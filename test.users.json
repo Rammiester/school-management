@@ -1,0 +1,191 @@
+[{
+  "_id": {
+    "$oid": "68a1fa54aac9ce9c2eba305f"
+  },
+  "name": "io",
+  "email": "io@gmail.com",
+  "password": "$2b$10$XQ0enEHr7KYHBaAMLscRdO53aKAekrWb0OT4UvfhS8BReluAAKlPO",
+  "role": "chairman",
+  "__v": 0,
+  "status": "approved"
+},
+{
+  "_id": {
+    "$oid": "68a56bc5741387f0c6e9bf90"
+  },
+  "name": "sdv",
+  "email": "iofd@gmail.com",
+  "password": "$2b$10$7W6cXdXgFUfRVEFe6e5ySO2gn03D2BubIF53s1s2MB3LPhZYyEJYG",
+  "role": "staff",
+  "status": "approved",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68a57023741387f0c6e9bfa4"
+  },
+  "name": "asda",
+  "email": "ioasdasd@gmail.com",
+  "password": "$2b$10$JdqZTL0UtenO.oWDKbrK9Ow4ZI3XTCUoE3cborz7.TmANMOeNAnVa",
+  "role": "",
+  "status": "pending",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68a56c5b741387f0c6e9bf92"
+  },
+  "name": "dasd",
+  "email": "iodasd@gmail.com",
+  "password": "$2b$10$hBDVZWQLEs9xG8lLtYmLceTu.FaAiAvjHLwMPpjQxKpgsgSY2qxIC",
+  "role": "staff",
+  "status": "approved",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68a414c28f265bff2ce9c059"
+  },
+  "name": "Teacher2",
+  "email": "Teacher2@gmail.com",
+  "password": "$2b$10$qop86kOXkBWfEupOxbSsweDK3K5WRTyggehUXxjrGQa25vzNUJT7W",
+  "role": "admin",
+  "status": "approved",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68a408cbf61bc441a0095023"
+  },
+  "name": "Test User",
+  "email": "test@example.com",
+  "password": "$2b$10$oE56Fu4LMD34NY2XWmk9PeQZQgJvE8o8nPAIq5dV2FmVqOgewi5ce",
+  "role": "student",
+  "status": "approved",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68a56c6e741387f0c6e9bf96"
+  },
+  "name": "dsad",
+  "email": "iodsad@gmail.com",
+  "password": "$2b$10$7JYXn1/.UoJInytOJqsMiOhLTB4RkpPfa4lH9Y7XuLuA/O6YhUryq",
+  "role": "teacher",
+  "status": "approved",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68a56d5d741387f0c6e9bf98"
+  },
+  "name": "asdas",
+  "email": "ioasdas@gmail.com",
+  "password": "$2b$10$UyDQcXfbfXv8YqQgyH0fxOLBJSE1PazV9T6kYsVpo/N.8rtmdUVlm",
+  "role": "",
+  "status": "pending",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68a483f6bc6ee8373f329b17"
+  },
+  "name": "teacher1",
+  "email": "teacher1@gmail.com",
+  "password": "$2b$10$DH.iPG9OfleAWDoAJkPeheDtHXw8tIknsb1JkV341QCWZ7ry/RvpK",
+  "role": "teacher",
+  "status": "approved",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68a56df4741387f0c6e9bfa0"
+  },
+  "name": "sfsdf",
+  "email": "iodsfsdfsdf@gmail.com",
+  "password": "$2b$10$O9hPAwliLzG0YHRcxnXLpehplwPoeoeeGzC1KtZyShrWi4LLdgGFa",
+  "role": "teacher",
+  "status": "approved",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68a409be51f37fd342c9aa90"
+  },
+  "name": "Test User",
+  "email": "testuser@example.com",
+  "password": "$2b$10$vUODuQdzyd.F8/9NNWfao.Ug.yu6PjqaQa6n76kxv74541FXxpVeG",
+  "role": "student",
+  "status": "approved",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68a45ede765f3365a7a28dd2"
+  },
+  "name": "Teacher",
+  "email": "Teacher@gmail.com",
+  "password": "$2b$10$f06vOSmYkcfZ5T7OVlcq8OBXL.eklmthrb.xuGLdCPo8QtmhpdAQy",
+  "role": "admin",
+  "status": "approved",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68a56aa3741387f0c6e9bf8e"
+  },
+  "name": "ioi",
+  "email": "ioi@gmail.com",
+  "password": "$2b$10$sEZ1.fM6A.pKce2W4RUumu/8kvznMCzNfy9q5E./ADnT1DagIIJOa",
+  "role": "teacher",
+  "status": "approved",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68b2c4ccd44ecbc8f576b820"
+  },
+  "name": "admin",
+  "email": "admin@admin.com",
+  "password": "$2b$10$1wwRFkjNXSw21Vi7diPTVOkfKooG7BruObXwuUbhBQm354GKH9xci",
+  "role": "admin",
+  "status": "approved",
+  "isAvailable": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68c667224b82e2697875dda6"
+  },
+  "name": "main",
+  "email": "main@gmail.com",
+  "password": "$2b$10$0G3VKbcTWbdnX7uFqEX.4..AvOrdtOwl8H/K/Ri/2rFUq8gCFb4Vi",
+  "role": "admin",
+  "status": "approved",
+  "isAvailable": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68c7e8302e5034dd57292b26"
+  },
+  "name": "admin",
+  "email": "admin5@gmail.com",
+  "password": "$2b$10$1BXVxKx1soQ64Ce0UndpG.1/nMyOk7WbkYD9b63HgAV/0MpPHSGQa",
+  "role": "admin",
+  "status": "approved",
+  "isAvailable": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68c96f750a0d659c6d8eef6f"
+  },
+  "name": "admin",
+  "email": "admin@gmail.com",
+  "password": "$2b$10$O0vXcMv/daX.OgLBuaMYtO5sJDzUads5Vrg.Yno8pu20P8I1h4v8S",
+  "role": "admin",
+  "status": "approved",
+  "isAvailable": true,
+  "__v": 0
+}]

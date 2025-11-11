@@ -1,0 +1,107 @@
+.custom-calendar-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.custom-calendar-trigger {
+  display: flex;
+  align-items: center;
+  padding: 4px 8px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background: var(--input-background-color);
+  cursor: pointer;
+  width: 100%;
+  color: var(--light-text);
+}
+
+.custom-calendar-trigger:hover {
+  border-color: var(--modal-secondary-color);
+}
+
+.custom-calendar-input {
+  flex: 1;
+  outline: none;
+  border: none;
+  background: transparent;
+  color: var(--light-text);
+}
+
+.custom-calendar-icon {
+  margin-left: 8px;
+  color: var(--subtext-light);
+}
+
+.custom-calendar-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  margin-top: 4px;
+  background: var(--card-background-color);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  padding: 8px;
+}
+
+.custom-calendar {
+  border: none;
+  box-shadow: none;
+  background: transparent;
+  color: var(--light-text);
+}
+
+.custom-calendar__navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.custom-calendar__navigation button {
+  background: var(--card-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  padding: 4px 8px;
+  cursor: pointer;
+  color: var(--light-text);
+}
+
+.custom-calendar__navigation button:hover {
+  background: var(--dark-card);
+}
+
+.custom-calendar__month_view {
+  margin-top: 8px;
+}
+
+.custom-calendar__month_view th {
+  font-weight: 500;
+  color: var(--subtext-light);
+  padding: 4px;
+  text-align: center;
+}
+
+.custom-calendar__month_view td {
+  padding: 4px;
+  text-align: center;
+  cursor: pointer;
+  color: var(--light-text);
+}
+
+.custom-calendar__month_view td:hover {
+  background: var(--dark-card);
+  border-radius: 4px;
+}
+
+.custom-calendar__month_view td--selected {
+  background: var(--modal-primary-color);
+  color: white;
+  border-radius: 4px;
+}
+
+.custom-calendar__month_view td--disabled {
+  color: var(--subtext-dark);
+  cursor: not-allowed;
+}

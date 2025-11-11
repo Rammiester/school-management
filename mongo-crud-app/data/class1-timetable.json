@@ -1,0 +1,449 @@
+{
+    "class": "class12",
+    "schedule": {
+      "Monday": [
+        {
+          "time": "8:00 - 9:00",
+          "subject": "Science",
+          "teacher": "Prof. Johnson",
+          "room": "R205"
+        },
+        {
+          "time": "9:00 - 10:00",
+          "subject": "English",
+          "teacher": "Ms. Williams",
+          "room": "R301"
+        },
+        {
+          "time": "10:00 - 11:00",
+          "subject": "History",
+          "teacher": "Mr. Brown",
+          "room": "R102"
+        },
+        {
+          "time": "11:00 - 12:00",
+          "subject": "Geography",
+          "teacher": "Dr. Davis",
+          "room": "R202"
+        },
+        {
+          "time": "12:00 - 13:00",
+          "subject": "Physics",
+          "teacher": "Prof. Miller",
+          "room": "R302"
+        },
+        {
+          "time": "13:00 - 14:00",
+          "subject": "Chemistry",
+          "teacher": "Ms. Wilson",
+          "room": "R103"
+        },
+        {
+          "time": "14:00 - 15:00",
+          "subject": "Biology",
+          "teacher": "Mr. Taylor",
+          "room": "R203"
+        },
+        {
+          "time": "15:00 - 16:00",
+          "subject": "Literature",
+          "teacher": "Dr. Anderson",
+          "room": "R303"
+        },
+        {
+          "time": "16:00 - 17:00",
+          "subject": "Art",
+          "teacher": "Ms. Thomas",
+          "room": "R104"
+        },
+        {
+          "time": "17:00 - 18:00",
+          "subject": "Music",
+          "teacher": "Mr. Jackson",
+          "room": "R204"
+        },
+        {
+          "time": "18:00 - 19:00",
+          "subject": "Computer Science",
+          "teacher": "Prof. White",
+          "room": "R304"
+        },
+        {
+          "time": "19:00 - 20:00",
+          "subject": "Mathematics",
+          "teacher": "Dr. Smith",
+          "room": "R101"
+        }
+      ],
+      "Tuesday": [
+        {
+          "time": "8:00 - 9:00",
+          "subject": "English",
+          "teacher": "Ms. Williams",
+          "room": "R301"
+        },
+        {
+          "time": "9:00 - 10:00",
+          "subject": "History",
+          "teacher": "Mr. Brown",
+          "room": "R102"
+        },
+        {
+          "time": "10:00 - 11:00",
+          "subject": "Geography",
+          "teacher": "Dr. Davis",
+          "room": "R202"
+        },
+        {
+          "time": "11:00 - 12:00",
+          "subject": "Physics",
+          "teacher": "Prof. Miller",
+          "room": "R302"
+        },
+        {
+          "time": "12:00 - 13:00",
+          "subject": "Chemistry",
+          "teacher": "Ms. Wilson",
+          "room": "R103"
+        },
+        {
+          "time": "13:00 - 14:00",
+          "subject": "Biology",
+          "teacher": "Mr. Taylor",
+          "room": "R203"
+        },
+        {
+          "time": "14:00 - 15:00",
+          "subject": "Literature",
+          "teacher": "Dr. Anderson",
+          "room": "R303"
+        },
+        {
+          "time": "15:00 - 16:00",
+          "subject": "Art",
+          "teacher": "Ms. Thomas",
+          "room": "R104"
+        },
+        {
+          "time": "16:00 - 17:00",
+          "subject": "Music",
+          "teacher": "Mr. Jackson",
+          "room": "R204"
+        },
+        {
+          "time": "17:00 - 18:00",
+          "subject": "Computer Science",
+          "teacher": "Prof. White",
+          "room": "R304"
+        },
+        {
+          "time": "18:00 - 19:00",
+          "subject": "Mathematics",
+          "teacher": "Dr. Smith",
+          "room": "R101"
+        },
+        {
+          "time": "19:00 - 20:00",
+          "subject": "Science",
+          "teacher": "Prof. Johnson",
+          "room": "R205"
+        }
+      ],
+      "Wednesday": [
+        {
+          "time": "8:00 - 9:00",
+          "subject": "History",
+          "teacher": "Mr. Brown",
+          "room": "R102"
+        },
+        {
+          "time": "9:00 - 10:00",
+          "subject": "Geography",
+          "teacher": "Dr. Davis",
+          "room": "R202"
+        },
+        {
+          "time": "10:00 - 11:00",
+          "subject": "Physics",
+          "teacher": "Prof. Miller",
+          "room": "R302"
+        },
+        {
+          "time": "11:00 - 12:00",
+          "subject": "Chemistry",
+          "teacher": "Ms. Wilson",
+          "room": "R103"
+        },
+        {
+          "time": "12:00 - 13:00",
+          "subject": "Biology",
+          "teacher": "Mr. Taylor",
+          "room": "R203"
+        },
+        {
+          "time": "13:00 - 14:00",
+          "subject": "Literature",
+          "teacher": "Dr. Anderson",
+          "room": "R303"
+        },
+        {
+          "time": "14:00 - 15:00",
+          "subject": "Art",
+          "teacher": "Ms. Thomas",
+          "room": "R104"
+        },
+        {
+          "time": "15:00 - 16:00",
+          "subject": "Music",
+          "teacher": "Mr. Jackson",
+          "room": "R204"
+        },
+        {
+          "time": "16:00 - 17:00",
+          "subject": "Computer Science",
+          "teacher": "Prof. White",
+          "room": "R304"
+        },
+        {
+          "time": "17:00 - 18:00",
+          "subject": "Mathematics",
+          "teacher": "Dr. Smith",
+          "room": "R101"
+        },
+        {
+          "time": "18:00 - 19:00",
+          "subject": "Science",
+          "teacher": "Prof. Johnson",
+          "room": "R205"
+        },
+        {
+          "time": "19:00 - 20:00",
+          "subject": "English",
+          "teacher": "Ms. Williams",
+          "room": "R301"
+        }
+      ],
+      "Thursday": [
+        {
+          "time": "8:00 - 9:00",
+          "subject": "Geography",
+          "teacher": "Dr. Davis",
+          "room": "R202"
+        },
+        {
+          "time": "9:00 - 10:00",
+          "subject": "Physics",
+          "teacher": "Prof. Miller",
+          "room": "R302"
+        },
+        {
+          "time": "10:00 - 11:00",
+          "subject": "Chemistry",
+          "teacher": "Ms. Wilson",
+          "room": "R103"
+        },
+        {
+          "time": "11:00 - 12:00",
+          "subject": "Biology",
+          "teacher": "Mr. Taylor",
+          "room": "R203"
+        },
+        {
+          "time": "12:00 - 13:00",
+          "subject": "Literature",
+          "teacher": "Dr. Anderson",
+          "room": "R303"
+        },
+        {
+          "time": "13:00 - 14:00",
+          "subject": "Art",
+          "teacher": "Ms. Thomas",
+          "room": "R104"
+        },
+        {
+          "time": "14:00 - 15:00",
+          "subject": "Music",
+          "teacher": "Mr. Jackson",
+          "room": "R204"
+        },
+        {
+          "time": "15:00 - 16:00",
+          "subject": "Computer Science",
+          "teacher": "Prof. White",
+          "room": "R304"
+        },
+        {
+          "time": "16:00 - 17:00",
+          "subject": "Mathematics",
+          "teacher": "Dr. Smith",
+          "room": "R101"
+        },
+        {
+          "time": "17:00 - 18:00",
+          "subject": "Science",
+          "teacher": "Prof. Johnson",
+          "room": "R205"
+        },
+        {
+          "time": "18:00 - 19:00",
+          "subject": "English",
+          "teacher": "Ms. Williams",
+          "room": "R301"
+        },
+        {
+          "time": "19:00 - 20:00",
+          "subject": "History",
+          "teacher": "Mr. Brown",
+          "room": "R102"
+        }
+      ],
+      "Friday": [
+        {
+          "time": "8:00 - 9:00",
+          "subject": "Physics",
+          "teacher": "Prof. Miller",
+          "room": "R302"
+        },
+        {
+          "time": "9:00 - 10:00",
+          "subject": "Chemistry",
+          "teacher": "Ms. Wilson",
+          "room": "R103"
+        },
+        {
+          "time": "10:00 - 11:00",
+          "subject": "Biology",
+          "teacher": "Mr. Taylor",
+          "room": "R203"
+        },
+        {
+          "time": "11:00 - 12:00",
+          "subject": "Literature",
+          "teacher": "Dr. Anderson",
+          "room": "R303"
+        },
+        {
+          "time": "12:00 - 13:00",
+          "subject": "Art",
+          "teacher": "Ms. Thomas",
+          "room": "R104"
+        },
+        {
+          "time": "13:00 - 14:00",
+          "subject": "Music",
+          "teacher": "Mr. Jackson",
+          "room": "R204"
+        },
+        {
+          "time": "14:00 - 15:00",
+          "subject": "Computer Science",
+          "teacher": "Prof. White",
+          "room": "R304"
+        },
+        {
+          "time": "15:00 - 16:00",
+          "subject": "Mathematics",
+          "teacher": "Dr. Smith",
+          "room": "R101"
+        },
+        {
+          "time": "16:00 - 17:00",
+          "subject": "Science",
+          "teacher": "Prof. Johnson",
+          "room": "R205"
+        },
+        {
+          "time": "17:00 - 18:00",
+          "subject": "English",
+          "teacher": "Ms. Williams",
+          "room": "R301"
+        },
+        {
+          "time": "18:00 - 19:00",
+          "subject": "History",
+          "teacher": "Mr. Brown",
+          "room": "R102"
+        },
+        {
+          "time": "19:00 - 20:00",
+          "subject": "Geography",
+          "teacher": "Dr. Davis",
+          "room": "R202"
+        }
+      ],
+      "Saturday": [
+        {
+          "time": "8:00 - 9:00",
+          "subject": "Chemistry",
+          "teacher": "Ms. Wilson",
+          "room": "R103"
+        },
+        {
+          "time": "9:00 - 10:00",
+          "subject": "Biology",
+          "teacher": "Mr. Taylor",
+          "room": "R203"
+        },
+        {
+          "time": "10:00 - 11:00",
+          "subject": "Literature",
+          "teacher": "Dr. Anderson",
+          "room": "R303"
+        },
+        {
+          "time": "11:00 - 12:00",
+          "subject": "Art",
+          "teacher": "Ms. Thomas",
+          "room": "R104"
+        },
+        {
+          "time": "12:00 - 13:00",
+          "subject": "Music",
+          "teacher": "Mr. Jackson",
+          "room": "R204"
+        },
+        {
+          "time": "13:00 - 14:00",
+          "subject": "Computer Science",
+          "teacher": "Prof. White",
+          "room": "R304"
+        },
+        {
+          "time": "14:00 - 15:00",
+          "subject": "Mathematics",
+          "teacher": "Dr. Smith",
+          "room": "R101"
+        },
+        {
+          "time": "15:00 - 16:00",
+          "subject": "Science",
+          "teacher": "Prof. Johnson",
+          "room": "R205"
+        },
+        {
+          "time": "16:00 - 17:00",
+          "subject": "English",
+          "teacher": "Ms. Williams",
+          "room": "R301"
+        },
+        {
+          "time": "17:00 - 18:00",
+          "subject": "History",
+          "teacher": "Mr. Brown",
+          "room": "R102"
+        },
+        {
+          "time": "18:00 - 19:00",
+          "subject": "Geography",
+          "teacher": "Dr. Davis",
+          "room": "R202"
+        },
+        {
+          "time": "19:00 - 20:00",
+          "subject": "Physics",
+          "teacher": "Prof. Miller",
+          "room": "R302"
+        }
+      ]
+    }
+  }

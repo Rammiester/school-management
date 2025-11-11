@@ -1,0 +1,95 @@
+/* SegmentedButton.css */
+
+.segmented-container {
+  display: flex;
+  gap: 5px;
+  margin-bottom: 30px;
+  border-radius: 25px;
+  overflow: hidden;
+  background-color: var(--card-primary);
+  padding: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1),
+              inset 0 0 10px rgba(0, 0, 0, 0.2),
+              inset 0 0 5px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: fit-content;
+  border: 1px solid var(--border-color);
+  /* min-width: 300px; */
+}
+
+.segmented-button {
+  background: transparent;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  color: var(--text-light-color);
+  font-size: 14px;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.segmented-button:hover {
+  background: var(--accent-color-hover);
+  color: white;
+}
+
+.segmented-button.active {
+  background: var(--accent-color);
+  color: var(--white);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border: 1px solid var(--accent-color);
+}
+
+.segmented-button.active::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 3px;
+  z-index: -1;
+  opacity: 0.1;
+}
+
+/* Responsive design - ensure horizontal layout on all screens */
+@media (max-width: 768px) {
+  .segmented-container {
+    width: 100%;
+    overflow-x: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .segmented-button {
+    flex: 0 0 auto;
+    min-width: 100px;
+    max-width: 150px;
+    padding: 12px 16px;
+    font-size: 13px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .segmented-container::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Additional responsive adjustments for very small screens */
+@media (max-width: 480px) {
+  .segmented-container {
+    padding: 3px;
+    gap: 2px;
+  }
+
+  .segmented-button {
+    min-width: 80px;
+    max-width: 120px;
+    padding: 10px 12px;
+    font-size: 12px;
+  }
+}

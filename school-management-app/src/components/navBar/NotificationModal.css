@@ -1,0 +1,86 @@
+.notification-modal .ant-modal-header-title,
+.notification-modal .ant-modal-title {
+  font-weight: 800;
+  font-size: 22px;
+  letter-spacing: 1px;
+}
+.notification-modal .ant-modal-body {
+  padding: 0;
+  min-height: 340px;
+  background: var(--background-color);
+}
+.notification-modal .ant-modal-content {
+  border-radius: 16px;
+  top: 32px;
+}
+.notification-modal .loading-spinner {
+  text-align: center;
+  padding: 2.5rem;
+}
+.notification-item {
+  margin: 18px 14px;
+  background: var(--card-background-color);
+  border-radius: 12px;
+  box-shadow: var(--box-shadow);
+  border: 1px solid var(--border-color);
+  padding: 18px 18px 10px 18px;
+  transition: box-shadow 0.2s;
+}
+.notification-item:hover {
+  box-shadow: var(--box-shadow-light);
+}
+.notification-avatar {
+  background: var(--input-background-color);
+  color: var(--text-light-color);
+}
+.notification-description {
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--text-light-color);
+  margin-right: 10px;
+}
+.notification-amount {
+  font-size: 18px;
+}
+.notification-date {
+  color: var(--subtext-light);
+}
+.notification-student {
+  font-size: 15px;
+  color: var(--subtext-dark);
+  margin-bottom: 2px;
+}
+.notification-raised-by {
+  color: var(--subtext-light);
+  font-size: 14px;
+}
+.notification-raised-by span {
+  color: var(--text-light-color);
+}
+.notification-extra {
+  margin-top: 8px;
+  color: var(--text-light-color);
+  font-size: 14px;
+  opacity: 0.85;
+}
+.notification-read-marker b {
+  color: var(--blue);
+}
+.notification-approve-button {
+  color: var(--green) !important;
+  border-color: var(--green) !important;
+  margin-right: 8px;
+}
+.notification-decline-button {
+  color: var(--red) !important;
+  border-color: var(--red) !important;
+}
+.notification-status {
+  font-weight: bold;
+  font-size: 16px;
+}
+.no-notifications {
+  color: var(--placeholder-color);
+  padding: 60px 0 70px 0;
+  text-align: center;
+}

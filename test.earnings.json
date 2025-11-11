@@ -1,0 +1,1105 @@
+[{
+  "_id": {
+    "$oid": "68679711505928fe86cc66ad"
+  },
+  "date": {
+    "$date": "2025-06-23T18:30:00.000Z"
+  },
+  "month": "march",
+  "earnings": 0,
+  "expenses": 200,
+  "description": "cleaning labour ",
+  "createdBy": "admin@example.com",
+  "status": "approved",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68a8a1ff454ff015fc291d71"
+  },
+  "date": {
+    "$date": "2025-08-13T18:30:00.000Z"
+  },
+  "month": "jan",
+  "earnings": 6,
+  "expenses": 0,
+  "description": "adasdasdasd",
+  "createdBy": "Teacher2@gmail.com",
+  "status": "approved",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68675e9ecb74a5c83da65066"
+  },
+  "date": {
+    "$date": "2025-04-27T18:30:00.000Z"
+  },
+  "month": "mar",
+  "earnings": 51000,
+  "expenses": 0,
+  "description": "admission fee",
+  "createdBy": "admin@example.com",
+  "studentUniqueId": "pat202504",
+  "status": "approved",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68b5538b194b51ca032f7453"
+  },
+  "date": {
+    "$date": "2025-09-01T00:00:00.000Z"
+  },
+  "month": "September",
+  "earnings": 0,
+  "expenses": 10000,
+  "description": "Salary for physics teacher ",
+  "status": "declined",
+  "type": "expense",
+  "requestType": "admin office",
+  "name": "Teacher2",
+  "time": "07:02",
+  "modeOfPayment": "upi",
+  "requestedBy": {
+    "$oid": "68a1fa54aac9ce9c2eba305f"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68eca30f795654c93c3f96ac"
+  },
+  "date": {
+    "$date": "2025-10-13T00:00:00.000Z"
+  },
+  "month": "October",
+  "earnings": 0,
+  "expenses": 50000,
+  "description": "salary",
+  "status": "declined",
+  "type": "expense",
+  "requestType": "salary",
+  "name": "Teacher2",
+  "time": "12:28",
+  "modeOfPayment": "upi",
+  "requestedBy": {
+    "$oid": "68a1fa54aac9ce9c2eba305f"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68eca32d795654c93c3f96b0"
+  },
+  "date": {
+    "$date": "2025-10-13T00:00:00.000Z"
+  },
+  "month": "October",
+  "earnings": 0,
+  "expenses": 12000,
+  "description": "food",
+  "status": "approved",
+  "type": "expense",
+  "requestType": "food",
+  "name": "admin",
+  "time": "12:28",
+  "modeOfPayment": "upi",
+  "requestedBy": {
+    "$oid": "68a1fa54aac9ce9c2eba305f"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68eca34e795654c93c3f96b4"
+  },
+  "date": {
+    "$date": "2025-10-13T00:00:00.000Z"
+  },
+  "month": "October",
+  "earnings": 0,
+  "expenses": 2000,
+  "description": "bus ",
+  "status": "approved",
+  "type": "expense",
+  "requestType": "transport",
+  "name": "main",
+  "time": "12:29",
+  "modeOfPayment": "upi",
+  "requestedBy": {
+    "$oid": "68a1fa54aac9ce9c2eba305f"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68eca36b795654c93c3f96b8"
+  },
+  "date": {
+    "$date": "2025-10-13T00:00:00.000Z"
+  },
+  "month": "October",
+  "earnings": 0,
+  "expenses": 2000,
+  "description": "cleaning",
+  "status": "approved",
+  "type": "expense",
+  "requestType": "housekeeping",
+  "name": "admin",
+  "time": "12:29",
+  "modeOfPayment": "upi",
+  "requestedBy": {
+    "$oid": "68a1fa54aac9ce9c2eba305f"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68eca390795654c93c3f96bc"
+  },
+  "date": {
+    "$date": "2025-10-13T00:00:00.000Z"
+  },
+  "month": "October",
+  "earnings": 0,
+  "expenses": 500,
+  "description": "a4 paper ",
+  "status": "approved",
+  "type": "expense",
+  "requestType": "stationary",
+  "name": "Teacher2",
+  "time": "12:30",
+  "modeOfPayment": "upi",
+  "requestedBy": {
+    "$oid": "68a1fa54aac9ce9c2eba305f"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68ecb58416b0c7c904b23925"
+  },
+  "date": {
+    "$date": "2025-10-13T00:00:00.000Z"
+  },
+  "month": "October",
+  "earnings": 4567,
+  "expenses": 0,
+  "description": "thr",
+  "status": "approved",
+  "type": "revenue",
+  "requestType": "hostel fee",
+  "name": "Teacher2",
+  "time": "13:46",
+  "modeOfPayment": "card",
+  "feePeriod": "jan to feb",
+  "requestedBy": {
+    "$oid": "68a1fa54aac9ce9c2eba305f"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68ecb5ab16b0c7c904b2392d"
+  },
+  "date": {
+    "$date": "2025-10-13T00:00:00.000Z"
+  },
+  "month": "October",
+  "earnings": 0,
+  "expenses": 4566,
+  "description": "yjio",
+  "status": "approved",
+  "type": "expense",
+  "requestType": "food",
+  "name": "Test User",
+  "time": "13:47",
+  "modeOfPayment": "upi",
+  "requestedBy": {
+    "$oid": "68a1fa54aac9ce9c2eba305f"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68ecb9c4d675d5308f4dfa45"
+  },
+  "date": {
+    "$date": "2025-10-13T00:00:00.000Z"
+  },
+  "month": "October",
+  "earnings": 25000,
+  "expenses": 0,
+  "description": "school fee",
+  "status": "approved",
+  "type": "revenue",
+  "requestType": "school fee",
+  "name": "Test User",
+  "time": "14:05",
+  "modeOfPayment": "upi",
+  "requestedBy": {
+    "$oid": "68a1fa54aac9ce9c2eba305f"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68ecb9fbd675d5308f4dfa4c"
+  },
+  "date": {
+    "$date": "2025-10-13T00:00:00.000Z"
+  },
+  "month": "October",
+  "earnings": 50000,
+  "expenses": 0,
+  "description": "hostel fee",
+  "status": "approved",
+  "type": "revenue",
+  "requestType": "hostel fee",
+  "name": "Priya Singh",
+  "time": "14:05",
+  "modeOfPayment": "card",
+  "requestedBy": {
+    "$oid": "68a1fa54aac9ce9c2eba305f"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68ecbaceb97911ae91927e0c"
+  },
+  "date": {
+    "$date": "2025-09-01T00:00:00.000Z"
+  },
+  "month": "September",
+  "earnings": 0,
+  "expenses": 20000,
+  "description": "salary ",
+  "status": "approved",
+  "type": "expense",
+  "requestType": "salary",
+  "name": "Teacher2",
+  "time": "14:09",
+  "modeOfPayment": "upi",
+  "requestedBy": {
+    "$oid": "68a1fa54aac9ce9c2eba305f"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68ecbaffb97911ae91927e13"
+  },
+  "date": {
+    "$date": "2025-08-01T00:00:00.000Z"
+  },
+  "month": "August",
+  "earnings": 0,
+  "expenses": 3500,
+  "description": "food",
+  "status": "approved",
+  "type": "expense",
+  "requestType": "food",
+  "name": "Priya Singh",
+  "time": "14:10",
+  "modeOfPayment": "upi",
+  "requestedBy": {
+    "$oid": "68a1fa54aac9ce9c2eba305f"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68ecbb36d675d5308f4dfa68"
+  },
+  "date": {
+    "$date": "2025-09-01T00:00:00.000Z"
+  },
+  "month": "September",
+  "earnings": 0,
+  "expenses": 1500,
+  "description": "cleaning",
+  "status": "approved",
+  "type": "expense",
+  "requestType": "housekeeping",
+  "name": "admin",
+  "time": "14:11",
+  "modeOfPayment": "upi",
+  "requestedBy": {
+    "$oid": "68a1fa54aac9ce9c2eba305f"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68ecbb60d675d5308f4dfa6c"
+  },
+  "date": {
+    "$date": "2025-08-01T00:00:00.000Z"
+  },
+  "month": "August",
+  "earnings": 0,
+  "expenses": 4000,
+  "description": "tarnsport",
+  "status": "approved",
+  "type": "expense",
+  "requestType": "transport",
+  "name": "main",
+  "time": "14:11",
+  "modeOfPayment": "upi",
+  "requestedBy": {
+    "$oid": "68a1fa54aac9ce9c2eba305f"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68ecbc9eb97911ae91927e21"
+  },
+  "date": {
+    "$date": "2025-07-01T00:00:00.000Z"
+  },
+  "month": "July",
+  "earnings": 0,
+  "expenses": 6000,
+  "description": "bus",
+  "status": "approved",
+  "type": "expense",
+  "requestType": "transport",
+  "name": "main",
+  "time": "14:17",
+  "modeOfPayment": "upi",
+  "requestedBy": {
+    "$oid": "68a1fa54aac9ce9c2eba305f"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68ecbee1d675d5308f4dfa98"
+  },
+  "date": {
+    "$date": "2025-07-01T00:00:00.000Z"
+  },
+  "month": "July",
+  "earnings": 3000,
+  "expenses": 0,
+  "description": "fee",
+  "status": "approved",
+  "type": "revenue",
+  "requestType": "school fee",
+  "name": "Arnav Mishra",
+  "time": "14:26",
+  "modeOfPayment": "upi",
+  "feePeriod": "jul",
+  "requestedBy": {
+    "$oid": "68a1fa54aac9ce9c2eba305f"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68ecbf19513776b9bcb96093"
+  },
+  "date": {
+    "$date": "2025-10-13T00:00:00.000Z"
+  },
+  "month": "October",
+  "earnings": 70000,
+  "expenses": 0,
+  "description": "fee",
+  "status": "approved",
+  "type": "revenue",
+  "requestType": "school fee",
+  "name": "Arnav Mishra",
+  "time": "14:27",
+  "modeOfPayment": "upi",
+  "requestedBy": {
+    "$oid": "68a1fa54aac9ce9c2eba305f"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68ef48e2eb2011d35393f4c6"
+  },
+  "date": {
+    "$date": "2025-10-15T00:00:00.000Z"
+  },
+  "month": "October",
+  "earnings": 2000,
+  "expenses": 0,
+  "description": "fee for sep",
+  "status": "approved",
+  "type": "revenue",
+  "requestType": "school fee",
+  "name": "Priya Singh",
+  "time": "12:39",
+  "modeOfPayment": "cash",
+  "feePeriod": "sep",
+  "requestedBy": {
+    "$oid": "68c96f750a0d659c6d8eef6f"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68f464b4a2c77f27d08fe438"
+  },
+  "date": {
+    "$date": "2025-06-01T00:00:00.000Z"
+  },
+  "month": "June",
+  "earnings": 0,
+  "expenses": 20000,
+  "description": "salary",
+  "status": "approved",
+  "type": "expense",
+  "requestType": "salary",
+  "name": "Teacher2",
+  "time": "09:39",
+  "modeOfPayment": "upi",
+  "requestedBy": {
+    "$oid": "68a1fa54aac9ce9c2eba305f"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68f464d7a2c77f27d08fe440"
+  },
+  "date": {
+    "$date": "2025-07-01T00:00:00.000Z"
+  },
+  "month": "July",
+  "earnings": 0,
+  "expenses": 20000,
+  "description": "salary",
+  "status": "approved",
+  "type": "expense",
+  "requestType": "salary",
+  "name": "Teacher2",
+  "time": "09:40",
+  "modeOfPayment": "upi",
+  "requestedBy": {
+    "$oid": "68a1fa54aac9ce9c2eba305f"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68f46502a2c77f27d08fe444"
+  },
+  "date": {
+    "$date": "2025-08-01T00:00:00.000Z"
+  },
+  "month": "August",
+  "earnings": 0,
+  "expenses": 20000,
+  "description": "salary",
+  "status": "approved",
+  "type": "expense",
+  "requestType": "salary",
+  "name": "Teacher2",
+  "time": "09:41",
+  "modeOfPayment": "upi",
+  "requestedBy": {
+    "$oid": "68a1fa54aac9ce9c2eba305f"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68f46520a2c77f27d08fe448"
+  },
+  "date": {
+    "$date": "2025-09-01T00:00:00.000Z"
+  },
+  "month": "September",
+  "earnings": 0,
+  "expenses": 20000,
+  "description": "salary",
+  "status": "approved",
+  "type": "expense",
+  "requestType": "salary",
+  "name": "Teacher2",
+  "time": "09:42",
+  "modeOfPayment": "upi",
+  "requestedBy": {
+    "$oid": "68a1fa54aac9ce9c2eba305f"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68f466808bb5715064a7bfb3"
+  },
+  "date": {
+    "$date": "2025-06-01T00:00:00.000Z"
+  },
+  "month": "June",
+  "earnings": 0,
+  "expenses": 10000,
+  "description": "salary",
+  "status": "approved",
+  "type": "expense",
+  "requestType": "transport",
+  "name": "ioi",
+  "time": "09:47",
+  "modeOfPayment": "upi",
+  "requestedBy": {
+    "$oid": "68a1fa54aac9ce9c2eba305f"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68f467628bb5715064a7bfb7"
+  },
+  "date": {
+    "$date": "2025-07-01T00:00:00.000Z"
+  },
+  "month": "July",
+  "earnings": 0,
+  "expenses": 10000,
+  "description": "transport",
+  "status": "approved",
+  "type": "expense",
+  "requestType": "transport",
+  "name": "ioi",
+  "time": "09:51",
+  "modeOfPayment": "upi",
+  "requestedBy": {
+    "$oid": "68a1fa54aac9ce9c2eba305f"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68f467888bb5715064a7bfbb"
+  },
+  "date": {
+    "$date": "2025-08-01T00:00:00.000Z"
+  },
+  "month": "August",
+  "earnings": 0,
+  "expenses": 2300,
+  "description": "transport",
+  "status": "approved",
+  "type": "expense",
+  "requestType": "transport",
+  "name": "io",
+  "time": "09:52",
+  "modeOfPayment": "upi",
+  "requestedBy": {
+    "$oid": "68a1fa54aac9ce9c2eba305f"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68f467b4a2c77f27d08fe464"
+  },
+  "date": {
+    "$date": "2025-09-01T00:00:00.000Z"
+  },
+  "month": "September",
+  "earnings": 0,
+  "expenses": 5000,
+  "description": "salary",
+  "status": "approved",
+  "type": "expense",
+  "requestType": "transport",
+  "name": "io",
+  "time": "09:53",
+  "modeOfPayment": "upi",
+  "requestedBy": {
+    "$oid": "68a1fa54aac9ce9c2eba305f"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68f467d8a2c77f27d08fe468"
+  },
+  "date": {
+    "$date": "2025-10-01T00:00:00.000Z"
+  },
+  "month": "October",
+  "earnings": 0,
+  "expenses": 3000,
+  "description": "transport",
+  "status": "approved",
+  "type": "expense",
+  "requestType": "transport",
+  "name": "io",
+  "time": "09:53",
+  "modeOfPayment": "upi",
+  "requestedBy": {
+    "$oid": "68a1fa54aac9ce9c2eba305f"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68f4689da2c77f27d08fe48e"
+  },
+  "date": {
+    "$date": "2025-06-01T00:00:00.000Z"
+  },
+  "month": "June",
+  "earnings": 0,
+  "expenses": 1200,
+  "description": "transport",
+  "status": "approved",
+  "type": "expense",
+  "requestType": "transport",
+  "name": "io",
+  "time": "09:56",
+  "modeOfPayment": "upi",
+  "requestedBy": {
+    "$oid": "68a1fa54aac9ce9c2eba305f"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68f468cba2c77f27d08fe492"
+  },
+  "date": {
+    "$date": "2025-06-01T00:00:00.000Z"
+  },
+  "month": "June",
+  "earnings": 0,
+  "expenses": 12000,
+  "description": "food",
+  "status": "approved",
+  "type": "expense",
+  "requestType": "food",
+  "name": "io",
+  "time": "09:57",
+  "modeOfPayment": "bank transfer",
+  "requestedBy": {
+    "$oid": "68a1fa54aac9ce9c2eba305f"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68f468e9a2c77f27d08fe496"
+  },
+  "date": {
+    "$date": "2025-07-01T00:00:00.000Z"
+  },
+  "month": "July",
+  "earnings": 0,
+  "expenses": 13000,
+  "description": "food",
+  "status": "approved",
+  "type": "expense",
+  "requestType": "food",
+  "name": "io",
+  "time": "09:58",
+  "modeOfPayment": "upi",
+  "requestedBy": {
+    "$oid": "68a1fa54aac9ce9c2eba305f"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68f4690aa2c77f27d08fe49a"
+  },
+  "date": {
+    "$date": "2025-08-01T00:00:00.000Z"
+  },
+  "month": "August",
+  "earnings": 0,
+  "expenses": 14000,
+  "description": "food",
+  "status": "approved",
+  "type": "expense",
+  "requestType": "food",
+  "name": "io",
+  "time": "09:58",
+  "modeOfPayment": "upi",
+  "requestedBy": {
+    "$oid": "68a1fa54aac9ce9c2eba305f"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68f46928a2c77f27d08fe49e"
+  },
+  "date": {
+    "$date": "2025-08-01T00:00:00.000Z"
+  },
+  "month": "August",
+  "earnings": 0,
+  "expenses": 12000,
+  "description": "food",
+  "status": "approved",
+  "type": "expense",
+  "requestType": "food",
+  "name": "io",
+  "time": "09:59",
+  "modeOfPayment": "upi",
+  "requestedBy": {
+    "$oid": "68a1fa54aac9ce9c2eba305f"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68f469ada2c77f27d08fe4ac"
+  },
+  "date": {
+    "$date": "2025-09-01T00:00:00.000Z"
+  },
+  "month": "September",
+  "earnings": 0,
+  "expenses": 16000,
+  "description": "food",
+  "status": "approved",
+  "type": "expense",
+  "requestType": "food",
+  "name": "io",
+  "time": "09:59",
+  "modeOfPayment": "upi",
+  "requestedBy": {
+    "$oid": "68a1fa54aac9ce9c2eba305f"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68f49a728c9e2a989e260df8"
+  },
+  "date": {
+    "$date": "2025-06-01T00:00:00.000Z"
+  },
+  "month": "June",
+  "earnings": 0,
+  "expenses": 20000,
+  "description": "salary",
+  "status": "approved",
+  "type": "expense",
+  "requestType": "salary",
+  "name": "Teacher",
+  "time": "13:29",
+  "modeOfPayment": "upi",
+  "requestedBy": {
+    "$oid": "68a1fa54aac9ce9c2eba305f"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68f49ab48c9e2a989e260dfc"
+  },
+  "date": {
+    "$date": "2025-06-01T00:00:00.000Z"
+  },
+  "month": "June",
+  "earnings": 0,
+  "expenses": 12000,
+  "description": "transport",
+  "status": "approved",
+  "type": "expense",
+  "requestType": "transport",
+  "name": "io",
+  "time": "13:30",
+  "modeOfPayment": "upi",
+  "requestedBy": {
+    "$oid": "68a1fa54aac9ce9c2eba305f"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68f49b92cfeab9cd83e7445b"
+  },
+  "date": {
+    "$date": "2025-06-01T00:00:00.000Z"
+  },
+  "month": "June",
+  "earnings": 0,
+  "expenses": 1200,
+  "description": "food",
+  "status": "approved",
+  "type": "expense",
+  "requestType": "food",
+  "name": "io",
+  "time": "13:34",
+  "modeOfPayment": "card",
+  "requestedBy": {
+    "$oid": "68a1fa54aac9ce9c2eba305f"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68f49db861bacb67c96fab8b"
+  },
+  "date": {
+    "$date": "2025-06-01T00:00:00.000Z"
+  },
+  "month": "June",
+  "earnings": 50000,
+  "expenses": 0,
+  "description": "fee",
+  "status": "approved",
+  "type": "revenue",
+  "requestType": "school fee",
+  "name": "asda",
+  "time": "13:43",
+  "modeOfPayment": "upi",
+  "requestedBy": {
+    "$oid": "68a1fa54aac9ce9c2eba305f"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68f49dd561bacb67c96fab93"
+  },
+  "date": {
+    "$date": "2025-06-01T00:00:00.000Z"
+  },
+  "month": "June",
+  "earnings": 32000,
+  "expenses": 0,
+  "description": "hostel",
+  "status": "approved",
+  "type": "revenue",
+  "requestType": "hostel fee",
+  "name": "io",
+  "time": "13:44",
+  "modeOfPayment": "card",
+  "requestedBy": {
+    "$oid": "68a1fa54aac9ce9c2eba305f"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68f49dfd61bacb67c96fab9c"
+  },
+  "date": {
+    "$date": "2025-06-01T00:00:00.000Z"
+  },
+  "month": "June",
+  "earnings": 4300,
+  "expenses": 0,
+  "description": "uni",
+  "status": "approved",
+  "type": "revenue",
+  "requestType": "uniform fee",
+  "name": "asda",
+  "time": "13:44",
+  "modeOfPayment": "upi",
+  "requestedBy": {
+    "$oid": "68a1fa54aac9ce9c2eba305f"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68f49e2b61bacb67c96faba0"
+  },
+  "date": {
+    "$date": "2025-06-01T00:00:00.000Z"
+  },
+  "month": "June",
+  "earnings": 450,
+  "expenses": 0,
+  "description": "medical fee",
+  "status": "approved",
+  "type": "revenue",
+  "requestType": "other fees",
+  "name": "asda",
+  "time": "13:45",
+  "modeOfPayment": "card",
+  "requestedBy": {
+    "$oid": "68a1fa54aac9ce9c2eba305f"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68f49e4861bacb67c96faba4"
+  },
+  "date": {
+    "$date": "2025-07-01T00:00:00.000Z"
+  },
+  "month": "July",
+  "earnings": 70000,
+  "expenses": 0,
+  "description": "fee",
+  "status": "approved",
+  "type": "revenue",
+  "requestType": "school fee",
+  "name": "asda",
+  "time": "13:46",
+  "modeOfPayment": "upi",
+  "requestedBy": {
+    "$oid": "68a1fa54aac9ce9c2eba305f"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68f4afb2200c15fab7b5057e"
+  },
+  "date": {
+    "$date": "2025-06-18T00:00:00.000Z"
+  },
+  "month": "June",
+  "earnings": 0,
+  "expenses": 12345,
+  "description": "asd",
+  "status": "approved",
+  "type": "expense",
+  "requestType": "stationary",
+  "name": "Test User",
+  "time": "15:00",
+  "modeOfPayment": "cash",
+  "requestedBy": {
+    "$oid": "68a1fa54aac9ce9c2eba305f"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68f4b6e3c286b786b0145e68"
+  },
+  "date": {
+    "$date": "2025-06-11T00:00:00.000Z"
+  },
+  "month": "June",
+  "earnings": 0,
+  "expenses": 89565,
+  "description": "efsf ",
+  "status": "approved",
+  "type": "expense",
+  "requestType": "admin office",
+  "name": "asda",
+  "time": "15:30",
+  "modeOfPayment": "card",
+  "requestedBy": {
+    "$oid": "68a1fa54aac9ce9c2eba305f"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68f4c34d5914aaf6a42615d8"
+  },
+  "date": {
+    "$date": "2025-06-01T00:00:00.000Z"
+  },
+  "month": "June",
+  "earnings": 0,
+  "expenses": 30000,
+  "description": "salary",
+  "status": "approved",
+  "type": "expense",
+  "requestType": "salary",
+  "name": "io",
+  "time": "16:23",
+  "modeOfPayment": "upi",
+  "requestedBy": {
+    "$oid": "68a1fa54aac9ce9c2eba305f"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68f4c3695914aaf6a42615dc"
+  },
+  "date": {
+    "$date": "2025-06-01T00:00:00.000Z"
+  },
+  "month": "June",
+  "earnings": 0,
+  "expenses": 12000,
+  "description": "food",
+  "status": "approved",
+  "type": "expense",
+  "requestType": "food",
+  "name": "io",
+  "time": "16:24",
+  "modeOfPayment": "upi",
+  "requestedBy": {
+    "$oid": "68a1fa54aac9ce9c2eba305f"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68f4c3895914aaf6a42615e0"
+  },
+  "date": {
+    "$date": "2025-06-01T00:00:00.000Z"
+  },
+  "month": "June",
+  "earnings": 0,
+  "expenses": 2900,
+  "description": "transport",
+  "status": "approved",
+  "type": "expense",
+  "requestType": "transport",
+  "name": "io",
+  "time": "16:24",
+  "modeOfPayment": "bank transfer",
+  "requestedBy": {
+    "$oid": "68a1fa54aac9ce9c2eba305f"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68f4dcd62b4efc78fedeface"
+  },
+  "date": {
+    "$date": "2025-10-01T00:00:00.000Z"
+  },
+  "month": "October",
+  "earnings": 2000,
+  "expenses": 0,
+  "description": "fee for oct ",
+  "status": "approved",
+  "type": "revenue",
+  "requestType": "school fee",
+  "name": "Priya Singh",
+  "time": "18:12",
+  "modeOfPayment": "upi",
+  "requestedBy": {
+    "$oid": "68a1fa54aac9ce9c2eba305f"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "690adf743d8f61601dfa3056"
+  },
+  "date": {
+    "$date": "2025-07-06T00:00:00.000Z"
+  },
+  "month": "July",
+  "earnings": 0,
+  "expenses": 20000,
+  "description": "frre",
+  "status": "approved",
+  "type": "expense",
+  "requestType": "salary",
+  "name": "sdv",
+  "time": "10:53",
+  "modeOfPayment": "card",
+  "requestedBy": {
+    "$oid": "68a1fa54aac9ce9c2eba305f"
+  },
+  "__v": 0
+}]

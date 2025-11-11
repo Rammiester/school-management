@@ -1,0 +1,308 @@
+.attendance-page {
+  background: var(--background-color);
+  min-height: 100vh;
+  padding: 20px;
+}
+
+
+
+.attendance-card .ant-card-head {
+  background: var(--card-primary);
+  color: var(--text-light-color) !important;
+  border-bottom: 1px solid var(--border-color);
+  border-radius: 12px 12px 0 0;
+  padding: 16px 24px;
+}
+
+.attendance-card .ant-card-head-title {
+  color: var(--text-light-color) !important;
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+/* List styling */
+.attendance-card .ant-list-item {
+  background: var(--card-background-color);
+  border-radius: 12px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  margin: 12px 0;
+  padding: 20px;
+  border: 1px solid var(--border-color);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  min-height: 100px;
+}
+
+.attendance-card .ant-list-item:hover {
+  background: var(--card-background-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  border-color: var(--accent-color);
+}
+
+/* Selected state */
+.attendance-card .ant-list-item.selected {
+  background: var(--primary-color);
+  border-color: var(--accent-color);
+  box-shadow: 0 4px 16px rgba(140, 42, 30, 0.2);
+}
+
+/* Status badge styling */
+.status-badge {
+  border-radius: 20px;
+  padding: 2px 8px;
+  height: auto;
+  line-height: 1.4;
+  font-weight: 500;
+  margin-left: 8px;
+  font-size: 12px;
+}
+
+/* Avatar styling */
+.ant-list-item .ant-list-item-meta-avatar {
+  margin-right: 16px;
+}
+
+/* Title styling */
+.ant-list-item .ant-list-item-meta-title {
+  margin-bottom: 4px;
+  font-weight: 600;
+}
+
+/* Enhanced List Item Pseudo-element for visual enhancement */
+.attendance-card .ant-list-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--accent-color);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.attendance-card .ant-list-item:hover::before {
+  opacity: 1;
+}
+
+/* Responsive adjustments for List items */
+@media (max-width: 768px) {
+  .attendance-card .ant-list-item {
+    padding: 16px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .attendance-card .ant-list-item .ant-list-item-content {
+    width: 100%;
+  }
+  
+  .attendance-card .ant-list-item .ant-list-item-meta {
+    width: 100%;
+    margin-bottom: 8px;
+  }
+  
+  .attendance-card .ant-list-item .ant-list-item-meta-title {
+    margin-bottom: 4px;
+  }
+  
+  .attendance-card .ant-list-item .ant-list-item-meta-description {
+    width: 100%;
+  }
+}
+
+/* Enhanced hover effect with subtle animation */
+.attendance-card .ant-list-item::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(140, 42, 30, 0.05) 0%, transparent 50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.attendance-card .ant-list-item:hover::after {
+  opacity: 1;
+}
+
+/* Specific styling for the Attendance by Date list */
+.attendance-by-date-list .ant-list-item {
+  background: var(--card-background-color);
+  border-radius: 12px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  margin: 12px 0;
+  padding: 16px 20px;
+  border: 1px solid var(--border-color);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  cursor: default;
+  min-height: 80px;
+}
+
+.attendance-by-date-list .ant-list-item:hover {
+  background: var(--card-background-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  border-color: var(--accent-color);
+}
+
+.attendance-by-date-list .ant-list-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--accent-color);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.attendance-by-date-list .ant-list-item:hover::before {
+  opacity: 1;
+}
+
+/* Enhanced hover effect for attendance by date list */
+.attendance-by-date-list .ant-list-item::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(140, 42, 30, 0.05) 0%, transparent 50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.attendance-by-date-list .ant-list-item:hover::after {
+  opacity: 1;
+}
+
+/* Tag styling */
+.ant-tag {
+  border-radius: 20px;
+  font-weight: 500;
+  padding: 4px 12px;
+  height: auto;
+  line-height: 1.4;
+  color: var(--text-light-color);
+}
+
+.ant-tag-success {
+  background: var(--primary-color);
+  border-color: var(--border-color);
+  color: var(--accent-color);
+}
+
+.ant-tag-error {
+  background: var(--accent-color);
+  border-color: var(--border-color);
+  color: var(--accent-color);
+}
+
+.ant-tag-default {
+  background: var(--card-background-color);
+  border-color: var(--border-color);
+  color: var(--accent-color);
+}
+
+/* Modal styling */
+.ant-modal-content {
+  background: var(--card-background-color);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+}
+
+.ant-modal-header {
+  background: var(--card-primary);
+  border-bottom: 1px solid var(--border-color);
+  border-radius: 12px 12px 0 0;
+  padding: 16px 24px;
+}
+
+.ant-modal-title {
+  color: var(--text-light-color);
+  font-weight: 600;
+}
+
+/* DatePicker styling */
+.ant-picker {
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+}
+
+.ant-picker:hover {
+  border-color: var(--accent-color);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .attendance-page {
+    padding: 10px;
+  }
+  
+  .attendance-card .ant-card-head-title {
+    font-size: 1.1rem;
+    color: var(--text-light-color) !important;
+  }
+  
+  .attendance-card .ant-list-item {
+    padding: 12px 16px;
+  }
+  
+  .ant-btn-primary {
+    padding: 6px 12px;
+    font-size: 0.9rem;
+  }
+}
+
+/* Biometric modal styling */
+.biometric-modal .ant-modal-body {
+  padding: 24px;
+}
+
+.biometric-modal .ant-modal-footer {
+  padding: 16px 24px;
+  border-top: 1px solid var(--border-color);
+}
+
+
+.class-card {
+  background-color: var(--card-background-color);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.class-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  border-color: var(--accent-color);
+}
+
+.class-card .ant-card-body {
+  padding: 20px;
+}
+
+.class-card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}

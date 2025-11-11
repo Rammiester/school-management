@@ -1,0 +1,501 @@
+[{
+  "_id": {
+    "$oid": "68a7e534397c61b684a089b6"
+  },
+  "userId": {
+    "$oid": "68a56df4741387f0c6e9bfa0"
+  },
+  "date": {
+    "$date": "2025-08-21T18:30:00.000Z"
+  },
+  "checkInTime": {
+    "$date": "2025-08-22T03:34:12.098Z"
+  },
+  "status": "checked-out",
+  "createdAt": {
+    "$date": "2025-08-22T03:34:12.099Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-22T06:54:19.858Z"
+  },
+  "__v": 0,
+  "checkOutTime": {
+    "$date": "2025-08-22T06:54:19.858Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68a6a545fbb12105f0ea5d6c"
+  },
+  "userId": {
+    "$oid": "68a414c28f265bff2ce9c059"
+  },
+  "date": {
+    "$date": "2025-08-20T18:30:00.000Z"
+  },
+  "checkInTime": {
+    "$date": "2025-08-21T04:49:09.357Z"
+  },
+  "status": "checked-out",
+  "createdAt": {
+    "$date": "2025-08-21T04:49:09.357Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-21T17:45:40.079Z"
+  },
+  "__v": 0,
+  "checkOutTime": {
+    "$date": "2025-08-21T17:45:40.079Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68a7640b397c61b684a0890a"
+  },
+  "userId": {
+    "$oid": "68a56c6e741387f0c6e9bf96"
+  },
+  "date": {
+    "$date": "2025-08-20T18:30:00.000Z"
+  },
+  "checkInTime": {
+    "$date": "2025-08-21T18:23:07.594Z"
+  },
+  "status": "checked-out",
+  "createdAt": {
+    "$date": "2025-08-21T18:23:07.594Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-21T18:23:25.250Z"
+  },
+  "__v": 0,
+  "checkOutTime": {
+    "$date": "2025-08-21T18:23:25.250Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68a7e520397c61b684a0899f"
+  },
+  "userId": {
+    "$oid": "68a414c28f265bff2ce9c059"
+  },
+  "date": {
+    "$date": "2025-08-21T18:30:00.000Z"
+  },
+  "checkInTime": {
+    "$date": "2025-08-22T03:33:52.109Z"
+  },
+  "status": "checked-in",
+  "createdAt": {
+    "$date": "2025-08-22T03:33:52.110Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-22T03:33:52.110Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68a76401397c61b684a088f2"
+  },
+  "userId": {
+    "$oid": "68a483f6bc6ee8373f329b17"
+  },
+  "date": {
+    "$date": "2025-08-20T18:30:00.000Z"
+  },
+  "checkInTime": {
+    "$date": "2025-08-21T18:22:57.264Z"
+  },
+  "status": "checked-out",
+  "createdAt": {
+    "$date": "2025-08-21T18:22:57.265Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-21T18:23:17.215Z"
+  },
+  "__v": 0,
+  "checkOutTime": {
+    "$date": "2025-08-21T18:23:17.215Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68a76409397c61b684a08904"
+  },
+  "userId": {
+    "$oid": "68a56c5b741387f0c6e9bf92"
+  },
+  "date": {
+    "$date": "2025-08-20T18:30:00.000Z"
+  },
+  "checkInTime": {
+    "$date": "2025-08-21T18:23:05.713Z"
+  },
+  "status": "checked-out",
+  "createdAt": {
+    "$date": "2025-08-21T18:23:05.714Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-21T18:23:23.532Z"
+  },
+  "__v": 0,
+  "checkOutTime": {
+    "$date": "2025-08-21T18:23:23.532Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68a7640d397c61b684a08910"
+  },
+  "userId": {
+    "$oid": "68a56df4741387f0c6e9bfa0"
+  },
+  "date": {
+    "$date": "2025-08-20T18:30:00.000Z"
+  },
+  "checkInTime": {
+    "$date": "2025-08-21T18:23:09.508Z"
+  },
+  "status": "checked-out",
+  "createdAt": {
+    "$date": "2025-08-21T18:23:09.509Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-21T18:23:28.747Z"
+  },
+  "__v": 0,
+  "checkOutTime": {
+    "$date": "2025-08-21T18:23:28.747Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68a7e525397c61b684a089a6"
+  },
+  "userId": {
+    "$oid": "68a483f6bc6ee8373f329b17"
+  },
+  "date": {
+    "$date": "2025-08-21T18:30:00.000Z"
+  },
+  "checkInTime": {
+    "$date": "2025-08-22T03:33:57.382Z"
+  },
+  "status": "checked-out",
+  "createdAt": {
+    "$date": "2025-08-22T03:33:57.382Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-22T03:33:58.623Z"
+  },
+  "__v": 0,
+  "checkOutTime": {
+    "$date": "2025-08-22T03:33:58.623Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68a7e537397c61b684a089bc"
+  },
+  "userId": {
+    "$oid": "68a56c6e741387f0c6e9bf96"
+  },
+  "date": {
+    "$date": "2025-08-21T18:30:00.000Z"
+  },
+  "checkInTime": {
+    "$date": "2025-08-22T03:34:15.417Z"
+  },
+  "status": "checked-out",
+  "createdAt": {
+    "$date": "2025-08-22T03:34:15.417Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-22T03:34:17.075Z"
+  },
+  "__v": 0,
+  "checkOutTime": {
+    "$date": "2025-08-22T03:34:17.074Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68a578144260c5367f7a35ea"
+  },
+  "userId": {
+    "$oid": "68a56c5b741387f0c6e9bf92"
+  },
+  "date": {
+    "$date": "2025-08-19T18:30:00.000Z"
+  },
+  "checkInTime": {
+    "$date": "2025-08-20T07:24:04.893Z"
+  },
+  "status": "checked-out",
+  "createdAt": {
+    "$date": "2025-08-20T07:24:04.897Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-20T07:24:15.806Z"
+  },
+  "__v": 0,
+  "checkOutTime": {
+    "$date": "2025-08-20T07:24:15.805Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68a76407397c61b684a088fe"
+  },
+  "userId": {
+    "$oid": "68a56bc5741387f0c6e9bf90"
+  },
+  "date": {
+    "$date": "2025-08-20T18:30:00.000Z"
+  },
+  "checkInTime": {
+    "$date": "2025-08-21T18:23:03.375Z"
+  },
+  "status": "checked-out",
+  "createdAt": {
+    "$date": "2025-08-21T18:23:03.376Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-21T18:23:21.590Z"
+  },
+  "__v": 0,
+  "checkOutTime": {
+    "$date": "2025-08-21T18:23:21.590Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68a763fe397c61b684a088ec"
+  },
+  "userId": {
+    "$oid": "68a45ede765f3365a7a28dd2"
+  },
+  "date": {
+    "$date": "2025-08-20T18:30:00.000Z"
+  },
+  "checkInTime": {
+    "$date": "2025-08-21T18:22:54.689Z"
+  },
+  "status": "checked-out",
+  "createdAt": {
+    "$date": "2025-08-21T18:22:54.693Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-21T18:23:14.745Z"
+  },
+  "__v": 0,
+  "checkOutTime": {
+    "$date": "2025-08-21T18:23:14.744Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68a7e53c397c61b684a089c6"
+  },
+  "userId": {
+    "$oid": "68a56c5b741387f0c6e9bf92"
+  },
+  "date": {
+    "$date": "2025-08-21T18:30:00.000Z"
+  },
+  "checkInTime": {
+    "$date": "2025-08-22T03:34:20.000Z"
+  },
+  "status": "checked-out",
+  "createdAt": {
+    "$date": "2025-08-22T03:34:20.001Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-22T06:53:43.243Z"
+  },
+  "__v": 0,
+  "checkOutTime": {
+    "$date": "2025-08-22T06:53:43.238Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68a76403397c61b684a088f8"
+  },
+  "userId": {
+    "$oid": "68a56aa3741387f0c6e9bf8e"
+  },
+  "date": {
+    "$date": "2025-08-20T18:30:00.000Z"
+  },
+  "checkInTime": {
+    "$date": "2025-08-21T18:22:59.331Z"
+  },
+  "status": "checked-out",
+  "createdAt": {
+    "$date": "2025-08-21T18:22:59.331Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-21T18:23:19.192Z"
+  },
+  "__v": 0,
+  "checkOutTime": {
+    "$date": "2025-08-21T18:23:19.192Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68a580bafbb12105f0ea5d47"
+  },
+  "userId": {
+    "$oid": "68a414c28f265bff2ce9c059"
+  },
+  "date": {
+    "$date": "2025-08-19T18:30:00.000Z"
+  },
+  "checkInTime": {
+    "$date": "2025-08-20T08:00:58.268Z"
+  },
+  "status": "checked-out",
+  "createdAt": {
+    "$date": "2025-08-20T08:00:58.275Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-20T08:02:16.960Z"
+  },
+  "__v": 0,
+  "checkOutTime": {
+    "$date": "2025-08-20T08:02:16.959Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68a7e529397c61b684a089b0"
+  },
+  "userId": {
+    "$oid": "68a56aa3741387f0c6e9bf8e"
+  },
+  "date": {
+    "$date": "2025-08-21T18:30:00.000Z"
+  },
+  "checkInTime": {
+    "$date": "2025-08-22T03:34:01.023Z"
+  },
+  "status": "checked-in",
+  "createdAt": {
+    "$date": "2025-08-22T03:34:01.023Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-22T03:34:01.023Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68cff706f1fb27a5060ad469"
+  },
+  "userId": {
+    "$oid": "68a56c6e741387f0c6e9bf96"
+  },
+  "date": {
+    "$date": "2025-09-21T00:00:00.000Z"
+  },
+  "checkInTime": {
+    "$date": "2025-09-21T13:00:54.480Z"
+  },
+  "status": "checked-out",
+  "biometricId": "biometric_1758459651062_68a56c6e741387f0c6e9bf96",
+  "biometricVerified": true,
+  "biometricType": "fingerprint",
+  "deviceInfo": "Android Device - Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Mobile Safari/537.36",
+  "createdAt": {
+    "$date": "2025-09-21T13:00:54.487Z"
+  },
+  "updatedAt": {
+    "$date": "2025-09-21T13:01:04.270Z"
+  },
+  "__v": 0,
+  "checkOutTime": {
+    "$date": "2025-09-21T13:01:04.269Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68f3689610bc5ef47b0ffbfb"
+  },
+  "userId": {
+    "$oid": "68a483f6bc6ee8373f329b17"
+  },
+  "date": {
+    "$date": "2025-10-18T00:00:00.000Z"
+  },
+  "checkInTime": {
+    "$date": "2025-10-18T10:14:46.151Z"
+  },
+  "status": "checked-out",
+  "biometricId": "biometric_1760782485090_68a483f6bc6ee8373f329b17",
+  "biometricVerified": true,
+  "biometricType": "face",
+  "deviceInfo": "Android Device - Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+  "createdAt": {
+    "$date": "2025-10-18T10:14:46.158Z"
+  },
+  "updatedAt": {
+    "$date": "2025-10-18T10:14:52.360Z"
+  },
+  "__v": 0,
+  "checkOutTime": {
+    "$date": "2025-10-18T10:14:52.359Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68f368ca10bc5ef47b0ffc0d"
+  },
+  "userId": {
+    "$oid": "68a56bc5741387f0c6e9bf90"
+  },
+  "date": {
+    "$date": "2025-10-18T00:00:00.000Z"
+  },
+  "checkInTime": {
+    "$date": "2025-10-18T10:15:38.727Z"
+  },
+  "status": "checked-in",
+  "biometricVerified": false,
+  "createdAt": {
+    "$date": "2025-10-18T10:15:38.728Z"
+  },
+  "updatedAt": {
+    "$date": "2025-10-18T10:15:38.728Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68f9b627f391e214fcf7bbeb"
+  },
+  "userId": {
+    "$oid": "68a483f6bc6ee8373f329b17"
+  },
+  "date": {
+    "$date": "2025-10-23T00:00:00.000Z"
+  },
+  "checkInTime": {
+    "$date": "2025-10-23T04:59:19.371Z"
+  },
+  "status": "checked-out",
+  "biometricVerified": false,
+  "createdAt": {
+    "$date": "2025-10-23T04:59:19.385Z"
+  },
+  "updatedAt": {
+    "$date": "2025-10-23T04:59:26.354Z"
+  },
+  "__v": 0,
+  "checkOutTime": {
+    "$date": "2025-10-23T04:59:26.352Z"
+  }
+}]

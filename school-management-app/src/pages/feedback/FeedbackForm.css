@@ -1,0 +1,280 @@
+
+.feedback-form-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: var(--background-color);
+  color: var(--text-light-color);
+  min-width:100%;
+}
+
+.feedback-form-card {
+  background: var(--card-background-color);
+  border-radius: 10px;
+  padding: 30px;
+  width: 100%;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--border-color);
+}
+
+.feedback-form-title {
+  text-align: center;
+  margin-bottom: 10px;
+  color: var(--text-light-color);
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.form-description {
+  text-align: center;
+  margin-bottom: 30px;
+  color: var(--subtext-light);
+  font-size: 1rem;
+}
+
+.feedback-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: var(--text-light-color);
+}
+
+.form-input,
+.form-textarea,
+.form-select {
+  padding: 12px 15px;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  background: var(--input-background-color);
+  color: var(--text-light-color);
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.form-input:focus,
+.form-textarea:focus,
+.form-select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(71, 107, 107, 0.3);
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.char-count {
+  align-self: flex-end;
+  margin-top: 5px;
+  font-size: 0.8rem;
+  color: var(--subtext-light);
+}
+
+.image-upload-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.upload-area {
+  border: 2px dashed var(--border-color);
+  border-radius: 8px;
+  padding: 30px 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: rgba(71, 107, 107, 0.1);
+}
+
+.upload-area:hover {
+  border-color: var(--primary-color);
+  background: rgba(71, 107, 107, 0.2);
+}
+
+.upload-icon {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.upload-text {
+  margin: 5px 0;
+  font-weight: 500;
+}
+
+.upload-hint {
+  margin: 5px 0;
+  font-size: 0.8rem;
+  color: var(--subtext-light);
+}
+
+.file-input {
+  padding: 10px;
+  background: var(--input-background-color);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  color: var(--text-light-color);
+}
+
+.image-preview {
+  text-align: center;
+  position: relative;
+}
+
+.preview-image {
+  max-width: 100%;
+  max-height: 300px;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+}
+
+.retry-image-btn {
+  position: absolute;
+  top: 10px;
+  right: 45px; /* Position it to the left of the remove button */
+  padding: 5px 10px;
+  background: rgba(52, 152, 219, 0.8);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: background 0.3s ease;
+  z-index: 1;
+}
+
+.retry-image-btn:hover {
+  background: rgba(52, 152, 219, 1);
+}
+
+.remove-image-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 5px 10px;
+  background: rgba(231, 76, 60, 0.8);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: background 0.3s ease;
+}
+
+.remove-image-btn:hover {
+  background: rgba(231, 76, 60, 1);
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 10px;
+  width: 100%;
+  align-items: center;
+}
+
+.reset-button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: var(--border-color);
+  color: var(--text-light-color);
+  min-width: 100px;
+  height: 32px;
+}
+
+.reset-button:hover:not(:disabled) {
+  background: var(--dark-card);
+  transform: translateY(-1px);
+}
+
+.submit-button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: var(--accent-color);
+  color: var(--text-light-color);
+  min-width: 100px;
+  height: 32px;
+}
+
+.submit-button:hover:not(:disabled) {
+  background: var(--accent-color-hover);
+  transform: translateY(-1px);
+  /* box-shadow: 0 4px 12px rgba(140, 42, 30, 0.3); */
+}
+
+.submit-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.message {
+  padding: 15px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: 500;
+}
+
+.message.success {
+  background: rgba(46, 204, 113, 0.2);
+  border: 1px solid #2ecc71;
+  color: #2ecc71;
+}
+
+.message.error {
+  background: rgba(231, 76, 60, 0.2);
+  border: 1px solid #e74c3c;
+  color: #e74c3c;
+}
+
+.message.info {
+  background: rgba(52, 152, 219, 0.2);
+  border: 1px solid #3498db;
+  color: #3498db;
+}
+
+.upload-status {
+  text-align: center;
+  color: var(--subtext-light);
+  font-style: italic;
+  margin: 10px 0;
+}
+
+@media (max-width: 768px) {
+  .feedback-form-card {
+    padding: 20px;
+    margin: 10px;
+  }
+  
+  .feedback-form-title {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+  
+  .form-actions {
+    flex-direction: column;
+  }
+}

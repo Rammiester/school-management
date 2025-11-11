@@ -1,0 +1,294 @@
+.nav-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+  background: var(--background-color);
+  height: 64px;
+  color: var(--text-light-color);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.nav-bar .ant-menu-light .ant-menu-submenu-title,
+.nav-bar :where(.css-dev-only-do-not-override-tjsggz).ant-menu-light > .ant-menu .ant-menu-submenu-title {
+  color: var(--text-light-color);
+}
+
+.nav-bar .ant-menu {
+  font-size: 18px;
+}
+
+.nav-bar .mobile-menu-icons {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .nav-bar .mobile-menu-icons {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.logo img {
+  width: 140px;
+  height: auto;
+}
+
+@media (max-width: 768px) {
+  .logo img {
+    width: 120px;
+  }
+}
+
+.menu-icon {
+  font-size: 24px;
+  cursor: pointer;
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .menu-icon {
+    display: block;
+  }
+}
+
+.sidebar-menu {
+  display: flex;
+  align-items: center;
+}
+
+.sidebar-menu .ant-menu {
+  background: transparent !important;
+}
+
+.sidebar-menu .ant-menu-item {
+  transition: all 0.3s ease;
+}
+
+/* Comprehensive override for all Ant Design menu item states */
+.sidebar-menu .ant-menu-item,
+.sidebar-menu .ant-menu-item:hover,
+.sidebar-menu .ant-menu-item:active,
+.sidebar-menu .ant-menu-item:focus,
+.sidebar-menu .ant-menu-item-selected,
+.sidebar-menu .ant-menu-item-active {
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  outline: none !important;
+  color: var(--text-light-color) !important;
+}
+
+/* Custom hover and active states */
+.sidebar-menu .ant-menu-item:hover,
+.sidebar-menu .ant-menu-item-active {
+  border-bottom: 3px solid var(--accent-color) !important;
+  color: var(--accent-color) !important;
+  background: transparent !important;
+}
+
+.sidebar-menu .custom-menu-item a {
+  font-weight: 500;
+  transition: all 0.3s ease !important;
+}
+
+/* Custom menu item hover */
+.sidebar-menu .custom-menu-item:hover {
+  color: var(--accent-color) !important;
+  background: transparent !important;
+  border-bottom: 3px solid var(--accent-color) !important;
+  border-radius: 0 !important;
+}
+
+
+/* Remove any default Ant Design hover effects */
+.sidebar-menu .custom-menu-item:hover::after {
+  display: none !important;
+}
+
+/* Ensure the custom menu item behaves consistently */
+.sidebar-menu .custom-menu-item {
+  transition: all 0.3s ease !important;
+}
+
+.sidebar-menu .ant-menu-light.ant-menu-horizontal > .ant-menu-item-selected::after,
+.sidebar-menu :where(.css-dev-only-do-not-override-tjsggz).ant-menu-light > .ant-menu.ant-menu-horizontal > .ant-menu-item-selected::after,
+.sidebar-menu :where(.css-dev-only-do-not-override-tjsggz).ant-menu-light.ant-menu-horizontal > .ant-menu-submenu-selected::after,
+.sidebar-menu :where(.css-dev-only-do-not-override-tjsggz).ant-menu-light > .ant-menu.ant-menu-horizontal > .ant-menu-submenu-selected::after {
+  border-bottom: none !important;
+}
+
+/* Enhanced active state styling */
+.sidebar-menu .ant-menu-item:hover {
+  background: transparent !important;
+  color: var(--accent-color) !important;
+}
+
+.sidebar-menu .ant-menu-item a:hover {
+  color: var(--accent-color) !important;
+}
+
+/* Add smooth transition for active state */
+.sidebar-menu .ant-menu-item,
+.sidebar-menu .ant-menu-item a {
+  transition: all 0.3s ease !important;
+}
+
+/* Mobile menu active state */
+.profile-modal .ant-menu-item-selected {
+  background-color: var(--accent-color) !important;
+  color: var(--white) !important;
+}
+
+/* Add focus styles for accessibility */
+.sidebar-menu .ant-menu-item:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Ensure active state is visible in both desktop and mobile */
+.sidebar-menu .ant-menu-item-selected,
+/* .sidebar-menu .ant-menu-item-selected a {
+  color: var(--accent-color) !important;
+  border-bottom: 3px solid var(--accent-color) !important;
+  background: transparent !important;
+} */
+
+/* Ensure mobile menu items show active state properly */
+.profile-modal .ant-menu-item-selected {
+  color: var(--white) !important;
+  background-color: var(--accent-color) !important;
+  border-radius: 25px !important;
+  margin: 4px 0 !important;
+}
+
+@media (max-width: 768px) {
+  .sidebar-menu {
+    display: none;
+  }
+}
+
+.toggle-button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 50%;
+  transition: background 0.3s;
+}
+
+.toggle-button:hover {
+  background: var(--box-shadow-light);
+}
+
+.toggle-button svg {
+  font-size: 1.5rem;
+}
+
+.profile-section {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.profile-section span {
+  color: var(--text-light-color);
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-left: 8px;
+}
+
+.profile-section .ant-avatar {
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid var(--text-light-color);
+}
+
+.profile-section .ant-avatar svg {
+  color: var(--text-light-color);
+  font-size: 18px;
+}
+
+.mobile-menu-icons-container {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .mobile-menu-icons-container {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+}
+
+.profile-modal .ant-modal-content {
+  background-color: var(--card-background-color);
+  color: var(--text-light-color);
+}
+
+.profile-modal .ant-modal-header {
+  background-color: var(--card-background-color);
+  color: var(--text-light-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.profile-modal .ant-modal-title {
+    color: var(--text-light-color);
+}
+
+.profile-modal .ant-menu {
+  background: transparent;
+  color: var(--text-light-color);
+}
+
+.profile-modal .ant-menu-item {
+  color: var(--text-light-color);
+}
+
+.profile-modal .ant-menu-item a {
+  color: var(--text-light-color);
+}
+
+.profile-modal .ant-menu-item-selected {
+  background-color: var(--accent-color) !important;
+}
+
+.ant-menu .ant-menu-item a::before {
+  color: var(--white) !important;
+}
+
+.profile-modal-title {
+  display: flex;
+  align-items: center;
+}
+
+.profile-modal-title .ant-avatar {
+  margin-right: 12px;
+}
+
+.profile-modal-name {
+  font-weight: 600;
+}
+
+.profile-modal-role {
+  font-size: 13px;
+  color: var(--subtext-dark);
+}
+.sidebar-menu .ant-menu-item-active::after,
+.sidebar-menu .ant-menu-item:hover::after {
+  display: none !important;
+}

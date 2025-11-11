@@ -1,0 +1,272 @@
+[{
+  "_id": {
+    "$oid": "68ef2db4edb58d377d3b297a"
+  },
+  "student": {
+    "$oid": "6867a3f297c995cb66406436"
+  },
+  "status": "pending",
+  "dueDate": {
+    "$date": "2025-10-15T00:00:00.000Z"
+  },
+  "description": "",
+  "amount": 500,
+  "department": "general",
+  "items": [
+    {
+      "amount": 500,
+      "description": "Educational trip",
+      "_id": {
+        "$oid": "68ef2db4edb58d377d3b297b"
+      }
+    }
+  ],
+  "generatedBy": {
+    "$oid": "68a1fa54aac9ce9c2eba305f"
+  },
+  "__v": 0,
+  "createdAt": {
+    "$date": "2025-10-15T05:14:28.730Z"
+  },
+  "updatedAt": {
+    "$date": "2025-10-15T05:14:28.730Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68ef2db4edb58d377d3b297c"
+  },
+  "student": {
+    "$oid": "6867a3f297c995cb66406436"
+  },
+  "status": "pending",
+  "dueDate": {
+    "$date": "2025-10-16T00:00:00.000Z"
+  },
+  "description": "",
+  "amount": 500,
+  "department": "general",
+  "items": [
+    {
+      "amount": 500,
+      "description": "Educational trip",
+      "_id": {
+        "$oid": "68ef2db4edb58d377d3b297d"
+      }
+    }
+  ],
+  "generatedBy": {
+    "$oid": "68a1fa54aac9ce9c2eba305f"
+  },
+  "__v": 0,
+  "createdAt": {
+    "$date": "2025-10-15T05:14:28.731Z"
+  },
+  "updatedAt": {
+    "$date": "2025-10-15T05:14:28.731Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68ef2db4edb58d377d3b297e"
+  },
+  "student": {
+    "$oid": "6867a3f297c995cb66406447"
+  },
+  "status": "pending",
+  "dueDate": {
+    "$date": "2025-10-15T00:00:00.000Z"
+  },
+  "description": "",
+  "amount": 500,
+  "department": "general",
+  "items": [
+    {
+      "amount": 500,
+      "description": "Educational trip",
+      "_id": {
+        "$oid": "68ef2db4edb58d377d3b297f"
+      }
+    }
+  ],
+  "generatedBy": {
+    "$oid": "68a1fa54aac9ce9c2eba305f"
+  },
+  "__v": 0,
+  "createdAt": {
+    "$date": "2025-10-15T05:14:28.731Z"
+  },
+  "updatedAt": {
+    "$date": "2025-10-15T05:14:28.731Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68ef2db4edb58d377d3b2980"
+  },
+  "student": {
+    "$oid": "6867a3f297c995cb66406447"
+  },
+  "status": "pending",
+  "dueDate": {
+    "$date": "2025-10-16T00:00:00.000Z"
+  },
+  "description": "",
+  "amount": 500,
+  "department": "general",
+  "items": [
+    {
+      "amount": 500,
+      "description": "Educational trip",
+      "_id": {
+        "$oid": "68ef2db4edb58d377d3b2981"
+      }
+    }
+  ],
+  "generatedBy": {
+    "$oid": "68a1fa54aac9ce9c2eba305f"
+  },
+  "__v": 0,
+  "createdAt": {
+    "$date": "2025-10-15T05:14:28.731Z"
+  },
+  "updatedAt": {
+    "$date": "2025-10-15T05:14:28.731Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68ef2db4edb58d377d3b2982"
+  },
+  "student": {
+    "$oid": "6867a3f297c995cb6640643f"
+  },
+  "status": "pending",
+  "dueDate": {
+    "$date": "2025-10-15T00:00:00.000Z"
+  },
+  "description": "",
+  "amount": 500,
+  "department": "general",
+  "items": [
+    {
+      "amount": 500,
+      "description": "Educational trip",
+      "_id": {
+        "$oid": "68ef2db4edb58d377d3b2983"
+      }
+    }
+  ],
+  "generatedBy": {
+    "$oid": "68a1fa54aac9ce9c2eba305f"
+  },
+  "__v": 0,
+  "createdAt": {
+    "$date": "2025-10-15T05:14:28.731Z"
+  },
+  "updatedAt": {
+    "$date": "2025-10-15T05:14:28.731Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68ef2db4edb58d377d3b2984"
+  },
+  "student": {
+    "$oid": "6867a3f297c995cb6640643f"
+  },
+  "status": "pending",
+  "dueDate": {
+    "$date": "2025-10-16T00:00:00.000Z"
+  },
+  "description": "",
+  "amount": 500,
+  "department": "general",
+  "items": [
+    {
+      "amount": 500,
+      "description": "Educational trip",
+      "_id": {
+        "$oid": "68ef2db4edb58d377d3b2985"
+      }
+    }
+  ],
+  "generatedBy": {
+    "$oid": "68a1fa54aac9ce9c2eba305f"
+  },
+  "__v": 0,
+  "createdAt": {
+    "$date": "2025-10-15T05:14:28.731Z"
+  },
+  "updatedAt": {
+    "$date": "2025-10-15T05:14:28.731Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68ef2db4edb58d377d3b2986"
+  },
+  "student": {
+    "$oid": "6867a3f297c995cb66406442"
+  },
+  "status": "pending",
+  "dueDate": {
+    "$date": "2025-10-15T00:00:00.000Z"
+  },
+  "description": "",
+  "amount": 500,
+  "department": "general",
+  "items": [
+    {
+      "amount": 500,
+      "description": "Educational trip",
+      "_id": {
+        "$oid": "68ef2db4edb58d377d3b2987"
+      }
+    }
+  ],
+  "generatedBy": {
+    "$oid": "68a1fa54aac9ce9c2eba305f"
+  },
+  "__v": 0,
+  "createdAt": {
+    "$date": "2025-10-15T05:14:28.731Z"
+  },
+  "updatedAt": {
+    "$date": "2025-10-15T05:14:28.731Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68ef2db4edb58d377d3b2988"
+  },
+  "student": {
+    "$oid": "6867a3f297c995cb66406442"
+  },
+  "status": "pending",
+  "dueDate": {
+    "$date": "2025-10-16T00:00:00.000Z"
+  },
+  "description": "",
+  "amount": 500,
+  "department": "general",
+  "items": [
+    {
+      "amount": 500,
+      "description": "Educational trip",
+      "_id": {
+        "$oid": "68ef2db4edb58d377d3b2989"
+      }
+    }
+  ],
+  "generatedBy": {
+    "$oid": "68a1fa54aac9ce9c2eba305f"
+  },
+  "__v": 0,
+  "createdAt": {
+    "$date": "2025-10-15T05:14:28.731Z"
+  },
+  "updatedAt": {
+    "$date": "2025-10-15T05:14:28.731Z"
+  }
+}]

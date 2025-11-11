@@ -1,0 +1,221 @@
+{
+  "classes": [
+    {
+      "id": "foundation",
+      "name": "Foundation",
+      "subjects": [
+        {
+          "id": "math-foundation",
+          "name": "Mathematics",
+          "chapters": [
+            { 
+              "id": "ch1-math-foundation", 
+              "name": "Numbers", 
+              "targetDate": "2025-09-15",
+              "topics": [
+                { "id": "topic1-ch1-math-foundation", "name": "Counting 1-10" },
+                { "id": "topic2-ch1-math-foundation", "name": "Counting 10-20" },
+                { "id": "topic3-ch1-math-foundation", "name": "Number Recognition" }
+              ]
+            },
+            { 
+              "id": "ch2-math-foundation", 
+              "name": "Addition", 
+              "targetDate": "2025-10-01",
+              "topics": [
+                { "id": "topic1-ch2-math-foundation", "name": "Addition with Objects" },
+                { "id": "topic2-ch2-math-foundation", "name": "Simple Addition Problems" }
+              ]
+            },
+            { 
+              "id": "ch3-math-foundation", 
+              "name": "Subtraction", 
+              "targetDate": "2025-10-20",
+              "topics": [
+                { "id": "topic1-ch3-math-foundation", "name": "Subtraction with Objects" },
+                { "id": "topic2-ch3-math-foundation", "name": "Simple Subtraction Problems" }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "english-foundation",
+          "name": "English",
+          "chapters": [
+            { 
+              "id": "ch1-eng-foundation", 
+              "name": "Alphabets", 
+              "targetDate": "2025-09-10",
+              "topics": [
+                { "id": "topic1-ch1-eng-foundation", "name": "Letters A-M" },
+                { "id": "topic2-ch1-eng-foundation", "name": "Letters N-Z" }
+              ]
+            },
+            { 
+              "id": "ch2-eng-foundation", 
+              "name": "Words", 
+              "targetDate": "2025-09-25",
+              "topics": [
+                { "id": "topic1-ch2-eng-foundation", "name": "Three Letter Words" },
+                { "id": "topic2-ch2-eng-foundation", "name": "Four Letter Words" }
+              ]
+            },
+            { 
+              "id": "ch3-eng-foundation", 
+              "name": "Sentences", 
+              "targetDate": "2025-10-15",
+              "topics": [
+                { "id": "topic1-ch3-eng-foundation", "name": "Simple Sentences" },
+                { "id": "topic2-ch3-eng-foundation", "name": "Sentence Structure" }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "class1",
+      "name": "Class 1",
+      "subjects": [
+        {
+          "id": "math-class1",
+          "name": "Mathematics",
+          "chapters": [
+            { 
+              "id": "ch1-math-class1", 
+              "name": "Multiplication", 
+              "targetDate": "2025-09-30",
+              "topics": [
+                { "id": "topic1-ch1-math-class1", "name": "Multiplication Tables 1-5" },
+                { "id": "topic2-ch1-math-class1", "name": "Multiplication Problems" }
+              ]
+            },
+            { 
+              "id": "ch2-math-class1", 
+              "name": "Division", 
+              "targetDate": "2025-10-25",
+              "topics": [
+                { "id": "topic1-ch2-math-class1", "name": "Division Basics" },
+                { "id": "topic2-ch2-math-class1", "name": "Simple Division Problems" }
+              ]
+            },
+            { 
+              "id": "ch3-math-class1", 
+              "name": "Fractions", 
+              "targetDate": "2025-11-15",
+              "topics": [
+                { "id": "topic1-ch3-math-class1", "name": "Introduction to Fractions" },
+                { "id": "topic2-ch3-math-class1", "name": "Simple Fraction Problems" }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "science-class1",
+          "name": "Science",
+          "chapters": [
+            { 
+              "id": "ch1-sci-class1", 
+              "name": "Plants", 
+              "targetDate": "2025-09-20",
+              "topics": [
+                { "id": "topic1-ch1-sci-class1", "name": "Parts of Plants" },
+                { "id": "topic2-ch1-sci-class1", "name": "Plant Growth" }
+              ]
+            },
+            { 
+              "id": "ch2-sci-class1", 
+              "name": "Animals", 
+              "targetDate": "2025-10-10",
+              "topics": [
+                { "id": "topic1-ch2-sci-class1", "name": "Animal Habitats" },
+                { "id": "topic2-ch2-sci-class1", "name": "Animal Categories" }
+              ]
+            },
+            { 
+              "id": "ch3-sci-class1", 
+              "name": "Weather", 
+              "targetDate": "2025-11-05",
+              "topics": [
+                { "id": "topic1-ch3-sci-class1", "name": "Weather Types" },
+                { "id": "topic2-ch3-sci-class1", "name": "Seasons" }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "class2",
+      "name": "Class 2",
+      "subjects": [
+        {
+          "id": "math-class2",
+          "name": "Mathematics",
+          "chapters": [
+            { 
+              "id": "ch1-math-class2", 
+              "name": "Geometry", 
+              "targetDate": "2025-10-15",
+              "topics": [
+                { "id": "topic1-ch1-math-class2", "name": "Basic Shapes" },
+                { "id": "topic2-ch1-math-class2", "name": "Shape Properties" }
+              ]
+            },
+            { 
+              "id": "ch2-math-class2", 
+              "name": "Measurements", 
+              "targetDate": "2025-11-05",
+              "topics": [
+                { "id": "topic1-ch2-math-class2", "name": "Length and Distance" },
+                { "id": "topic2-ch2-math-class2", "name": "Weight and Mass" }
+              ]
+            },
+            { 
+              "id": "ch3-math-class2", 
+              "name": "Time", 
+              "targetDate": "2025-11-25",
+              "topics": [
+                { "id": "topic1-ch3-math-class2", "name": "Reading Clocks" },
+                { "id": "topic2-ch3-math-class2", "name": "Calendar Basics" }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "social-class2",
+          "name": "Social Studies",
+          "chapters": [
+            { 
+              "id": "ch1-soc-class2", 
+              "name": "Family", 
+              "targetDate": "2025-09-25",
+              "topics": [
+                { "id": "topic1-ch1-soc-class2", "name": "Family Members" },
+                { "id": "topic2-ch1-soc-class2", "name": "Family Roles" }
+              ]
+            },
+            { 
+              "id": "ch2-soc-class2", 
+              "name": "Community Helpers", 
+              "targetDate": "2025-10-20",
+              "topics": [
+                { "id": "topic1-ch2-soc-class2", "name": "Police and Firefighters" },
+                { "id": "topic2-ch2-soc-class2", "name": "Doctors and Teachers" }
+              ]
+            },
+            { 
+              "id": "ch3-soc-class2", 
+              "name": "Our Country", 
+              "targetDate": "2025-11-15",
+              "topics": [
+                { "id": "topic1-ch3-soc-class2", "name": "National Symbols" },
+                { "id": "topic2-ch3-soc-class2", "name": "Important Places" }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,362 @@
+[
+  {
+    "className": "1",
+    "payments": [
+      {
+        "department": "Academics",
+        "amount": 15000,
+        "isEditable": true
+      },
+      {
+        "department": "Sports",
+        "amount": 2000,
+        "isEditable": true
+      },
+      {
+        "department": "Library",
+        "amount": 1000,
+        "isEditable": true
+      },
+      {
+        "department": "Hostel",
+        "amount": 5000,
+        "isEditable": true
+      },
+      {
+        "department": "Transport",
+        "amount": 3000,
+        "isEditable": true
+      }
+    ]
+  },
+  {
+    "className": "2",
+    "payments": [
+      {
+        "department": "Academics",
+        "amount": 16000,
+        "isEditable": true
+      },
+      {
+        "department": "Sports",
+        "amount": 2200,
+        "isEditable": true
+      },
+      {
+        "department": "Library",
+        "amount": 1100,
+        "isEditable": true
+      },
+      {
+        "department": "Hostel",
+        "amount": 5500,
+        "isEditable": true
+      },
+      {
+        "department": "Transport",
+        "amount": 3200,
+        "isEditable": true
+      }
+    ]
+  },
+  {
+    "className": "3",
+    "payments": [
+      {
+        "department": "Academics",
+        "amount": 17000,
+        "isEditable": true
+      },
+      {
+        "department": "Sports",
+        "amount": 2400,
+        "isEditable": true
+      },
+      {
+        "department": "Library",
+        "amount": 1200,
+        "isEditable": true
+      },
+      {
+        "department": "Hostel",
+        "amount": 6000,
+        "isEditable": true
+      },
+      {
+        "department": "Transport",
+        "amount": 3400,
+        "isEditable": true
+      }
+    ]
+  },
+  {
+    "className": "4",
+    "payments": [
+      {
+        "department": "Academics",
+        "amount": 18000,
+        "isEditable": true
+      },
+      {
+        "department": "Sports",
+        "amount": 2600,
+        "isEditable": true
+      },
+      {
+        "department": "Library",
+        "amount": 1300,
+        "isEditable": true
+      },
+      {
+        "department": "Hostel",
+        "amount": 6500,
+        "isEditable": true
+      },
+      {
+        "department": "Transport",
+        "amount": 3600,
+        "isEditable": true
+      }
+    ]
+  },
+  {
+    "className": "5",
+    "payments": [
+      {
+        "department": "Academics",
+        "amount": 19000,
+        "isEditable": true
+      },
+      {
+        "department": "Sports",
+        "amount": 2800,
+        "isEditable": true
+      },
+      {
+        "department": "Library",
+        "amount": 1400,
+        "isEditable": true
+      },
+      {
+        "department": "Hostel",
+        "amount": 7000,
+        "isEditable": true
+      },
+      {
+        "department": "Transport",
+        "amount": 3800,
+        "isEditable": true
+      }
+    ]
+  },
+  {
+    "className": "6",
+    "payments": [
+      {
+        "department": "Academics",
+        "amount": 20000,
+        "isEditable": true
+      },
+      {
+        "department": "Sports",
+        "amount": 3000,
+        "isEditable": true
+      },
+      {
+        "department": "Library",
+        "amount": 1500,
+        "isEditable": true
+      },
+      {
+        "department": "Hostel",
+        "amount": 7500,
+        "isEditable": true
+      },
+      {
+        "department": "Transport",
+        "amount": 4000,
+        "isEditable": true
+      }
+    ]
+  },
+  {
+    "className": "7",
+    "payments": [
+      {
+        "department": "Academics",
+        "amount": 21000,
+        "isEditable": true
+      },
+      {
+        "department": "Sports",
+        "amount": 3200,
+        "isEditable": true
+      },
+      {
+        "department": "Library",
+        "amount": 1600,
+        "isEditable": true
+      },
+      {
+        "department": "Hostel",
+        "amount": 8000,
+        "isEditable": true
+      },
+      {
+        "department": "Transport",
+        "amount": 4200,
+        "isEditable": true
+      }
+    ]
+  },
+  {
+    "className": "8",
+    "payments": [
+      {
+        "department": "Academics",
+        "amount": 22000,
+        "isEditable": true
+      },
+      {
+        "department": "Sports",
+        "amount": 3400,
+        "isEditable": true
+      },
+      {
+        "department": "Library",
+        "amount": 1700,
+        "isEditable": true
+      },
+      {
+        "department": "Hostel",
+        "amount": 8500,
+        "isEditable": true
+      },
+      {
+        "department": "Transport",
+        "amount": 4400,
+        "isEditable": true
+      }
+    ]
+  },
+  {
+    "className": "9",
+    "payments": [
+      {
+        "department": "Academics",
+        "amount": 23000,
+        "isEditable": true
+      },
+      {
+        "department": "Sports",
+        "amount": 3600,
+        "isEditable": true
+      },
+      {
+        "department": "Library",
+        "amount": 1800,
+        "isEditable": true
+      },
+      {
+        "department": "Hostel",
+        "amount": 9000,
+        "isEditable": true
+      },
+      {
+        "department": "Transport",
+        "amount": 4600,
+        "isEditable": true
+      }
+    ]
+  },
+  {
+    "className": "10",
+    "payments": [
+      {
+        "department": "Academics",
+        "amount": 24000,
+        "isEditable": true
+      },
+      {
+        "department": "Sports",
+        "amount": 3800,
+        "isEditable": true
+      },
+      {
+        "department": "Library",
+        "amount": 1900,
+        "isEditable": true
+      },
+      {
+        "department": "Hostel",
+        "amount": 9500,
+        "isEditable": true
+      },
+      {
+        "department": "Transport",
+        "amount": 4800,
+        "isEditable": true
+      }
+    ]
+  },
+  {
+    "className": "11",
+    "payments": [
+      {
+        "department": "Academics",
+        "amount": 25000,
+        "isEditable": true
+      },
+      {
+        "department": "Sports",
+        "amount": 4000,
+        "isEditable": true
+      },
+      {
+        "department": "Library",
+        "amount": 2000,
+        "isEditable": true
+      },
+      {
+        "department": "Hostel",
+        "amount": 10000,
+        "isEditable": true
+      },
+      {
+        "department": "Transport",
+        "amount": 5000,
+        "isEditable": true
+      }
+    ]
+  },
+  {
+    "className": "12",
+    "payments": [
+      {
+        "department": "Academics",
+        "amount": 26000,
+        "isEditable": true
+      },
+      {
+        "department": "Sports",
+        "amount": 4200,
+        "isEditable": true
+      },
+      {
+        "department": "Library",
+        "amount": 2100,
+        "isEditable": true
+      },
+      {
+        "department": "Hostel",
+        "amount": 10500,
+        "isEditable": true
+      },
+      {
+        "department": "Transport",
+        "amount": 5200,
+        "isEditable": true
+      }
+    ]
+  }
+]

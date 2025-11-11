@@ -1,0 +1,51 @@
+[{
+  "_id": {
+    "$oid": "685fc5cf130dcef36532012a"
+  },
+  "message": "PTM scheduled for next Saturday.",
+  "postedBy": "Teacher",
+  "date": {
+    "$date": "2025-06-28T10:37:03.388Z"
+  },
+  "__v": 0,
+  "createdAt": {
+    "$date": "2025-06-28T10:37:03.389Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-28T10:37:03.389Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "685fc5cf130dcef365320129"
+  },
+  "message": "School will remain closes on 15th August due to Independence Day.",
+  "postedBy": "Principal",
+  "date": {
+    "$date": "2025-06-28T10:37:03.388Z"
+  },
+  "__v": 0,
+  "createdAt": {
+    "$date": "2025-06-28T10:37:03.389Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-28T10:37:03.389Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68a08bbe9f407694888c5687"
+  },
+  "message": "School will remain closes on 15th August due to Independence Day.",
+  "postedBy": "Principal",
+  "date": {
+    "$date": "2025-06-28T10:37:03.388Z"
+  },
+  "__v": 0,
+  "createdAt": {
+    "$date": "2025-06-28T10:37:03.389Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-28T10:37:03.389Z"
+  }
+}]

@@ -1,0 +1,428 @@
+/* Request Component CSS */
+/* Responsive design for request.js page */
+.request-dashboard-container {
+  width: 100%;
+  max-width: 1300px;
+  margin: 0 auto 20px;
+}
+
+/* Request Card Styles */
+.request-card {
+  background: linear-gradient(135deg, var(--purple) 0%, var(--blue) 100%);
+  border-radius: 12px;
+  max-width: 1300px;
+  padding: 20px;
+  color: var(--text-light-color);
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+  margin: 10px 0;
+  font-size: 0.9rem;
+  opacity: 0.9;
+  border: 1px solid var(--border-color);
+}
+
+.request-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+  opacity: 1;
+}
+
+.request-card h3 {
+  margin: 0 0 10px 0;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+}
+
+.request-card p {
+  margin: 5px 0;
+  opacity: 0.9;
+  font-size: 0.95rem;
+}
+
+.request-count {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  margin-top: 10px;
+  display: inline-block;
+  font-weight: 500;
+}
+
+/* Modal Styles */
+.request-modal .ant-modal-content {
+  padding: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.request-modal .ant-modal-header {
+  background: var(--card-background-color) !important;
+  border-bottom: 1px solid var(--border-color);
+  padding: 16px 24px;
+  color: var(--text-light-color);
+}
+
+.request-modal .ant-modal-title {
+  color: var(--text-light-color) !important;
+  font-size: 1.2rem;
+  font-weight: 600;
+  background-color: var(--card-background-color) !important;
+}
+
+.request-modal .ant-modal-body {
+  padding: 24px;
+  background: var(--background-color);
+}
+
+.request-modal .ant-modal-footer {
+  border-top: 1px solid var(--border-color);
+  padding: 16px 24px;
+  text-align: right;
+  background: var(--card-background-color);
+}
+
+.request-modal .ant-modal-footer button {
+  margin-left: 8px;
+  margin-bottom: 0;
+}
+
+/* Request Grid Styles */
+.request-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+}
+
+/* Request Item Styles */
+.request-item {
+  border-radius: 8px;
+  padding: 16px;
+  cursor: pointer;
+  background-color: var(--card-primary);
+  transition: all 0.2s ease;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.request-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-color: var(--accent-color);
+}
+
+.request-item h4 {
+  margin: 0 0 10px 0;
+  color: var(--text-light-color);
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.request-item p {
+  margin: 5px 0;
+  font-size: 0.9rem;
+  color: var(--subtext-light);
+  line-height: 1.4;
+}
+
+.request-item p:first-child {
+  font-weight: 500;
+  color: var(--text-light-color);
+}
+
+/* Individual Request Modal Styles */
+.individual-request-modal .ant-modal-body {
+  padding: 20px;
+}
+
+.individual-request-modal .request-details {
+  margin-bottom: 20px;
+}
+
+.individual-request-modal .request-details p {
+  margin: 8px 0;
+  font-size: 0.95rem;
+}
+
+.individual-request-modal .request-details strong {
+  color: var(--text-light-color);
+}
+
+/* Role Selection Styles */
+.role-select-container {
+  margin-bottom: 20px;
+}
+
+.role-select-container label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--text-light-color);
+  font-weight: 500;
+}
+
+/* Button Styles */
+.request-action-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+.request-action-buttons .ant-btn {
+  border-radius: 4px;
+  font-weight: 500;
+  padding: 8px 16px;
+  transition: all 0.2s ease;
+}
+
+.request-action-buttons .ant-btn-primary {
+  background: var(--accent-color);
+  border-color: var(--accent-color);
+}
+
+.request-action-buttons .ant-btn-primary:hover,
+.request-action-buttons .ant-btn-primary:focus,
+.request-action-buttons .ant-btn-primary:active {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.request-action-buttons .ant-btn-danger {
+  background: var(--accent-color);
+  border-color: var(--accent-color);
+}
+
+.request-action-buttons .ant-btn-danger:hover,
+.request-action-buttons .ant-btn-danger:focus,
+.request-action-buttons .ant-btn-danger:active {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+/* Empty State Styles */
+.no-requests-message {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--subtext-light);
+  font-size: 1.1rem;
+}
+
+.no-requests-message p {
+  margin: 0;
+}
+
+/* Loading Styles */
+.request-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  color: var(--subtext-light);
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .request-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 12px;
+  }
+  
+  .request-card {
+    padding: 18px;
+  }
+  
+  .request-modal .ant-modal-body {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .request-dashboard-container {
+    padding: 0 0.5rem;
+  }
+  
+  .request-card {
+    padding: 16px;
+  }
+  
+  .request-card h3 {
+    font-size: 1.1rem;
+  }
+  
+  .request-count {
+    font-size: 0.8rem;
+    padding: 4px 8px;
+  }
+  
+  .request-modal .ant-modal-content {
+    width: 95%;
+    max-width: 95%;
+  }
+  
+  .request-modal .ant-modal-body {
+    padding: 16px;
+  }
+  
+  .request-modal .ant-modal-footer {
+    padding: 12px 16px;
+  }
+  
+  .request-modal .ant-modal-footer button {
+    margin-left: 4px;
+    margin-bottom: 8px;
+    width: 100%;
+  }
+  
+  .request-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .request-modal .ant-modal-footer {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .request-action-buttons {
+    flex-direction: column;
+  }
+  
+  .request-action-buttons .ant-btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .request-card {
+    padding: 12px;
+  }
+  
+  .request-card h3 {
+    font-size: 1rem;
+  }
+  
+  .request-count {
+    font-size: 0.7rem;
+    padding: 3px 6px;
+  }
+  
+  .request-modal .ant-modal-content {
+    width: 98%;
+    max-width: 98%;
+  }
+  
+  .request-modal .ant-modal-body {
+    padding: 12px;
+  }
+  
+  .request-modal .ant-modal-footer {
+    padding: 10px 12px;
+  }
+  
+  .request-item {
+    padding: 12px;
+  }
+  
+  .request-item h4 {
+    font-size: 1rem;
+  }
+  
+  .request-item p {
+    font-size: 0.85rem;
+  }
+}
+
+/* Dark Mode Specific Styles */
+.dashboard-container.dark-theme .request-card {
+  background: linear-gradient(135deg, var(--accent-color) 0%, var(--modal-secondary-color) 100%);
+  border-color: var(--border-color);
+}
+
+.dashboard-container.dark-theme .request-item {
+  background-color: var(--dark-card);
+  border-color: var(--border-color);
+}
+
+.dashboard-container.dark-theme .request-item:hover {
+  border-color: var(--accent-color);
+}
+
+.dashboard-container.dark-theme .request-modal .ant-modal-header {
+  background: var(--dark-card) !important;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.dashboard-container.dark-theme .request-modal .ant-modal-body {
+  background: var(--background-color);
+}
+
+.dashboard-container.dark-theme .request-modal .ant-modal-footer {
+  background: var(--dark-card);
+  border-top: 1px solid var(--border-color);
+}
+
+/* Animation and Transition */
+.request-card {
+  animation: fadeInUp 0.4s ease;
+  animation-fill-mode: both;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.request-item {
+  animation: fadeIn 0.3s ease;
+  animation-fill-mode: both;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Focus Styles for Accessibility */
+.request-card:focus-visible,
+.request-item:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}
+
+/* Hover and Focus States for Buttons */
+.request-action-buttons .ant-btn:hover,
+.request-action-buttons .ant-btn:focus {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive Grid for Different Screen Sizes */
+@media (min-width: 1400px) {
+  .request-grid {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
+}
+
+@media (min-width: 1600px) {
+  .request-grid {
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  }
+}

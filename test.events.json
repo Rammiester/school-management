@@ -1,0 +1,38 @@
+[{
+  "_id": {
+    "$oid": "685fc5cf130dcef365320125"
+  },
+  "title": "Annual Day",
+  "description": "A grand celebration of school achievements.",
+  "date": {
+    "$date": "2025-11-10T10:00:00.000Z"
+  },
+  "location": "Main Auditorium",
+  "createdBy": "chairman@example.com",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2025-06-28T10:37:03.386Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-28T10:37:03.386Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "685fc5cf130dcef365320126"
+  },
+  "title": "Sports Day",
+  "description": "Annual sports meet for all grades.",
+  "date": {
+    "$date": "2025-09-15T09:00:00.000Z"
+  },
+  "location": "School Grounds",
+  "createdBy": "teacher@example.com",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2025-06-28T10:37:03.386Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-28T10:37:03.386Z"
+  }
+}]

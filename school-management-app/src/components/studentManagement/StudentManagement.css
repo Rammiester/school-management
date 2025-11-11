@@ -1,0 +1,166 @@
+.student-management-container {
+  padding: 30px 24px;
+  max-width: 1100px;
+  margin: 62px auto;
+  background: var(--card-primary);
+  border-radius: 12px;
+  box-shadow: var(--box-shadow);
+  height: calc(100vh - 120px);
+  display: flex;
+  flex-direction: column;
+}
+
+.student-management-header {
+  background: var(--accent-color);
+  padding: 10px 18px;
+  border-radius: 8px;
+  display: inline-block;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.student-management-form-container {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 12px;
+  padding-bottom: 20px;
+}
+
+.student-management-save-button {
+  background-color: var(--modal-secondary-color);
+  border: none;
+  padding: 10px 30px;
+  height: 38px;
+  color: var(--text-light-color);
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.student-management-save-button:hover {
+  background-color: var(--accent-color-hover);
+}
+
+/* Form label styling with icons */
+.student-management-form-label {
+  color: var(--text-light-color);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.student-management-form-label svg {
+  font-size: 18px;
+  color: var(--text-light-color);
+}
+
+/* Input styling */
+.student-management-input {
+  background: var(--input-background-color);
+  color: var(--text-light-color);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.student-management-input:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(71, 107, 107, 0.2);
+}
+
+.student-management-input::placeholder {
+  color: var(--placeholder-color);
+  opacity: 1;
+}
+
+/* Select styling */
+.student-management-select {
+  width: 100% !important;
+  background: var(--input-background-color) !important;
+  color: var(--text-light-color) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 6px !important;
+  height: 42px !important;
+  transition: all 0.2s ease !important;
+}
+
+.student-management-select:hover {
+  border-color: var(--primary-color) !important;
+  box-shadow: 0 0 0 2px rgba(71, 107, 107, 0.2) !important;
+}
+
+.student-management-select-focused {
+  border-color: var(--primary-color) !important;
+  box-shadow: 0 0 0 2px rgba(71, 107, 107, 0.2) !important;
+}
+
+.student-management-select-item {
+  background: var(--input-background-color) !important;
+  color: var(--text-light-color) !important;
+  padding: 6px 12px !important;
+  font-size: 14px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+.student-management-select-item:hover {
+  background-color: var(--dark-card) !important;
+}
+
+.student-management-select-item-selected {
+  background-color: var(--primary-color) !important;
+  color: var(--text-light-color) !important;
+}
+
+/* DatePicker styling */
+.student-management-datepicker {
+  width: 100%;
+  background: var(--input-background-color);
+  color: var(--text-light-color);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 14px;
+}
+
+.student-management-datepicker:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(71, 107, 107, 0.2);
+}
+
+/* Textarea styling */
+.student-management-textarea {
+  background: var(--input-background-color);
+  color: var(--text-light-color);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  resize: vertical;
+}
+
+.student-management-textarea:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(71, 107, 107, 0.2);
+}
+
+/* Form item styling */
+.student-management-form-item-label {
+  color: var(--text-light-color) !important;
+}
+
+/* Disabled input styling */
+.student-management-disabled-input {
+  background: var(--input-background-color);
+  color: var(--text-light-color);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 14px;
+  opacity: 0.7;
+}
