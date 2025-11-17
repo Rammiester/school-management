@@ -1,9 +1,9 @@
 // charts/RevenueExpenseChart.js
-import React, { useEffect, useLayoutEffect, useRef } from 'react';
+import React, { useEffect, useLayoutEffect, useRef } from "react";
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const ChartWrapper = styled.div`
   width: 100%;
@@ -12,7 +12,10 @@ const ChartWrapper = styled.div`
 
 const RevenueExpenseChart = ({ data, requestTypeFilter }) => {
   const chartRef = useRef(null);
-  const textColor = getComputedStyle(document.documentElement).getPropertyValue('--text').trim() || '#000000';
+  const textColor =
+    getComputedStyle(document.documentElement)
+      .getPropertyValue("--text")
+      .trim() || "#000000";
 
   useEffect(() => {
     console.log("Revenue and Expense data in chart:", data);
@@ -48,12 +51,15 @@ const RevenueExpenseChart = ({ data, requestTypeFilter }) => {
     revenueSeries.columns.template.fill = am4core.color("#f5ae3f");
     revenueSeries.columns.template.stroke = am4core.color("#f5ae3f");
     revenueSeries.columns.template.width = am4core.percent(40);
-    
+
     // Add tooltip for revenue
-    revenueSeries.columns.template.tooltipText = "{name}: ₹{valueY.formatNumber('#,###.##')}";
-    
+    revenueSeries.columns.template.tooltipText =
+      "{name}: ₹{valueY.formatNumber('#,###.##')}";
+
     // Add label bullet for revenue (only show if value > 0)
-    const revenueLabelBullet = revenueSeries.bullets.push(new am4charts.LabelBullet());
+    const revenueLabelBullet = revenueSeries.bullets.push(
+      new am4charts.LabelBullet()
+    );
     revenueLabelBullet.label.text = "₹{valueY}";
     revenueLabelBullet.label.hideOversized = true;
     revenueLabelBullet.label.truncate = false;
@@ -61,7 +67,7 @@ const RevenueExpenseChart = ({ data, requestTypeFilter }) => {
     revenueLabelBullet.label.dy = -10;
     revenueLabelBullet.label.fontSize = 10;
     // revenueLabelBullet.label.fill = am4core.color(textColor);
-    revenueLabelBullet.label.adapter.add("text", function(text, target) {
+    revenueLabelBullet.label.adapter.add("text", function (text, target) {
       if (target.dataItem && target.dataItem.valueY > 0) {
         return "₹" + target.dataItem.valueY;
       }
@@ -76,19 +82,22 @@ const RevenueExpenseChart = ({ data, requestTypeFilter }) => {
     expensesSeries.columns.template.fill = am4core.color("#e07a5f");
     expensesSeries.columns.template.stroke = am4core.color("#e07a5f");
     expensesSeries.columns.template.width = am4core.percent(40);
-    
+
     // Add tooltip for expenses
-    expensesSeries.columns.template.tooltipText = "{name}: ₹{valueY.formatNumber('#,###.##')}";
-    
+    expensesSeries.columns.template.tooltipText =
+      "{name}: ₹{valueY.formatNumber('#,###.##')}";
+
     // Add label bullet for expenses (only show if value > 0)
-    const expensesLabelBullet = expensesSeries.bullets.push(new am4charts.LabelBullet());
+    const expensesLabelBullet = expensesSeries.bullets.push(
+      new am4charts.LabelBullet()
+    );
     expensesLabelBullet.label.text = "₹{valueY}";
     expensesLabelBullet.label.hideOversized = true;
     expensesLabelBullet.label.truncate = false;
     expensesLabelBullet.locationY = 0.5;
     expensesLabelBullet.label.dy = -10;
     expensesLabelBullet.label.fontSize = 10;
-    expensesLabelBullet.label.adapter.add("text", function(text, target) {
+    expensesLabelBullet.label.adapter.add("text", function (text, target) {
       if (target.dataItem && target.dataItem.valueY > 0) {
         return "₹" + target.dataItem.valueY;
       }
@@ -98,7 +107,7 @@ const RevenueExpenseChart = ({ data, requestTypeFilter }) => {
     // Set data
     chart.data = chartData;
     chart.logo.disabled = true;
-    
+
     // Add legend
     chart.legend = new am4charts.Legend();
     chart.legend.position = "bottom";

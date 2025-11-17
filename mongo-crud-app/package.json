@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "test:finance": "node scripts/test-finance-api.js"
+    "test:finance": "node scripts/test-finance-api.js",
+    "seed": "node seeders/seeds.js"
   },
   "keywords": [],
   "author": "",
