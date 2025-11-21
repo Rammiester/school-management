@@ -1,10 +1,43 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { Modal, Form, Input, Select, DatePicker, TimePicker, Button, Space, Card, Row, Col, Tag, message, Table, Typography, Divider } from 'antd';
-import { PlusOutlined, EyeOutlined, DeleteOutlined, UploadOutlined, CheckCircleOutlined, CloseCircleOutlined, EditOutlined } from '@ant-design/icons';
-import { AuthContext } from '../../context/AuthContext';
-import { createFinanceRequest, getAllFinanceRequests, deleteFinanceRequest, searchUsers, searchStudents, getAllUsers } from '../../services/financeService';
-import dayjs from 'dayjs';
-import ReviewModal from '../../components/modals/ReviewModal';
+import React, { useState, useEffect, useContext } from "react";
+import {
+  Modal,
+  Form,
+  Input,
+  Select,
+  DatePicker,
+  TimePicker,
+  Button,
+  Space,
+  Card,
+  Row,
+  Col,
+  Tag,
+  message,
+  Table,
+  Typography,
+  Divider,
+  Upload,
+} from "antd";
+import {
+  PlusOutlined,
+  EyeOutlined,
+  DeleteOutlined,
+  UploadOutlined,
+  CheckCircleOutlined,
+  CloseCircleOutlined,
+  EditOutlined,
+} from "@ant-design/icons";
+import { AuthContext } from "../../context/AuthContext";
+import {
+  createFinanceRequest,
+  getAllFinanceRequests,
+  deleteFinanceRequest,
+  searchUsers,
+  searchStudents,
+  getAllUsers,
+} from "../../services/financeService";
+import dayjs from "dayjs";
+import ReviewModal from "../../components/modals/ReviewModal";
 
 // helper: returns current India time as a dayjs object
 const getIndiaTime = () => {
@@ -14,7 +47,6 @@ const getIndiaTime = () => {
   const istDate = new Date(utcMs + istOffsetMs);
   return dayjs(istDate);
 };
-
 
 const { Option } = Select;
 const { TextArea } = Input;
@@ -34,6 +66,7 @@ const FinanceRequests = () => {
   const [filteredStudents, setFilteredStudents] = useState([]);
   const [allUsers, setAllUsers] = useState([]);
   const [selectedRequest, setSelectedRequest] = useState(null);
+  const [fileList, setFileList] = useState([]); // NEW: For file uploads
   const [pagination, setPagination] = useState({
     current: 1,
     pageSize: 10,
@@ -221,52 +254,75 @@ const FinanceRequests = () => {
   };
 
   const handleSubmit = async (values) => {
-    setSubmitting(true);
-    try {
-      let recipientName = "";
+  setSubmitting(true);
+  try {
+    let recipientName = "";
 
-      if (recipientType === "student") {
-        const student = filteredStudents.find(
-          (s) => s.uniqueId === values.recipient
-        );
-        recipientName = student?.name || "";
-      } else {
-        // Try to find by email first, then by _id if email search failed
-        let user = filteredUsers.find((u) => u.email === values.recipient);
-        if (!user) {
-          user = allUsers.find((u) => u.email === values.recipient);
-        }
-        if (!user) {
-          user = filteredUsers.find((u) => u._id === values.recipient);
-        }
-        if (!user) {
-          user = allUsers.find((u) => u._id === values.recipient);
-        }
-        recipientName = user?.name || values.recipient || "";
+    if (recipientType === "student") {
+      const student = filteredStudents.find(
+        (s) => s.uniqueId === values.recipient
+      );
+      recipientName = student?.name || "";
+    } else {
+      let user = filteredUsers.find((u) => u.email === values.recipient);
+      if (!user) {
+        user = allUsers.find((u) => u.email === values.recipient);
       }
-
-      const formData = {
-        ...values,
-        name: recipientName || "Unknown", // Ensure name is never undefined/null
-        date: values.date.format("YYYY-MM-DD"),
-        time: values.time.format("HH:mm"),
-        earnings: values.type === "revenue" ? parseFloat(values.amount) : 0,
-        expenses: values.type === "expense" ? parseFloat(values.amount) : 0,
-        requestedBy: user.id,
-        month: values.date.format("MMMM"),
-      };
-
-      const response = await createFinanceRequest(formData);
-      messageApi.success("Request created successfully");
-      setIsModalOpen(false);
-      form.resetFields();
-      fetchRequests();
-    } catch (error) {
-      messageApi.error(error.message || "Failed to create request");
-    } finally {
-      setSubmitting(false);
+      if (!user) {
+        user = filteredUsers.find((u) => u._id === values.recipient);
+      }
+      if (!user) {
+        user = allUsers.find((u) => u._id === values.recipient);
+      }
+      recipientName = user?.name || values.recipient || "";
     }
-  };
+
+    // Create FormData for file upload
+    const formData = new FormData();
+    
+    // Append regular fields - ENSURE THEY ARE NOT UNDEFINED
+    formData.append('type', values.type || '');
+    formData.append('requestType', values.requestType || '');
+    formData.append('name', recipientName || "Unknown");
+    formData.append('date', values.date.format("YYYY-MM-DD"));
+    formData.append('time', values.time.format("HH:mm"));
+    formData.append('month', values.date.format("MMMM"));
+    formData.append('modeOfPayment', values.modeOfPayment || '');
+    formData.append('description', values.description || '');
+    formData.append('requestedBy', user.id || '');
+    formData.append('earnings', values.type === "revenue" ? parseFloat(values.amount) : 0);
+    formData.append('expenses', values.type === "expense" ? parseFloat(values.amount) : 0);
+    
+    if (values.feePeriod) {
+      formData.append('feePeriod', values.feePeriod);
+    }
+
+    // Append files
+    if (fileList && fileList.length > 0) {
+      fileList.forEach((file) => {
+        formData.append('attachments', file.originFileObj);
+      });
+    }
+
+    // DEBUG: Log what we're sending
+    console.log('FormData contents:');
+    for (let [key, value] of formData.entries()) {
+      console.log(key, value);
+    }
+
+    const response = await createFinanceRequest(formData);
+    messageApi.success("Request created successfully");
+    setIsModalOpen(false);
+    form.resetFields();
+    setFileList([]);
+    fetchRequests();
+  } catch (error) {
+    console.error('Submission error:', error);
+    messageApi.error(error.message || "Failed to create request");
+  } finally {
+    setSubmitting(false);
+  }
+};
 
   const handleDelete = async (id) => {
     try {
@@ -605,7 +661,10 @@ const FinanceRequests = () => {
       <Modal
         title="Create Finance Request"
         open={isModalOpen}
-        onCancel={() => setIsModalOpen(false)}
+        onCancel={() => {
+          setIsModalOpen(false);
+          setFileList([]); // NEW: Clear file list on cancel
+        }}
         footer={null}
         width={700}
         className="add-notice-modal"
@@ -760,25 +819,26 @@ const FinanceRequests = () => {
                 <TimePicker style={{ width: "100%" }} format="HH:mm" />
               </Form.Item>
             </Col>
+            <Col span={12}>
+              <Form.Item
+                name="modeOfPayment"
+                label="Payment Method"
+                rules={[
+                  { required: true, message: "Please select payment method" },
+                ]}
+              >
+                <Select placeholder="Select payment method">
+                  {paymentModes.map((mode) => (
+                    <Option key={mode} value={mode}>
+                      {mode
+                        .replace(/([A-Z])/g, " $1")
+                        .replace(/^./, (str) => str.toUpperCase())}
+                    </Option>
+                  ))}
+                </Select>
+              </Form.Item>
+            </Col>
           </Row>
-
-          <Form.Item
-            name="modeOfPayment"
-            label="Payment Method"
-            rules={[
-              { required: true, message: "Please select payment method" },
-            ]}
-          >
-            <Select placeholder="Select payment method">
-              {paymentModes.map((mode) => (
-                <Option key={mode} value={mode}>
-                  {mode
-                    .replace(/([A-Z])/g, " $1")
-                    .replace(/^./, (str) => str.toUpperCase())}
-                </Option>
-              ))}
-            </Select>
-          </Form.Item>
 
           <Form.Item
             name="description"
@@ -786,6 +846,49 @@ const FinanceRequests = () => {
             rules={[{ required: true, message: "Please enter description" }]}
           >
             <TextArea rows={3} placeholder="Enter description" />
+          </Form.Item>
+
+          {/* NEW: Attachment Upload Field */}
+          <Form.Item
+            name="attachments"
+            label="Attachments (Optional)"
+            valuePropName="fileList"
+            getValueFromEvent={(e) => {
+              if (Array.isArray(e)) {
+                return e;
+              }
+              return e?.fileList;
+            }}
+            extra="Upload bill/receipt images (Max 2 files, JPG/PNG only, 5MB each)"
+          >
+            <Upload
+              listType="picture-card"
+              maxCount={2}
+              accept=".jpg,.jpeg,.png"
+              beforeUpload={(file) => {
+                const isJpgOrPng =
+                  file.type === "image/jpeg" || file.type === "image/png";
+                if (!isJpgOrPng) {
+                  messageApi.error("You can only upload JPG/PNG file!");
+                  return Upload.LIST_IGNORE;
+                }
+                const isLt5M = file.size / 1024 / 1024 < 5;
+                if (!isLt5M) {
+                  messageApi.error("Image must be smaller than 5MB!");
+                  return Upload.LIST_IGNORE;
+                }
+                return false; // Prevent auto upload
+              }}
+              fileList={fileList}
+              onChange={({ fileList: newFileList }) => setFileList(newFileList)}
+            >
+              {fileList.length >= 2 ? null : (
+                <div>
+                  <UploadOutlined />
+                  <div style={{ marginTop: 8 }}>Upload</div>
+                </div>
+              )}
+            </Upload>
           </Form.Item>
 
           <Form.Item
@@ -800,7 +903,14 @@ const FinanceRequests = () => {
 
           <Form.Item>
             <Space style={{ width: "100%", justifyContent: "flex-end" }}>
-              <Button onClick={() => setIsModalOpen(false)}>Cancel</Button>
+              <Button
+                onClick={() => {
+                  setIsModalOpen(false);
+                  setFileList([]);
+                }}
+              >
+                Cancel
+              </Button>
               <Button type="primary" htmlType="submit" loading={submitting}>
                 Create Request
               </Button>

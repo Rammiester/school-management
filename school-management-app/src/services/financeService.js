@@ -3,9 +3,12 @@ import api from '../api';
 
 export const createFinanceRequest = async (requestData) => {
   try {
+    // ✅ DO NOT manually set Content-Type - let Axios handle it
+    // Axios will automatically set: 'multipart/form-data; boundary=----WebKit...'
     const response = await api.post('/api/earnings', requestData);
     return response.data;
   } catch (error) {
+    console.error('Finance request error:', error.response?.data || error);
     throw error.response?.data || error;
   }
 };

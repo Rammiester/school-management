@@ -35,6 +35,10 @@ const PORT = process.env.PORT || 3001;
 app.use(cors());
 app.use(express.json());
 
+// ADD THIS: Serve uploaded files statically
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+
 // Serve React app in production (if build exists)
 try {
   const buildPath = path.join(__dirname, 'build');

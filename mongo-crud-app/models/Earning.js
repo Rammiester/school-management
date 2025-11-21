@@ -11,46 +11,64 @@ const earningSchema = new mongoose.Schema({
   status: { type: String, default: "pending" }, // pending/approved/declined
   type: {
     type: String,
-    enum: ['expense', 'revenue'],
-    required: true
+    enum: ["expense", "revenue"],
+    required: true,
   },
   requestType: {
     type: String,
-    enum: ['transport', 'salary', 'food', 'admin office', 'housekeeping', 'stationary', 'other', 
-           'school fee', 'hostel fee', 'uniform fee', 'other fees', 'donation', 'grant'],
-    required: true
+    enum: [
+      "transport",
+      "salary",
+      "food",
+      "admin office",
+      "housekeeping",
+      "stationary",
+      "other",
+      "school fee",
+      "hostel fee",
+      "uniform fee",
+      "other fees",
+      "donation",
+      "grant",
+    ],
+    required: true,
   },
   name: {
     type: String,
-    required: true
+    required: true,
   },
+  attachments: [
+    {
+      type: String, // File paths
+    },
+  ],
   time: {
     type: String,
-    required: true
+    required: true,
   },
   modeOfPayment: {
     type: String,
-    enum: ['cash', 'card', 'upi', 'bank transfer', 'cheque'],
-    required: true
+    enum: ["cash", "card", "upi", "bank transfer", "cheque"],
+    required: true,
   },
   feePeriod: {
     type: String, // Only for revenue type
   },
   requestedBy: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    required: true
+    ref: "User",
+    required: true,
   },
   reviewedBy: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
+    ref: "User",
   },
   reviewedAt: {
-    type: Date
+    type: Date,
   },
   reviewNotes: {
-    type: String
-  }
+    type: String,
+  },
 });
 
 // Add indexes for better query performance
