@@ -6,6 +6,16 @@ import { createFinanceRequest, getAllFinanceRequests, deleteFinanceRequest, sear
 import dayjs from 'dayjs';
 import ReviewModal from '../../components/modals/ReviewModal';
 
+// helper: returns current India time as a dayjs object
+const getIndiaTime = () => {
+  const now = new Date();
+  const utcMs = now.getTime() + now.getTimezoneOffset() * 60000;
+  const istOffsetMs = 5.5 * 60 * 60 * 1000;
+  const istDate = new Date(utcMs + istOffsetMs);
+  return dayjs(istDate);
+};
+
+
 const { Option } = Select;
 const { TextArea } = Input;
 
@@ -19,7 +29,7 @@ const FinanceRequests = () => {
   const [requests, setRequests] = useState([]);
   const [loading, setLoading] = useState(false);
   const [submitting, setSubmitting] = useState(false);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const [filteredUsers, setFilteredUsers] = useState([]);
   const [filteredStudents, setFilteredStudents] = useState([]);
   const [allUsers, setAllUsers] = useState([]);
@@ -27,31 +37,61 @@ const FinanceRequests = () => {
   const [pagination, setPagination] = useState({
     current: 1,
     pageSize: 10,
-    total: 0
+    total: 0,
   });
   const [filters, setFilters] = useState({});
-  const [dateRange, setDateRange] = useState([dayjs().subtract(1, 'month'), dayjs()]);
+  const [dateRange, setDateRange] = useState([
+    dayjs().subtract(1, "month"),
+    dayjs(),
+  ]);
   const [filterForm] = Form.useForm();
 
   // Enhanced request types based on the API structure
   const expenseTypes = [
-    'salary', 'food', 'admin office', 'housekeeping', 'stationary', 'other', 'transport'
+    "salary",
+    "food",
+    "admin office",
+    "housekeeping",
+    "stationary",
+    "other",
+    "transport",
   ];
   const revenueTypes = [
-    'school fee', 'hostel fee', 'uniform fee', 'other fees', 'donation', 'grant'
+    "school fee",
+    "hostel fee",
+    "uniform fee",
+    "other fees",
+    "donation",
+    "grant",
   ];
-  const paymentModes = ['cash', 'card', 'upi', 'bank transfer', 'cheque'];
-  const [recipientType, setRecipientType] = useState('user');
+  const paymentModes = ["cash", "card", "upi", "bank transfer", "cheque"];
+  const [recipientType, setRecipientType] = useState("user");
   const [showAdvancedFilters, setShowAdvancedFilters] = useState(false);
+
+  // ensure date & time are set to current India time every time the "Create Request" modal opens
+  useEffect(() => {
+    if (isModalOpen) {
+      const nowIst = getIndiaTime();
+      // set both date and time fields (DatePicker expects a dayjs, TimePicker expects a dayjs)
+      form.setFieldsValue({
+        date: nowIst,
+        time: nowIst,
+      });
+    } else {
+      // optional: reset form when modal closed so stale data doesn't linger
+      form.resetFields();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isModalOpen]);
 
   useEffect(() => {
     fetchRequests();
     fetchAllUsers(); // Fetch all users when component mounts
   }, []);
-  const typeValue = Form.useWatch('type', form);
+  const typeValue = Form.useWatch("type", form);
   useEffect(() => {
     if (typeValue) {
-      const typeLabel = typeValue === 'expense' ? 'Expense' : 'Revenue';
+      const typeLabel = typeValue === "expense" ? "Expense" : "Revenue";
       message.success(`Request Type selected: ${typeLabel}`);
     }
   }, [typeValue, form]);
@@ -65,18 +105,18 @@ const FinanceRequests = () => {
     setEditModal(true);
   };
   const handleReview = async (requestId, status, editedRequest = null) => {
-    if (status === 'edit' && editedRequest) {
+    if (status === "edit" && editedRequest) {
       // Handle edit functionality
       try {
         // In a real implementation, you would update the request here
         // For now, we'll just simulate the update
-        message.success('Request updated successfully');
+        message.success("Request updated successfully");
         setEditModal(false);
         setSelectedRequest(null);
         fetchRequests(); // Refresh the list to show updated data
       } catch (error) {
-        message.error('Failed to update request');
-        console.error('Error updating request:', error);
+        message.error("Failed to update request");
+        console.error("Error updating request:", error);
       }
     } else {
       // Handle approve/reject functionality (keep original logic)
@@ -84,53 +124,61 @@ const FinanceRequests = () => {
       try {
         // This is a placeholder - in real implementation you'd call your API
         message.success(`Request ${status} successfully`);
-        if (status === 'approved' || status === 'rejected') {
+        if (status === "approved" || status === "rejected") {
           setViewModal(false);
         }
         setSelectedRequest(null);
         fetchRequests();
       } catch (error) {
-        message.error('Failed to review request');
-        console.error('Error reviewing request:', error);
+        message.error("Failed to review request");
+        console.error("Error reviewing request:", error);
       }
     }
   };
-  const fetchRequests = async (page = 1, limit = 10, additionalFilters = {}) => {
+  const fetchRequests = async (
+    page = 1,
+    limit = 10,
+    additionalFilters = {}
+  ) => {
     setLoading(true);
     try {
-      const response = await getAllFinanceRequests(page, limit, additionalFilters);
+      const response = await getAllFinanceRequests(
+        page,
+        limit,
+        additionalFilters
+      );
       // Handle different response structures
       if (response.data && response.pagination) {
         // New structure from backend
         setRequests(response.data);
-        setPagination(prev => ({
+        setPagination((prev) => ({
           ...prev,
           current: page,
           pageSize: limit,
-          total: response.pagination.total || 0
+          total: response.pagination.total || 0,
         }));
       } else if (response && Array.isArray(response)) {
         // Old structure (direct array)
         setRequests(response);
-        setPagination(prev => ({
+        setPagination((prev) => ({
           ...prev,
           current: page,
           pageSize: limit,
-          total: response.length || 0
+          total: response.length || 0,
         }));
       } else {
         // Fallback
         setRequests([]);
-        setPagination(prev => ({
+        setPagination((prev) => ({
           ...prev,
           current: page,
           pageSize: limit,
-          total: 0
+          total: 0,
         }));
       }
     } catch (error) {
-      messageApi.error('Failed to fetch requests');
-      console.error('Error fetching requests:', error);
+      messageApi.error("Failed to fetch requests");
+      console.error("Error fetching requests:", error);
     } finally {
       setLoading(false);
     }
@@ -141,8 +189,8 @@ const FinanceRequests = () => {
       const users = await getAllUsers(); // Call the new service function
       setAllUsers(users);
     } catch (error) {
-      messageApi.error('Failed to fetch users');
-      console.error('Error fetching users:', error);
+      messageApi.error("Failed to fetch users");
+      console.error("Error fetching users:", error);
     }
   };
 
@@ -152,7 +200,7 @@ const FinanceRequests = () => {
         const users = await searchUsers(value);
         setFilteredUsers(users);
       } catch (error) {
-        messageApi.error('Failed to search users');
+        messageApi.error("Failed to search users");
       }
     } else {
       setFilteredUsers([]);
@@ -165,7 +213,7 @@ const FinanceRequests = () => {
         const students = await searchStudents(value);
         setFilteredStudents(students);
       } catch (error) {
-        messageApi.error('Failed to search students');
+        messageApi.error("Failed to search students");
       }
     } else {
       setFilteredStudents([]);
@@ -175,44 +223,46 @@ const FinanceRequests = () => {
   const handleSubmit = async (values) => {
     setSubmitting(true);
     try {
-      let recipientName = '';
+      let recipientName = "";
 
-      if (recipientType === 'student') {
-        const student = filteredStudents.find(s => s.uniqueId === values.recipient);
-        recipientName = student?.name || '';
+      if (recipientType === "student") {
+        const student = filteredStudents.find(
+          (s) => s.uniqueId === values.recipient
+        );
+        recipientName = student?.name || "";
       } else {
         // Try to find by email first, then by _id if email search failed
-        let user = filteredUsers.find(u => u.email === values.recipient);
+        let user = filteredUsers.find((u) => u.email === values.recipient);
         if (!user) {
-          user = allUsers.find(u => u.email === values.recipient);
+          user = allUsers.find((u) => u.email === values.recipient);
         }
         if (!user) {
-          user = filteredUsers.find(u => u._id === values.recipient);
+          user = filteredUsers.find((u) => u._id === values.recipient);
         }
         if (!user) {
-          user = allUsers.find(u => u._id === values.recipient);
+          user = allUsers.find((u) => u._id === values.recipient);
         }
-        recipientName = user?.name || values.recipient || '';
+        recipientName = user?.name || values.recipient || "";
       }
 
       const formData = {
         ...values,
-        name: recipientName || 'Unknown', // Ensure name is never undefined/null
-        date: values.date.format('YYYY-MM-DD'),
-        time: values.time.format('HH:mm'),
-        earnings: values.type === 'revenue' ? parseFloat(values.amount) : 0,
-        expenses: values.type === 'expense' ? parseFloat(values.amount) : 0,
+        name: recipientName || "Unknown", // Ensure name is never undefined/null
+        date: values.date.format("YYYY-MM-DD"),
+        time: values.time.format("HH:mm"),
+        earnings: values.type === "revenue" ? parseFloat(values.amount) : 0,
+        expenses: values.type === "expense" ? parseFloat(values.amount) : 0,
         requestedBy: user.id,
-        month: values.date.format('MMMM'),
+        month: values.date.format("MMMM"),
       };
 
       const response = await createFinanceRequest(formData);
-      messageApi.success('Request created successfully');
+      messageApi.success("Request created successfully");
       setIsModalOpen(false);
       form.resetFields();
       fetchRequests();
     } catch (error) {
-      messageApi.error(error.message || 'Failed to create request');
+      messageApi.error(error.message || "Failed to create request");
     } finally {
       setSubmitting(false);
     }
@@ -221,10 +271,10 @@ const FinanceRequests = () => {
   const handleDelete = async (id) => {
     try {
       const response = await deleteFinanceRequest(id);
-      messageApi.success('Request deleted successfully');
+      messageApi.success("Request deleted successfully");
       fetchRequests();
     } catch (error) {
-      messageApi.error('Failed to delete request');
+      messageApi.error("Failed to delete request");
     }
   };
   const handleDropdownVisibleChange = (visible) => {
@@ -232,9 +282,9 @@ const FinanceRequests = () => {
     // But we'll rely on the form validation instead
     if (visible) {
       // Check if type is selected before showing options
-      const type = form.getFieldValue('type');
+      const type = form.getFieldValue("type");
       if (!type) {
-        messageApi.error('Please select Request Type first');
+        messageApi.error("Please select Request Type first");
         // Prevent dropdown from opening if no type selected
         return false;
       }
@@ -244,90 +294,108 @@ const FinanceRequests = () => {
 
   const getStatusColor = (status) => {
     switch (status) {
-      case 'pending': return 'orange';
-      case 'approved': return 'green';
-      case 'rejected': return 'red';
-      default: return 'default';
+      case "pending":
+        return "orange";
+      case "approved":
+        return "green";
+      case "rejected":
+        return "red";
+      default:
+        return "default";
     }
   };
 
   const getStatusIcon = (status) => {
     switch (status) {
-      case 'pending': return <CheckCircleOutlined style={{ color: 'orange' }} />;
-      case 'approved': return <CheckCircleOutlined style={{ color: 'green' }} />;
-      case 'rejected': return <CloseCircleOutlined style={{ color: 'red' }} />;
-      default: return null;
+      case "pending":
+        return <CheckCircleOutlined style={{ color: "orange" }} />;
+      case "approved":
+        return <CheckCircleOutlined style={{ color: "green" }} />;
+      case "rejected":
+        return <CloseCircleOutlined style={{ color: "red" }} />;
+      default:
+        return null;
     }
   };
 
   const columns = [
     {
-      title: 'Name',
-      dataIndex: 'name',
-      key: 'name',
-      fixed: 'left',
+      title: "Name",
+      dataIndex: "name",
+      key: "name",
+      fixed: "left",
       width: 150,
-      render: (text) => <span className="period-cell">{text || 'N/A'}</span>,
-      onCell: () => ({ style: { background: 'var(--accent-color) !important', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' } }),
+      render: (text) => <span className="period-cell">{text || "N/A"}</span>,
+      onCell: () => ({
+        style: {
+          background: "var(--accent-color) !important",
+          whiteSpace: "nowrap",
+          overflow: "hidden",
+          textOverflow: "ellipsis",
+        },
+      }),
     },
     {
-      title: 'Type',
-      dataIndex: 'type',
-      key: 'type',
+      title: "Type",
+      dataIndex: "type",
+      key: "type",
       width: 100,
       render: (type) => (
-        <Tag color={type === 'revenue' ? 'success' : 'error'}>
-          {type?.toUpperCase() || 'N/A'}
+        <Tag color={type === "revenue" ? "success" : "error"}>
+          {type?.toUpperCase() || "N/A"}
         </Tag>
-      )
+      ),
     },
     {
-      title: 'Request Type',
-      dataIndex: 'requestType',
-      key: 'requestType',
+      title: "Request Type",
+      dataIndex: "requestType",
+      key: "requestType",
       width: 150,
-      render: (text) => text ? text.toUpperCase() : 'N/A'
+      render: (text) => (text ? text.toUpperCase() : "N/A"),
     },
     {
-      title: 'Amount',
-      dataIndex: 'amount',
-      key: 'amount',
+      title: "Amount",
+      dataIndex: "amount",
+      key: "amount",
       width: 120,
       render: (_, record) => {
-        const amount = record.type === 'revenue' ? record.earnings : record.expenses;
+        const amount =
+          record.type === "revenue" ? record.earnings : record.expenses;
         return `₹${amount?.toLocaleString() || 0}`;
-      }
+      },
     },
     {
-      title: 'Date',
-      dataIndex: 'date',
-      key: 'date',
+      title: "Date",
+      dataIndex: "date",
+      key: "date",
       width: 120,
-      render: (date) => dayjs(date).format('DD/MM/YYYY')
+      render: (date) => dayjs(date).format("DD/MM/YYYY"),
     },
     {
-      title: 'Status',
-      dataIndex: 'status',
-      key: 'status',
+      title: "Status",
+      dataIndex: "status",
+      key: "status",
       width: 120,
       render: (status) => (
-        <div style={{ display: 'flex', alignItems: 'center' }}>
+        <div style={{ display: "flex", alignItems: "center" }}>
           {getStatusIcon(status)}
-          <span style={{ marginLeft: '5px' }}>{status?.toUpperCase() || 'N/A'}</span>
+          <span style={{ marginLeft: "5px" }}>
+            {status?.toUpperCase() || "N/A"}
+          </span>
         </div>
-      )
+      ),
     },
     {
-      title: 'Requested By',
-      dataIndex: 'requestedBy',
-      key: 'requestedBy',
+      title: "Requested By",
+      dataIndex: "requestedBy",
+      key: "requestedBy",
       width: 150,
       render: (requestedBy, record) => {
         if (!requestedBy) {
-          return 'N/A';
+          return "N/A";
         }
 
-        if (typeof requestedBy === 'string') {
+        if (typeof requestedBy === "string") {
           return requestedBy;
         }
 
@@ -339,12 +407,12 @@ const FinanceRequests = () => {
           return requestedBy.email;
         }
 
-        return 'N/A';
-      }
+        return "N/A";
+      },
     },
     {
-      title: 'Actions',
-      key: 'actions',
+      title: "Actions",
+      key: "actions",
       width: 180,
       render: (_, record) => (
         <Space size="small">
@@ -361,11 +429,13 @@ const FinanceRequests = () => {
             icon={<EditOutlined />}
             size="small"
             onClick={() => showEdit(record)}
-            disabled={record.status !== 'pending' && record.status !== undefined}
+            disabled={
+              record.status !== "pending" && record.status !== undefined
+            }
           >
             Edit
           </Button>
-          {(record.status === 'pending' || !record.status) && (
+          {(record.status === "pending" || !record.status) && (
             <Button
               danger
               icon={<DeleteOutlined />}
@@ -375,14 +445,22 @@ const FinanceRequests = () => {
             />
           )}
         </Space>
-      )
-    }
+      ),
+    },
   ];
 
   return (
     <>
       {contextHolder}
-      <div className="timetable-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+      <div
+        className="timetable-header"
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          marginBottom: "20px",
+        }}
+      >
         <h1>Finance Requests</h1>
         <Button
           type="primary"
@@ -393,20 +471,37 @@ const FinanceRequests = () => {
         </Button>
       </div>
 
-      <div className="timetable-table-container" style={{ marginBottom: '20px' }}>
-        <Card style={{ padding: '20px' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+      <div
+        className="timetable-table-container"
+        style={{ marginBottom: "20px" }}
+      >
+        <Card style={{ padding: "20px" }}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              marginBottom: "20px",
+            }}
+          >
             <h3>Recent Requests</h3>
             <Button
               type="link"
               onClick={() => setShowAdvancedFilters(!showAdvancedFilters)}
             >
-              {showAdvancedFilters ? 'Hide Filters' : 'Show Filters'}
+              {showAdvancedFilters ? "Hide Filters" : "Show Filters"}
             </Button>
           </div>
 
           {showAdvancedFilters && (
-            <div style={{ marginBottom: '20px', padding: '15px', backgroundColor: 'var(--card-background-color)', borderRadius: '4px' }}>
+            <div
+              style={{
+                marginBottom: "20px",
+                padding: "15px",
+                backgroundColor: "var(--card-background-color)",
+                borderRadius: "4px",
+              }}
+            >
               <Form form={filterForm} layout="vertical">
                 <Row gutter={16}>
                   <Col span={8}>
@@ -429,9 +524,9 @@ const FinanceRequests = () => {
                   <Col span={8}>
                     <Form.Item name="dateRange" label="Date Range">
                       <DatePicker.RangePicker
-                        style={{ width: '100%' }}
+                        style={{ width: "100%" }}
                         format="YYYY-MM-DD"
-                        placeholder={['Start date', 'End date']}
+                        placeholder={["Start date", "End date"]}
                         value={dateRange}
                       />
                     </Form.Item>
@@ -451,13 +546,21 @@ const FinanceRequests = () => {
                             page: 1,
                             limit: pagination.pageSize,
                           };
-                          if (Array.isArray(dateRange) && dateRange.length === 2) {
-                            query.startDate = dayjs(dateRange[0]).format('YYYY-MM-DD');
-                            query.endDate = dayjs(dateRange[1]).format('YYYY-MM-DD');
+                          if (
+                            Array.isArray(dateRange) &&
+                            dateRange.length === 2
+                          ) {
+                            query.startDate = dayjs(dateRange[0]).format(
+                              "YYYY-MM-DD"
+                            );
+                            query.endDate = dayjs(dateRange[1]).format(
+                              "YYYY-MM-DD"
+                            );
                           }
-                          Object.keys(query).forEach(k => {
+                          Object.keys(query).forEach((k) => {
                             const v = query[k];
-                            if (v === undefined || v === null || v === '') delete query[k];
+                            if (v === undefined || v === null || v === "")
+                              delete query[k];
                           });
                           setFilters(query);
                           fetchRequests(1, pagination.pageSize, query);
@@ -476,7 +579,6 @@ const FinanceRequests = () => {
                         Reset
                       </Button>
                     </Space>
-
                   </Col>
                 </Row>
               </Form>
@@ -493,7 +595,7 @@ const FinanceRequests = () => {
               ...pagination,
               onChange: (page, pageSize) => {
                 fetchRequests(page, pageSize);
-              }
+              },
             }}
             rowKey="_id"
           />
@@ -508,11 +610,12 @@ const FinanceRequests = () => {
         width={700}
         className="add-notice-modal"
       >
-        <Form form={form}
+        <Form
+          form={form}
           layout="vertical"
           onFinish={handleSubmit}
           initialValues={{
-            dateRange: [dayjs().subtract(1, 'month'), dayjs()],
+            dateRange: [dayjs().subtract(1, "month"), dayjs()],
           }}
         >
           <Row gutter={16}>
@@ -520,11 +623,9 @@ const FinanceRequests = () => {
               <Form.Item
                 name="type"
                 label="Type"
-                rules={[{ required: true, message: 'Please select type' }]}
+                rules={[{ required: true, message: "Please select type" }]}
               >
-                <Select
-                  placeholder="Select type"
-                >
+                <Select placeholder="Select type">
                   <Option value="expense">Expense</Option>
                   <Option value="revenue">Revenue</Option>
                 </Select>
@@ -534,21 +635,37 @@ const FinanceRequests = () => {
               <Form.Item
                 name="requestType"
                 label="Request Category"
-                rules={[{ required: true, message: 'Please select request category' }]}
+                rules={[
+                  { required: true, message: "Please select request category" },
+                ]}
               >
                 <Select
                   placeholder="Select category"
                   showSearch
-                  filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+                  filterOption={(input, option) =>
+                    option.children
+                      .toLowerCase()
+                      .indexOf(input.toLowerCase()) >= 0
+                  }
                   onOpenChange={handleDropdownVisibleChange}
-                // disabled={!typeValue}
+                  // disabled={!typeValue}
                 >
-                  {typeValue === 'revenue' && revenueTypes.map(type => (
-                    <Option key={type} value={type}>{type.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())}</Option>
-                  ))}
-                  {typeValue === 'expense' && expenseTypes.map(type => (
-                    <Option key={type} value={type}>{type.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())}</Option>
-                  ))}
+                  {typeValue === "revenue" &&
+                    revenueTypes.map((type) => (
+                      <Option key={type} value={type}>
+                        {type
+                          .replace(/([A-Z])/g, " $1")
+                          .replace(/^./, (str) => str.toUpperCase())}
+                      </Option>
+                    ))}
+                  {typeValue === "expense" &&
+                    expenseTypes.map((type) => (
+                      <Option key={type} value={type}>
+                        {type
+                          .replace(/([A-Z])/g, " $1")
+                          .replace(/^./, (str) => str.toUpperCase())}
+                      </Option>
+                    ))}
                 </Select>
               </Form.Item>
             </Col>
@@ -559,10 +676,15 @@ const FinanceRequests = () => {
               <Form.Item
                 name="recipientType"
                 label="Recipient Type"
-                rules={[{ required: true, message: 'Please select recipient type' }]}
+                rules={[
+                  { required: true, message: "Please select recipient type" },
+                ]}
                 initialValue="user"
               >
-                <Select placeholder="Select recipient type" onChange={(value) => setRecipientType(value)}>
+                <Select
+                  placeholder="Select recipient type"
+                  onChange={(value) => setRecipientType(value)}
+                >
                   <Option value="user">User</Option>
                   <Option value="student">Student</Option>
                 </Select>
@@ -572,7 +694,7 @@ const FinanceRequests = () => {
               <Form.Item
                 name="amount"
                 label="Amount"
-                rules={[{ required: true, message: 'Please enter amount' }]}
+                rules={[{ required: true, message: "Please enter amount" }]}
               >
                 <Input type="number" placeholder="Enter amount" />
               </Form.Item>
@@ -583,27 +705,37 @@ const FinanceRequests = () => {
             <Col span={12}>
               <Form.Item
                 name="recipient"
-                label={recipientType === 'student' ? 'Student' : 'User'}
-                rules={[{ required: true, message: 'Please select a recipient' }]}
+                label={recipientType === "student" ? "Student" : "User"}
+                rules={[
+                  { required: true, message: "Please select a recipient" },
+                ]}
               >
                 <Select
                   placeholder={`Select a ${recipientType}`}
                   showSearch
-                  onSearch={recipientType === 'student' ? handleStudentSearch : handleUserSearch}
+                  onSearch={
+                    recipientType === "student"
+                      ? handleStudentSearch
+                      : handleUserSearch
+                  }
                   filterOption={false}
                   allowClear
                 >
-                  {recipientType === 'student'
-                    ? filteredStudents.map(student => (
-                      <Option key={student.uniqueId} value={student.uniqueId}>
-                        {student.name} ({student.uniqueId})
-                      </Option>
-                    ))
-                    : allUsers.map(user => ( // Use allUsers instead of filteredUsers
-                      <Option key={user._id} value={user.email}>
-                        {user.name} ({user.email})
-                      </Option>
-                    ))}
+                  {recipientType === "student"
+                    ? filteredStudents.map((student) => (
+                        <Option key={student.uniqueId} value={student.uniqueId}>
+                          {student.name} ({student.uniqueId})
+                        </Option>
+                      ))
+                    : allUsers.map(
+                        (
+                          user // Use allUsers instead of filteredUsers
+                        ) => (
+                          <Option key={user._id} value={user.email}>
+                            {user.name} ({user.email})
+                          </Option>
+                        )
+                      )}
                 </Select>
               </Form.Item>
             </Col>
@@ -611,9 +743,9 @@ const FinanceRequests = () => {
               <Form.Item
                 name="date"
                 label="Date"
-                rules={[{ required: true, message: 'Please select date' }]}
+                rules={[{ required: true, message: "Please select date" }]}
               >
-                <DatePicker style={{ width: '100%' }} />
+                <DatePicker style={{ width: "100%" }} />
               </Form.Item>
             </Col>
           </Row>
@@ -623,9 +755,9 @@ const FinanceRequests = () => {
               <Form.Item
                 name="time"
                 label="Time"
-                rules={[{ required: true, message: 'Please select time' }]}
+                rules={[{ required: true, message: "Please select time" }]}
               >
-                <TimePicker style={{ width: '100%' }} format="HH:mm" />
+                <TimePicker style={{ width: "100%" }} format="HH:mm" />
               </Form.Item>
             </Col>
           </Row>
@@ -633,11 +765,17 @@ const FinanceRequests = () => {
           <Form.Item
             name="modeOfPayment"
             label="Payment Method"
-            rules={[{ required: true, message: 'Please select payment method' }]}
+            rules={[
+              { required: true, message: "Please select payment method" },
+            ]}
           >
             <Select placeholder="Select payment method">
-              {paymentModes.map(mode => (
-                <Option key={mode} value={mode}>{mode.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())}</Option>
+              {paymentModes.map((mode) => (
+                <Option key={mode} value={mode}>
+                  {mode
+                    .replace(/([A-Z])/g, " $1")
+                    .replace(/^./, (str) => str.toUpperCase())}
+                </Option>
               ))}
             </Select>
           </Form.Item>
@@ -645,7 +783,7 @@ const FinanceRequests = () => {
           <Form.Item
             name="description"
             label="Description"
-            rules={[{ required: true, message: 'Please enter description' }]}
+            rules={[{ required: true, message: "Please enter description" }]}
           >
             <TextArea rows={3} placeholder="Enter description" />
           </Form.Item>
@@ -653,15 +791,15 @@ const FinanceRequests = () => {
           <Form.Item
             name="feePeriod"
             label="Fee Period (for revenue)"
-            hidden={form.getFieldValue('type') !== 'revenue'}
+            hidden={form.getFieldValue("type") !== "revenue"}
           >
             <Input placeholder="e.g., Jan 2024 - Mar 2024" />
           </Form.Item>
 
-          <Divider style={{ margin: '20px 0' }} />
+          <Divider style={{ margin: "20px 0" }} />
 
           <Form.Item>
-            <Space style={{ width: '100%', justifyContent: 'flex-end' }}>
+            <Space style={{ width: "100%", justifyContent: "flex-end" }}>
               <Button onClick={() => setIsModalOpen(false)}>Cancel</Button>
               <Button type="primary" htmlType="submit" loading={submitting}>
                 Create Request
