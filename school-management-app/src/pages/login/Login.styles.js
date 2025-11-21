@@ -59,15 +59,17 @@ export const Logo = styled.img`
 // Input Fields
 export const InputField = styled.input`
   width: 100%;
-  padding: 10px;
+  box-sizing: border-box;
+  padding: 12px 14px;
   margin: 0.8rem 0;
   border: 1px solid var(--border-color);
   border-radius: 5px;
   font-size: 1rem;
+  line-height: 1.4;
   outline: none;
   transition: 0.3s;
   color: var(--active-text);
-
+  overflow: visible;
   &:focus {
     border-color: var(--primary-color);
     box-shadow: 0 0 5px rgba(71, 107, 107, 0.5);
