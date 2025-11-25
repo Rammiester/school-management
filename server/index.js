@@ -34,7 +34,7 @@ const PORT = process.env.PORT || 3001;
 
 // Use an env var to restrict frontend origin in production.
 // Set FRONTEND_ORIGIN=https://example.com in production (Vercel URL)
-const FRONTEND_ORIGIN = process.env.FRONTEND_ORIGIN || '*';
+const FRONTEND_ORIGIN = process.env.FRONTEND_ORIGIN || "http://localhost:3000";
 
 app.use(cors({
   origin: (origin, callback) => {
