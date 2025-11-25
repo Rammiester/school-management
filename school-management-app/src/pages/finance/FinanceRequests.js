@@ -731,7 +731,7 @@ const FinanceRequests = () => {
           </Row>
 
           <Row gutter={16}>
-            <Col span={12}>
+            {/* <Col span={12}>
               <Form.Item
                 name="recipientType"
                 label="Recipient Type"
@@ -748,18 +748,18 @@ const FinanceRequests = () => {
                   <Option value="student">Student</Option>
                 </Select>
               </Form.Item>
-            </Col>
+            </Col> */}
             <Col span={12}>
-              <Form.Item
+             
+            </Col>
+          </Row>
+             <Form.Item
                 name="amount"
                 label="Amount"
                 rules={[{ required: true, message: "Please enter amount" }]}
               >
                 <Input type="number" placeholder="Enter amount" />
               </Form.Item>
-            </Col>
-          </Row>
-
           <Row gutter={16}>
             <Col span={12}>
               <Form.Item
@@ -853,6 +853,7 @@ const FinanceRequests = () => {
             name="attachments"
             label="Attachments (Optional)"
             valuePropName="fileList"
+            style={{color: "white"}}
             getValueFromEvent={(e) => {
               if (Array.isArray(e)) {
                 return e;
