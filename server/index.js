@@ -1,4 +1,4 @@
-//index.js (main server entrypoint)
+// index.js (main server entrypoint)
 
 const express = require("express");
 const cors = require("cors");
@@ -32,17 +32,34 @@ require('./jobs/paymentReminders');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-app.use(cors());
-app.use(express.json());
+// Use an env var to restrict frontend origin in production.
+// Set FRONTEND_ORIGIN=https://example.com in production (Vercel URL)
+const FRONTEND_ORIGIN = process.env.FRONTEND_ORIGIN || '*';
 
-// ADD THIS: Serve uploaded files statically
+app.use(cors({
+  origin: (origin, callback) => {
+    // allow non-browser (curl, Postman) requests when origin is undefined
+    if (!origin) return callback(null, true);
+    if (FRONTEND_ORIGIN === '*' || origin === FRONTEND_ORIGIN) return callback(null, true);
+    callback(new Error('CORS policy: This origin is not allowed'));
+  },
+  credentials: true,
+}));
+
+// Body parsers
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Serve uploaded files statically (if you use local disk storage for uploads)
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
+// Simple healthcheck endpoint for platform checks
+app.get('/healthz', (_req, res) => res.status(200).send('OK'));
 
 // Serve React app in production (if build exists)
 try {
   const buildPath = path.join(__dirname, 'build');
-  if (require('fs').existsSync(buildPath)) {
+  if (fs.existsSync(buildPath)) {
     app.use(express.static(buildPath));
     app.get('*', (req, res) => {
       res.sendFile(path.join(buildPath, 'index.html'));
@@ -52,6 +69,7 @@ try {
   console.log('Build directory not found or error serving static files:', error);
 }
 
+// MongoDB connection
 mongoose
   .connect(process.env.MONGODB_URI, {
     serverSelectionTimeoutMS: 360000,
@@ -69,6 +87,7 @@ mongoose
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => console.error("MongoDB connection error:", err));
 
+// Routes
 app.use("/api/users", usersRouter);
 app.use("/api/students", studentsRouter);
 app.use("/api/events", eventsRouter);
@@ -88,6 +107,7 @@ app.use("/api/images", imageUploadRouter);
 app.use("/api/template", generateFromTemplateRouter);
 app.use("/api/departments", departmentsRouter);
 
+// Root ping
 app.get("/", (_req, res) => {
   res.send({ message: "API is up and running!" });
 });
