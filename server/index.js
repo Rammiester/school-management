@@ -33,7 +33,7 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 // Use an env var to restrict frontend origin in production.
-Set FRONTEND_ORIGIN="https://www.srspatna.com/"
+const FRONTEND_ORIGIN="https://www.srspatna.com"
 // const FRONTEND_ORIGIN = process.env.FRONTEND_ORIGIN || "http://localhost:3000";
 
 app.use(cors({
