@@ -848,11 +848,6 @@ const FinanceRequests = () => {
                     }`,
                   },
                 ]}
-                extra={
-                  recipientType === "student"
-                    ? "Search by name or unique ID (min 2 characters)"
-                    : "Search by name or unique ID (min 2 characters)"
-                }
               >
                 <Select
                   placeholder={
