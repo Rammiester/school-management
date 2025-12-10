@@ -1,33 +1,95 @@
+// scripts/seedFinanceDataFull.js
+// Idempotent seeder for Earnings: July -> Dec 2024 + mock old doc + 2 pending demo items
+// Usage: node scripts/seedFinanceDataFull.js
 const mongoose = require("mongoose");
 require("dotenv").config();
+const bcrypt = require('bcryptjs');
 
 const Earning = require("../models/Earning");
-const User = require("../models/User"); // Adjust path if needed
+const User = require("../models/User");
+
+const SALT_ROUNDS = 10;
+
+const randPassword = () =>
+  Math.random().toString(36).slice(-10) + Math.random().toString(36).slice(-4);
+
+/**
+ * Upsert documents by a small deterministic filter to avoid duplicates.
+ * The filter uses date + (name || description) + earnings/expenses where present.
+ */
+const upsertDocs = async (arr) => {
+  for (const doc of arr) {
+    const filter = {
+      date: doc.date,
+    };
+
+    if (doc.name) filter.name = doc.name;
+    else if (doc.description) filter.description = doc.description;
+
+    // include amounts if provided to be more precise
+    if (typeof doc.earnings !== "undefined") filter.earnings = doc.earnings;
+    if (typeof doc.expenses !== "undefined") filter.expenses = doc.expenses;
+
+    // remove undefined fields (safety)
+    Object.keys(filter).forEach((k) => {
+      if (filter[k] === undefined || filter[k] === null) delete filter[k];
+    });
+
+    await Earning.findOneAndUpdate(filter, doc, {
+      upsert: true,
+      new: true,
+      setDefaultsOnInsert: true,
+    });
+  }
+};
+
+const ensureAdminUser = async () => {
+  let adminUser = await User.findOne({ role: "admin" });
+  if (adminUser) {
+    console.log("Found admin user:", adminUser.email);
+    return adminUser;
+  }
+
+  // fallback to chairman if admin not present
+  const fallback = await User.findOne({ role: "chairman" });
+  if (fallback) {
+    console.log("No admin found — using chairman as adminUser:", fallback.email);
+    return fallback;
+  }
+
+  // create a seed admin user
+  const password = randPassword();
+  const hashed = await bcrypt.hash(password, SALT_ROUNDS);
+  const email = "admin@example.com";
+  const name = "Seed Admin";
+
+  const newUser = new User({
+    name,
+    email,
+    password: hashed,
+    role: "admin",
+    status: "approved",
+    // optional uniqueId for users as you discussed earlier
+    uniqueId: "ADM0001",
+  });
+
+  await newUser.save();
+  console.log("Created seed admin:", email, "password:", password);
+  return newUser;
+};
 
 const seedFinanceData = async () => {
   try {
-    // Connect to MongoDB
     await mongoose.connect(process.env.MONGODB_URI, {
       serverSelectionTimeoutMS: 30000,
       socketTimeoutMS: 30000,
     });
-    console.log("✅ Connected to MongoDB for seeding");
+    console.log("Connected to MongoDB for seeding");
 
-    // Get a user for requestedBy
-    let adminUser = await User.findOne({ role: "admin" });
+    const adminUser = await ensureAdminUser();
+    const adminId = adminUser._id;
 
-    if (!adminUser) {
-      console.log(
-        "⚠️  No admin user found. Please create a user first or update the requestedBy field."
-      );
-      process.exit(1);
-    }
-
-    // OPTIONAL: Clear existing data
-    // await Earning.deleteMany({});
-    // console.log("🗑️  Cleared existing finance data");
-
-    // ==================== JULY 2024 ====================
+    // ===== JULY 2024 =====
     const julyRevenue = [
       {
         date: new Date("2024-07-05"),
@@ -43,8 +105,8 @@ const seedFinanceData = async () => {
         feePeriod: "Q3 2024",
         studentUniqueId: "STU2024011",
         status: "approved",
-        requestedBy: adminUser._id,
-        reviewedBy: adminUser._id,
+        requestedBy: adminId,
+        reviewedBy: adminId,
         reviewedAt: new Date("2024-07-05"),
         reviewNotes: "Regular fee payment approved",
       },
@@ -62,8 +124,8 @@ const seedFinanceData = async () => {
         feePeriod: "Summer 2024",
         studentUniqueId: "STU2024012",
         status: "approved",
-        requestedBy: adminUser._id,
-        reviewedBy: adminUser._id,
+        requestedBy: adminId,
+        reviewedBy: adminId,
         reviewedAt: new Date("2024-07-10"),
       },
       {
@@ -80,7 +142,7 @@ const seedFinanceData = async () => {
         feePeriod: "2024",
         studentUniqueId: "STU2024013",
         status: "approved",
-        requestedBy: adminUser._id,
+        requestedBy: adminId,
       },
       {
         date: new Date("2024-07-20"),
@@ -94,8 +156,8 @@ const seedFinanceData = async () => {
         time: "04:00 PM",
         modeOfPayment: "cheque",
         status: "approved",
-        requestedBy: adminUser._id,
-        reviewedBy: adminUser._id,
+        requestedBy: adminId,
+        reviewedBy: adminId,
         reviewedAt: new Date("2024-07-20"),
         reviewNotes: "Donation for library expansion",
       },
@@ -113,7 +175,7 @@ const seedFinanceData = async () => {
         feePeriod: "July 2024",
         studentUniqueId: "STU2024014",
         status: "approved",
-        requestedBy: adminUser._id,
+        requestedBy: adminId,
       },
     ];
 
@@ -130,8 +192,8 @@ const seedFinanceData = async () => {
         time: "09:00 AM",
         modeOfPayment: "bank transfer",
         status: "approved",
-        requestedBy: adminUser._id,
-        reviewedBy: adminUser._id,
+        requestedBy: adminId,
+        reviewedBy: adminId,
         reviewedAt: new Date("2024-07-01"),
         reviewNotes: "Monthly salary payment",
       },
@@ -147,8 +209,8 @@ const seedFinanceData = async () => {
         time: "03:00 PM",
         modeOfPayment: "cash",
         status: "approved",
-        requestedBy: adminUser._id,
-        reviewedBy: adminUser._id,
+        requestedBy: adminId,
+        reviewedBy: adminId,
         reviewedAt: new Date("2024-07-08"),
       },
       {
@@ -163,7 +225,7 @@ const seedFinanceData = async () => {
         time: "10:30 AM",
         modeOfPayment: "upi",
         status: "approved",
-        requestedBy: adminUser._id,
+        requestedBy: adminId,
       },
       {
         date: new Date("2024-07-18"),
@@ -177,7 +239,7 @@ const seedFinanceData = async () => {
         time: "11:45 AM",
         modeOfPayment: "card",
         status: "approved",
-        requestedBy: adminUser._id,
+        requestedBy: adminId,
       },
       {
         date: new Date("2024-07-22"),
@@ -191,7 +253,7 @@ const seedFinanceData = async () => {
         time: "02:15 PM",
         modeOfPayment: "cash",
         status: "approved",
-        requestedBy: adminUser._id,
+        requestedBy: adminId,
       },
       {
         date: new Date("2024-07-28"),
@@ -205,11 +267,11 @@ const seedFinanceData = async () => {
         time: "04:30 PM",
         modeOfPayment: "bank transfer",
         status: "approved",
-        requestedBy: adminUser._id,
+        requestedBy: adminId,
       },
     ];
 
-    // ==================== AUGUST 2024 ====================
+    // ===== AUGUST 2024 =====
     const augustRevenue = [
       {
         date: new Date("2024-08-02"),
@@ -225,8 +287,8 @@ const seedFinanceData = async () => {
         feePeriod: "Q3 2024",
         studentUniqueId: "STU2024021",
         status: "approved",
-        requestedBy: adminUser._id,
-        reviewedBy: adminUser._id,
+        requestedBy: adminId,
+        reviewedBy: adminId,
         reviewedAt: new Date("2024-08-02"),
       },
       {
@@ -243,7 +305,7 @@ const seedFinanceData = async () => {
         feePeriod: "August 2024",
         studentUniqueId: "STU2024022",
         status: "approved",
-        requestedBy: adminUser._id,
+        requestedBy: adminId,
       },
       {
         date: new Date("2024-08-12"),
@@ -257,8 +319,8 @@ const seedFinanceData = async () => {
         time: "10:00 AM",
         modeOfPayment: "bank transfer",
         status: "approved",
-        requestedBy: adminUser._id,
-        reviewedBy: adminUser._id,
+        requestedBy: adminId,
+        reviewedBy: adminId,
         reviewedAt: new Date("2024-08-12"),
         reviewNotes: "Grant for building renovation",
       },
@@ -276,7 +338,7 @@ const seedFinanceData = async () => {
         feePeriod: "August 2024",
         studentUniqueId: "STU2024023",
         status: "approved",
-        requestedBy: adminUser._id,
+        requestedBy: adminId,
       },
       {
         date: new Date("2024-08-25"),
@@ -290,8 +352,8 @@ const seedFinanceData = async () => {
         time: "11:00 AM",
         modeOfPayment: "cheque",
         status: "approved",
-        requestedBy: adminUser._id,
-        reviewedBy: adminUser._id,
+        requestedBy: adminId,
+        reviewedBy: adminId,
         reviewedAt: new Date("2024-08-25"),
       },
     ];
@@ -309,8 +371,8 @@ const seedFinanceData = async () => {
         time: "09:00 AM",
         modeOfPayment: "bank transfer",
         status: "approved",
-        requestedBy: adminUser._id,
-        reviewedBy: adminUser._id,
+        requestedBy: adminId,
+        reviewedBy: adminId,
         reviewedAt: new Date("2024-08-01"),
       },
       {
@@ -325,7 +387,7 @@ const seedFinanceData = async () => {
         time: "02:00 PM",
         modeOfPayment: "cash",
         status: "approved",
-        requestedBy: adminUser._id,
+        requestedBy: adminId,
       },
       {
         date: new Date("2024-08-10"),
@@ -339,8 +401,8 @@ const seedFinanceData = async () => {
         time: "11:00 AM",
         modeOfPayment: "upi",
         status: "approved",
-        requestedBy: adminUser._id,
-        reviewedBy: adminUser._id,
+        requestedBy: adminId,
+        reviewedBy: adminId,
         reviewedAt: new Date("2024-08-10"),
       },
       {
@@ -355,7 +417,7 @@ const seedFinanceData = async () => {
         time: "10:30 AM",
         modeOfPayment: "card",
         status: "approved",
-        requestedBy: adminUser._id,
+        requestedBy: adminId,
       },
       {
         date: new Date("2024-08-20"),
@@ -369,7 +431,7 @@ const seedFinanceData = async () => {
         time: "03:45 PM",
         modeOfPayment: "bank transfer",
         status: "approved",
-        requestedBy: adminUser._id,
+        requestedBy: adminId,
       },
       {
         date: new Date("2024-08-22"),
@@ -383,7 +445,7 @@ const seedFinanceData = async () => {
         time: "01:15 PM",
         modeOfPayment: "bank transfer",
         status: "approved",
-        requestedBy: adminUser._id,
+        requestedBy: adminId,
       },
       {
         date: new Date("2024-08-28"),
@@ -397,11 +459,11 @@ const seedFinanceData = async () => {
         time: "04:00 PM",
         modeOfPayment: "cheque",
         status: "approved",
-        requestedBy: adminUser._id,
+        requestedBy: adminId,
       },
     ];
 
-    // ==================== SEPTEMBER 2024 ====================
+    // ===== SEPTEMBER 2024 =====
     const septemberRevenue = [
       {
         date: new Date("2024-09-03"),
@@ -417,8 +479,8 @@ const seedFinanceData = async () => {
         feePeriod: "Q3 2024",
         studentUniqueId: "STU2024031",
         status: "approved",
-        requestedBy: adminUser._id,
-        reviewedBy: adminUser._id,
+        requestedBy: adminId,
+        reviewedBy: adminId,
         reviewedAt: new Date("2024-09-03"),
       },
       {
@@ -435,7 +497,7 @@ const seedFinanceData = async () => {
         feePeriod: "Autumn 2024",
         studentUniqueId: "STU2024032",
         status: "approved",
-        requestedBy: adminUser._id,
+        requestedBy: adminId,
       },
       {
         date: new Date("2024-09-14"),
@@ -451,7 +513,7 @@ const seedFinanceData = async () => {
         feePeriod: "2024",
         studentUniqueId: "STU2024033",
         status: "approved",
-        requestedBy: adminUser._id,
+        requestedBy: adminId,
       },
       {
         date: new Date("2024-09-20"),
@@ -467,7 +529,7 @@ const seedFinanceData = async () => {
         feePeriod: "September 2024",
         studentUniqueId: "STU2024034",
         status: "approved",
-        requestedBy: adminUser._id,
+        requestedBy: adminId,
       },
       {
         date: new Date("2024-09-26"),
@@ -481,8 +543,8 @@ const seedFinanceData = async () => {
         time: "09:00 AM",
         modeOfPayment: "bank transfer",
         status: "approved",
-        requestedBy: adminUser._id,
-        reviewedBy: adminUser._id,
+        requestedBy: adminId,
+        reviewedBy: adminId,
         reviewedAt: new Date("2024-09-26"),
         reviewNotes: "Government grant approved",
       },
@@ -501,8 +563,8 @@ const seedFinanceData = async () => {
         time: "09:00 AM",
         modeOfPayment: "bank transfer",
         status: "approved",
-        requestedBy: adminUser._id,
-        reviewedBy: adminUser._id,
+        requestedBy: adminId,
+        reviewedBy: adminId,
         reviewedAt: new Date("2024-09-01"),
       },
       {
@@ -517,7 +579,7 @@ const seedFinanceData = async () => {
         time: "01:30 PM",
         modeOfPayment: "cash",
         status: "approved",
-        requestedBy: adminUser._id,
+        requestedBy: adminId,
       },
       {
         date: new Date("2024-09-11"),
@@ -531,7 +593,7 @@ const seedFinanceData = async () => {
         time: "10:00 AM",
         modeOfPayment: "upi",
         status: "approved",
-        requestedBy: adminUser._id,
+        requestedBy: adminId,
       },
       {
         date: new Date("2024-09-17"),
@@ -545,7 +607,7 @@ const seedFinanceData = async () => {
         time: "02:45 PM",
         modeOfPayment: "card",
         status: "approved",
-        requestedBy: adminUser._id,
+        requestedBy: adminId,
       },
       {
         date: new Date("2024-09-23"),
@@ -559,7 +621,7 @@ const seedFinanceData = async () => {
         time: "11:30 AM",
         modeOfPayment: "bank transfer",
         status: "approved",
-        requestedBy: adminUser._id,
+        requestedBy: adminId,
       },
       {
         date: new Date("2024-09-28"),
@@ -573,11 +635,11 @@ const seedFinanceData = async () => {
         time: "04:00 PM",
         modeOfPayment: "bank transfer",
         status: "approved",
-        requestedBy: adminUser._id,
+        requestedBy: adminId,
       },
     ];
 
-    // ==================== OCTOBER 2024 ====================
+    // ===== OCTOBER 2024 =====
     const octoberRevenue = [
       {
         date: new Date("2024-10-04"),
@@ -593,8 +655,8 @@ const seedFinanceData = async () => {
         feePeriod: "Q4 2024",
         studentUniqueId: "STU2024041",
         status: "approved",
-        requestedBy: adminUser._id,
-        reviewedBy: adminUser._id,
+        requestedBy: adminId,
+        reviewedBy: adminId,
         reviewedAt: new Date("2024-10-04"),
       },
       {
@@ -611,7 +673,7 @@ const seedFinanceData = async () => {
         feePeriod: "October 2024",
         studentUniqueId: "STU2024042",
         status: "approved",
-        requestedBy: adminUser._id,
+        requestedBy: adminId,
       },
       {
         date: new Date("2024-10-15"),
@@ -625,8 +687,8 @@ const seedFinanceData = async () => {
         time: "03:00 PM",
         modeOfPayment: "cheque",
         status: "approved",
-        requestedBy: adminUser._id,
-        reviewedBy: adminUser._id,
+        requestedBy: adminId,
+        reviewedBy: adminId,
         reviewedAt: new Date("2024-10-15"),
       },
       {
@@ -643,7 +705,7 @@ const seedFinanceData = async () => {
         feePeriod: "October 2024",
         studentUniqueId: "STU2024043",
         status: "approved",
-        requestedBy: adminUser._id,
+        requestedBy: adminId,
       },
       {
         date: new Date("2024-10-28"),
@@ -659,7 +721,7 @@ const seedFinanceData = async () => {
         feePeriod: "October 2024",
         studentUniqueId: "STU2024044",
         status: "approved",
-        requestedBy: adminUser._id,
+        requestedBy: adminId,
       },
     ];
 
@@ -676,8 +738,8 @@ const seedFinanceData = async () => {
         time: "09:00 AM",
         modeOfPayment: "bank transfer",
         status: "approved",
-        requestedBy: adminUser._id,
-        reviewedBy: adminUser._id,
+        requestedBy: adminId,
+        reviewedBy: adminId,
         reviewedAt: new Date("2024-10-01"),
       },
       {
@@ -692,7 +754,7 @@ const seedFinanceData = async () => {
         time: "02:30 PM",
         modeOfPayment: "cash",
         status: "approved",
-        requestedBy: adminUser._id,
+        requestedBy: adminId,
       },
       {
         date: new Date("2024-10-12"),
@@ -706,7 +768,7 @@ const seedFinanceData = async () => {
         time: "11:00 AM",
         modeOfPayment: "upi",
         status: "approved",
-        requestedBy: adminUser._id,
+        requestedBy: adminId,
       },
       {
         date: new Date("2024-10-16"),
@@ -720,7 +782,7 @@ const seedFinanceData = async () => {
         time: "03:15 PM",
         modeOfPayment: "card",
         status: "approved",
-        requestedBy: adminUser._id,
+        requestedBy: adminId,
       },
       {
         date: new Date("2024-10-22"),
@@ -734,7 +796,7 @@ const seedFinanceData = async () => {
         time: "10:30 AM",
         modeOfPayment: "bank transfer",
         status: "approved",
-        requestedBy: adminUser._id,
+        requestedBy: adminId,
       },
       {
         date: new Date("2024-10-25"),
@@ -748,7 +810,7 @@ const seedFinanceData = async () => {
         time: "01:00 PM",
         modeOfPayment: "bank transfer",
         status: "approved",
-        requestedBy: adminUser._id,
+        requestedBy: adminId,
       },
       {
         date: new Date("2024-10-30"),
@@ -762,11 +824,11 @@ const seedFinanceData = async () => {
         time: "04:30 PM",
         modeOfPayment: "bank transfer",
         status: "approved",
-        requestedBy: adminUser._id,
+        requestedBy: adminId,
       },
     ];
 
-    // ==================== NOVEMBER 2024 ====================
+    // ===== NOVEMBER 2024 =====
     const novemberRevenue = [
       {
         date: new Date("2024-11-05"),
@@ -782,8 +844,8 @@ const seedFinanceData = async () => {
         feePeriod: "Q4 2024",
         studentUniqueId: "STU2024051",
         status: "approved",
-        requestedBy: adminUser._id,
-        reviewedBy: adminUser._id,
+        requestedBy: adminId,
+        reviewedBy: adminId,
         reviewedAt: new Date("2024-11-05"),
       },
       {
@@ -800,7 +862,7 @@ const seedFinanceData = async () => {
         feePeriod: "November 2024",
         studentUniqueId: "STU2024052",
         status: "approved",
-        requestedBy: adminUser._id,
+        requestedBy: adminId,
       },
       {
         date: new Date("2024-11-16"),
@@ -814,8 +876,8 @@ const seedFinanceData = async () => {
         time: "10:00 AM",
         modeOfPayment: "bank transfer",
         status: "approved",
-        requestedBy: adminUser._id,
-        reviewedBy: adminUser._id,
+        requestedBy: adminId,
+        reviewedBy: adminId,
         reviewedAt: new Date("2024-11-16"),
         reviewNotes: "Annual grant disbursement",
       },
@@ -831,8 +893,8 @@ const seedFinanceData = async () => {
         time: "04:00 PM",
         modeOfPayment: "cheque",
         status: "approved",
-        requestedBy: adminUser._id,
-        reviewedBy: adminUser._id,
+        requestedBy: adminId,
+        reviewedBy: adminId,
         reviewedAt: new Date("2024-11-20"),
       },
       {
@@ -849,7 +911,7 @@ const seedFinanceData = async () => {
         feePeriod: "November 2024",
         studentUniqueId: "STU2024053",
         status: "approved",
-        requestedBy: adminUser._id,
+        requestedBy: adminId,
       },
     ];
 
@@ -866,8 +928,8 @@ const seedFinanceData = async () => {
         time: "09:00 AM",
         modeOfPayment: "bank transfer",
         status: "approved",
-        requestedBy: adminUser._id,
-        reviewedBy: adminUser._id,
+        requestedBy: adminId,
+        reviewedBy: adminId,
         reviewedAt: new Date("2024-11-01"),
       },
       {
@@ -882,7 +944,7 @@ const seedFinanceData = async () => {
         time: "01:00 PM",
         modeOfPayment: "cash",
         status: "approved",
-        requestedBy: adminUser._id,
+        requestedBy: adminId,
       },
       {
         date: new Date("2024-11-10"),
@@ -896,7 +958,7 @@ const seedFinanceData = async () => {
         time: "10:30 AM",
         modeOfPayment: "upi",
         status: "approved",
-        requestedBy: adminUser._id,
+        requestedBy: adminId,
       },
       {
         date: new Date("2024-11-14"),
@@ -910,7 +972,7 @@ const seedFinanceData = async () => {
         time: "02:00 PM",
         modeOfPayment: "card",
         status: "approved",
-        requestedBy: adminUser._id,
+        requestedBy: adminId,
       },
       {
         date: new Date("2024-11-19"),
@@ -924,7 +986,7 @@ const seedFinanceData = async () => {
         time: "11:45 AM",
         modeOfPayment: "bank transfer",
         status: "approved",
-        requestedBy: adminUser._id,
+        requestedBy: adminId,
       },
       {
         date: new Date("2024-11-23"),
@@ -938,7 +1000,7 @@ const seedFinanceData = async () => {
         time: "03:30 PM",
         modeOfPayment: "bank transfer",
         status: "approved",
-        requestedBy: adminUser._id,
+        requestedBy: adminId,
       },
       {
         date: new Date("2024-11-27"),
@@ -952,17 +1014,162 @@ const seedFinanceData = async () => {
         time: "09:30 AM",
         modeOfPayment: "cheque",
         status: "pending",
-        requestedBy: adminUser._id,
+        requestedBy: adminId,
       },
     ];
 
-    // ==================== COMBINE ALL DATA ====================
+    // ===== DECEMBER 2024 =====
+    const decemberRevenue = [
+      {
+        date: new Date("2024-12-05"),
+        month: "December 2024",
+        earnings: 45000,
+        expenses: 0,
+        description: "December fee collection",
+        type: "revenue",
+        requestType: "school fee",
+        name: "December Fee Collection",
+        time: "10:00 AM",
+        modeOfPayment: "upi",
+        feePeriod: "Dec 2024",
+        studentUniqueId: "STU2024061",
+        status: "approved",
+        requestedBy: adminId,
+      },
+      {
+        date: new Date("2024-12-12"),
+        month: "December 2024",
+        earnings: 12000,
+        expenses: 0,
+        description: "Winter hostel fee",
+        type: "revenue",
+        requestType: "hostel fee",
+        name: "Winter Hostel Fee",
+        time: "11:15 AM",
+        modeOfPayment: "bank transfer",
+        feePeriod: "Dec 2024",
+        studentUniqueId: "STU2024062",
+        status: "approved",
+        requestedBy: adminId,
+      },
+      {
+        date: new Date("2024-12-18"),
+        month: "December 2024",
+        earnings: 30000,
+        expenses: 0,
+        description: "Corporate donation for end-year",
+        type: "revenue",
+        requestType: "donation",
+        name: "End Year Donation",
+        time: "03:00 PM",
+        modeOfPayment: "cheque",
+        status: "approved",
+        requestedBy: adminId,
+      },
+    ];
+
+    const decemberExpenses = [
+      {
+        date: new Date("2024-12-01"),
+        month: "December 2024",
+        earnings: 0,
+        expenses: 57000,
+        description: "December staff salaries",
+        type: "expense",
+        requestType: "salary",
+        name: "December Staff Salaries",
+        time: "09:00 AM",
+        modeOfPayment: "bank transfer",
+        status: "approved",
+        requestedBy: adminId,
+        reviewedBy: adminId,
+        reviewedAt: new Date("2024-12-01"),
+      },
+      {
+        date: new Date("2024-12-10"),
+        month: "December 2024",
+        earnings: 0,
+        expenses: 9500,
+        description: "Winter supplies & clothing",
+        type: "expense",
+        requestType: "other",
+        name: "Winter Supplies",
+        time: "02:30 PM",
+        modeOfPayment: "cash",
+        status: "approved",
+        requestedBy: adminId,
+      },
+      {
+        date: new Date("2024-12-20"),
+        month: "December 2024",
+        earnings: 0,
+        expenses: 20000,
+        description: "Annual event arrangements",
+        type: "expense",
+        requestType: "other",
+        name: "Annual Event Expense",
+        time: "11:00 AM",
+        modeOfPayment: "upi",
+        status: "approved",
+        requestedBy: adminId,
+      },
+    ];
+
+    // ===== Mock old document you showed (keep as-is so demo contains it) =====
+    const mockOldDoc = {
+      // uses the exact date and createdBy style you pasted earlier
+      date: new Date("2025-06-23T18:30:00.000Z"),
+      month: "march",
+      earnings: 0,
+      expenses: 200,
+      description: "cleaning labour ",
+      createdBy: "admin@example.com",
+      status: "approved",
+    };
+
+    // ===== Demo pending items (to test attachment deletion flow) =====
+    // Note: make sure the files exist at these paths (or create placeholder files)
+    const pendingDemoItems = [
+      {
+        date: new Date("2024-12-28"),
+        month: "December 2024",
+        earnings: 0,
+        expenses: 2500,
+        description: "Pending demo: vendor invoice (delete on approve)",
+        type: "expense",
+        requestType: "admin office",
+        name: "Vendor Invoice Demo",
+        time: "14:00",
+        modeOfPayment: "upi",
+        status: "pending",
+        requestedBy: adminId,
+        attachments: ["uploads/finance-requests/sample-bill.png"],
+      },
+      {
+        date: new Date("2024-12-29"),
+        month: "December 2024",
+        earnings: 5000,
+        expenses: 0,
+        description: "Pending demo: tuition fee (delete on approve)",
+        type: "revenue",
+        requestType: "school fee",
+        name: "Tuition Fee Demo",
+        time: "11:00",
+        modeOfPayment: "card",
+        status: "pending",
+        requestedBy: adminId,
+        attachments: ["uploads/finance-requests/sample-invoice.png"],
+      },
+    ];
+
+    // ===== Combine everything =====
     const allRevenue = [
       ...julyRevenue,
       ...augustRevenue,
       ...septemberRevenue,
       ...octoberRevenue,
       ...novemberRevenue,
+      ...decemberRevenue,
     ];
 
     const allExpenses = [
@@ -971,131 +1178,41 @@ const seedFinanceData = async () => {
       ...septemberExpenses,
       ...octoberExpenses,
       ...novemberExpenses,
+      ...decemberExpenses,
     ];
 
-    // ==================== INSERT DATA ====================
-    const insertedRevenue = await Earning.insertMany(allRevenue);
-    console.log(`✅ Seeded ${insertedRevenue.length} revenue records`);
+    // Upsert all docs
+    console.log("Seeding revenue records...");
+    await upsertDocs(allRevenue);
 
-    const insertedExpenses = await Earning.insertMany(allExpenses);
-    console.log(`✅ Seeded ${insertedExpenses.length} expense records`);
+    console.log("Seeding expense records...");
+    await upsertDocs(allExpenses);
 
-    // ==================== SUMMARY ====================
-    const calculateTotal = (data, field) =>
-      data.reduce((sum, item) => sum + item[field], 0);
+    console.log("Seeding demo pending items...");
+    await upsertDocs(pendingDemoItems);
 
-    const julyRevenueTotal = calculateTotal(julyRevenue, "earnings");
-    const julyExpensesTotal = calculateTotal(julyExpenses, "expenses");
-    const augustRevenueTotal = calculateTotal(augustRevenue, "earnings");
-    const augustExpensesTotal = calculateTotal(augustExpenses, "expenses");
-    const septemberRevenueTotal = calculateTotal(septemberRevenue, "earnings");
-    const septemberExpensesTotal = calculateTotal(
-      septemberExpenses,
-      "expenses"
-    );
-    const octoberRevenueTotal = calculateTotal(octoberRevenue, "earnings");
-    const octoberExpensesTotal = calculateTotal(octoberExpenses, "expenses");
-    const novemberRevenueTotal = calculateTotal(novemberRevenue, "earnings");
-    const novemberExpensesTotal = calculateTotal(novemberExpenses, "expenses");
+    console.log("Seeding mock old document...");
+    await upsertDocs([mockOldDoc]);
 
-    const totalRevenue = calculateTotal(allRevenue, "earnings");
-    const totalExpenses = calculateTotal(allExpenses, "expenses");
+    // Summary counts for sanity
+    const totalSeeded = (await Earning.countDocuments({
+      date: { $gte: new Date("2024-07-01"), $lte: new Date("2024-12-31") },
+    })) || 0;
 
-    console.log("\n📊 Seeding Summary (July - November 2024):");
-    console.log("\n   JULY 2024:");
-    console.log(
-      `   Revenue: ₹${julyRevenueTotal.toLocaleString()} (${
-        julyRevenue.length
-      } records)`
-    );
-    console.log(
-      `   Expenses: ₹${julyExpensesTotal.toLocaleString()} (${
-        julyExpenses.length
-      } records)`
-    );
-    console.log(
-      `   Net: ₹${(julyRevenueTotal - julyExpensesTotal).toLocaleString()}`
-    );
+    const pendingCount = await Earning.countDocuments({ status: "pending" });
 
-    console.log("\n   AUGUST 2024:");
-    console.log(
-      `   Revenue: ₹${augustRevenueTotal.toLocaleString()} (${
-        augustRevenue.length
-      } records)`
-    );
-    console.log(
-      `   Expenses: ₹${augustExpensesTotal.toLocaleString()} (${
-        augustExpenses.length
-      } records)`
-    );
-    console.log(
-      `   Net: ₹${(augustRevenueTotal - augustExpensesTotal).toLocaleString()}`
-    );
+    console.log("Seeding finished.");
+    console.log("Total records between Jul-Dec 2024:", totalSeeded);
+    console.log("Total pending requests (all time):", pendingCount);
 
-    console.log("\n   SEPTEMBER 2024:");
-    console.log(
-      `   Revenue: ₹${septemberRevenueTotal.toLocaleString()} (${
-        septemberRevenue.length
-      } records)`
-    );
-    console.log(
-      `   Expenses: ₹${septemberExpensesTotal.toLocaleString()} (${
-        septemberExpenses.length
-      } records)`
-    );
-    console.log(
-      `   Net: ₹${(
-        septemberRevenueTotal - septemberExpensesTotal
-      ).toLocaleString()}`
-    );
-
-    console.log("\n   OCTOBER 2024:");
-    console.log(
-      `   Revenue: ₹${octoberRevenueTotal.toLocaleString()} (${
-        octoberRevenue.length
-      } records)`
-    );
-    console.log(
-      `   Expenses: ₹${octoberExpensesTotal.toLocaleString()} (${
-        octoberExpenses.length
-      } records)`
-    );
-    console.log(
-      `   Net: ₹${(
-        octoberRevenueTotal - octoberExpensesTotal
-      ).toLocaleString()}`
-    );
-
-    console.log("\n   NOVEMBER 2024:");
-    console.log(
-      `   Revenue: ₹${novemberRevenueTotal.toLocaleString()} (${
-        novemberRevenue.length
-      } records)`
-    );
-    console.log(
-      `   Expenses: ₹${novemberExpensesTotal.toLocaleString()} (${
-        novemberExpenses.length
-      } records)`
-    );
-    console.log(
-      `   Net: ₹${(
-        novemberRevenueTotal - novemberExpensesTotal
-      ).toLocaleString()}`
-    );
-
-    console.log("\n   ═══════════════════════════════");
-    console.log("   TOTAL (JULY - NOVEMBER 2024):");
-    console.log(`   Total Revenue: ₹${totalRevenue.toLocaleString()}`);
-    console.log(`   Total Expenses: ₹${totalExpenses.toLocaleString()}`);
-    console.log(
-      `   Net Profit: ₹${(totalRevenue - totalExpenses).toLocaleString()}`
-    );
-    console.log(`   Total Records: ${allRevenue.length + allExpenses.length}`);
-
-    console.log("\n🎉 Database seeding completed successfully!");
+    await mongoose.disconnect();
+    console.log("Disconnected from MongoDB. Done.");
     process.exit(0);
   } catch (error) {
-    console.error("❌ Seeding error:", error);
+    console.error("Seeding error:", error);
+    try {
+      await mongoose.disconnect();
+    } catch (e) {}
     process.exit(1);
   }
 };

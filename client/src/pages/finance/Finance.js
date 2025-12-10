@@ -94,7 +94,7 @@ const Finance = () => {
   });
   const [error, setError] = useState(null);
   const [dateRange, setDateRange] = useState([
-    dayjs().subtract(4, "month"),
+    dayjs().subtract(5, "month"),
     dayjs(),
   ]); // Default to now to past 4 months
   const [activeTab, setActiveTab] = useState("requests");

@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { Button, Space, Tag, message, Table, Typography } from 'antd';
-import { EyeOutlined } from '@ant-design/icons';
-import { getPendingRequests, reviewRequest } from '../../services/financeService';
-import moment from 'moment';
-import ReviewModal from '../../components/modals/ReviewModal';
-import './Finance.css';
+import React, { useState, useEffect } from "react";
+import { Button, Space, Tag, message, Table, Typography } from "antd";
+import { EyeOutlined } from "@ant-design/icons";
+import {
+  getPendingRequests,
+  reviewRequest,
+} from "../../services/financeService";
+import moment from "moment";
+import ReviewModal from "../../components/modals/ReviewModal";
+import "./Finance.css";
 
 const { Title } = Typography;
 
@@ -21,8 +24,8 @@ const ChairmanReview = ({ fetchFinanceData }) => {
       const data = await getPendingRequests();
       setPendingRequests(data);
     } catch (error) {
-      message.error('Failed to fetch pending requests');
-      console.error('Error fetching pending requests:', error);
+      message.error("Failed to fetch pending requests");
+      console.error("Error fetching pending requests:", error);
     } finally {
       setLoading(false);
     }
@@ -32,7 +35,7 @@ const ChairmanReview = ({ fetchFinanceData }) => {
     fetchPendingRequests();
   }, []);
 
-  const handleReview = async (requestId, status, reviewNotes = '') => {
+  const handleReview = async (requestId, status, reviewNotes = "") => {
     setReviewing(true);
     try {
       const response = await reviewRequest(requestId, status, reviewNotes);
@@ -44,8 +47,8 @@ const ChairmanReview = ({ fetchFinanceData }) => {
         fetchPendingRequests();
       }
     } catch (error) {
-      message.error('Failed to review request');
-      console.error('Error reviewing request:', error);
+      message.error("Failed to review request");
+      console.error("Error reviewing request:", error);
     } finally {
       setReviewing(false);
     }
@@ -58,71 +61,92 @@ const ChairmanReview = ({ fetchFinanceData }) => {
 
   const getStatusColor = (status) => {
     switch (status) {
-      case 'pending': return 'orange';
-      case 'approved': return 'green';
-      case 'rejected': return 'red';
-      default: return 'default';
+      case "pending":
+        return "orange";
+      case "approved":
+        return "green";
+      case "rejected":
+        return "red";
+      default:
+        return "default";
     }
   };
 
   const columns = [
     {
-      title: 'Name',
-      dataIndex: 'name',
-      key: 'name',
-      fixed: 'left',
+      title: "Name",
+      dataIndex: "name",
+      key: "name",
+      fixed: "left",
       width: 150,
-      render: (text) => <span className="period-cell">{text || 'N/A'}</span>,
-      onCell: () => ({ style: { background: 'var(--accent-color) !important', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' } }),
+      render: (text) => <span className="period-cell">{text || "N/A"}</span>,
+      onCell: () => ({
+        style: {
+          background: "var(--accent-color) !important",
+          whiteSpace: "nowrap",
+          overflow: "hidden",
+          textOverflow: "ellipsis",
+        },
+      }),
     },
     {
-      title: 'Type',
-      dataIndex: 'type',
-      key: 'type',
+      title: "Type",
+      dataIndex: "type",
+      key: "type",
       width: 100,
       render: (type) => {
         if (!type) return <Tag color="default">N/A</Tag>;
         return (
-          <Tag color={type === 'revenue' ? 'green' : 'red'}>
-            {type?.toUpperCase() || 'N/A'}
+          <Tag color={type === "revenue" ? "green" : "red"}>
+            {type?.toUpperCase() || "N/A"}
           </Tag>
         );
-      }
+      },
     },
     {
-      title: 'Request Type',
-      dataIndex: 'requestType',
-      key: 'requestType',
+      title: "Request Type",
+      dataIndex: "requestType",
+      key: "requestType",
       width: 150,
-      render: (text) => text ? text.toUpperCase() : 'N/A'
+      render: (text) => (text ? text.toUpperCase() : "N/A"),
     },
     {
-      title: 'Amount',
-      dataIndex: 'amount',
-      key: 'amount',
+      title: "Amount",
+      dataIndex: "amount",
+      key: "amount",
       width: 120,
       render: (_, record) => {
-        const amount = record.type === 'revenue' ? record.earnings : record.expenses;
+        const amount =
+          record.type === "revenue" ? record.earnings : record.expenses;
         return `₹${amount?.toLocaleString() || 0}`;
-      }
+      },
     },
     {
-      title: 'Date',
-      dataIndex: 'date',
-      key: 'date',
+      title: "Date",
+      dataIndex: "date",
+      key: "date",
       width: 120,
-      render: (date) => moment(date).format('DD/MM/YYYY') || 'N/A'
+      render: (date) => moment(date).format("DD/MM/YYYY") || "N/A",
     },
     {
-      title: 'Requested By',
-      dataIndex: 'createdBy',
-      key: 'createdBy',
+      title: "Requested By",
+      dataIndex: "requestedBy",
+      key: "requestedBy",
       width: 150,
-      render: (createdBy) => createdBy || 'N/A'
+      render: (requestedBy) => {
+        // handle populated object or fallback string id/email
+        if (!requestedBy) return "N/A";
+        if (typeof requestedBy === "object") {
+          return (
+            requestedBy.name || requestedBy.email || requestedBy._id || "N/A"
+          );
+        }
+        return requestedBy; // string id or email
+      },
     },
     {
-      title: 'Actions',
-      key: 'actions',
+      title: "Actions",
+      key: "actions",
       width: 100,
       render: (_, record) => (
         <Space>
@@ -151,8 +175,8 @@ const ChairmanReview = ({ fetchFinanceData }) => {
             Reject
           </Button> */}
         </Space>
-      )
-    }
+      ),
+    },
   ];
 
   return (

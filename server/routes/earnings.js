@@ -6,6 +6,8 @@ const Student = require("../models/Student");
 const upload = require("../middleware/upload"); // ADD THIS
 const fs = require("fs"); // ADD THIS
 const router = express.Router();
+const path = require("path");
+
 
 // Add a revenue/expense entry (with studentUniqueId handling)
 // Add a revenue/expense entry (with studentUniqueId handling)
@@ -92,9 +94,11 @@ router.get("/my-requests", async (req, res) => {
     // If not using authentication middleware, use req.query.email
     const email = req.user?.email || req.query.email; // fallback to query param
     if (!email) return res.status(401).json({ error: "Unauthorized" });
-    const myRequests = await Earning.find({ createdBy: email }).sort({
-      date: -1,
-    });
+    const myRequests = await Earning.find({ createdBy: email })
+      .populate("requestedBy", "name email")
+      .sort({
+        date: -1,
+      });
     res.json(myRequests);
   } catch (err) {
     res.status(400).json({ error: err.message });
@@ -131,6 +135,7 @@ router.get("/pending-earnings", async (req, res) => {
     const skip = (pageInt - 1) * limitInt;
 
     const pendingEarnings = await Earning.find(query)
+      .populate("requestedBy", "name email")
       .sort({ date: -1 })
       .skip(skip)
       .limit(limitInt);
@@ -152,20 +157,73 @@ router.get("/pending-earnings", async (req, res) => {
   }
 });
 
-// PATCH approve a single earning
+
+// PATCH approve a single earning - with safe attachment deletion (robust)
 router.patch("/:id/approve", async (req, res) => {
   try {
     const { approvedBy } = req.body;
-    const updated = await Earning.findByIdAndUpdate(
-      req.params.id,
-      { status: "approved", approvedBy },
-      { new: true }
+
+    // Load the document first (so we can inspect attachments safely)
+    const earning = await Earning.findById(req.params.id);
+    if (!earning) return res.status(404).json({ error: "Earning not found" });
+
+    // Safe uploads directory (adjust if your uploads folder is elsewhere)
+    const uploadsDir = path.resolve(path.join(__dirname, "..", "uploads"));
+
+    // Delete attachments from disk if they exist and are inside uploadsDir
+    if (Array.isArray(earning.attachments) && earning.attachments.length > 0) {
+      for (const relPath of earning.attachments) {
+        if (!relPath) continue;
+
+        // Resolve candidate path relative to project root
+        const candidatePath = path.isAbsolute(relPath)
+          ? path.normalize(relPath)
+          : path.normalize(path.join(__dirname, "..", relPath));
+
+        // Ensure candidatePath is inside uploadsDir (safety guard) using path.relative
+        const relative = path.relative(uploadsDir, candidatePath);
+        if (relative.startsWith('..') || path.isAbsolute(relative)) {
+          console.warn(`Skipping deletion of file outside uploads directory: ${candidatePath}`);
+          continue;
+        }
+
+        try {
+          if (fs.existsSync(candidatePath)) {
+            fs.unlinkSync(candidatePath);
+            console.log("Deleted attachment:", candidatePath);
+          } else {
+            console.log("Attachment not found, skipping:", candidatePath);
+          }
+        } catch (err) {
+          console.error("Failed to delete attachment:", candidatePath, err);
+          // continue with other files
+        }
+      }
+    }
+
+    // Update the earning - set approved status and clear attachments
+    earning.status = "approved";
+    if (approvedBy) earning.approvedBy = approvedBy;
+    // Clear attachments to reflect deletion
+    earning.attachments = [];
+    earning.reviewedAt = new Date();
+
+    const saved = await earning.save();
+
+    // Return populated document (if you use populate elsewhere)
+    const populated = await Earning.findById(saved._id).populate(
+      "requestedBy",
+      "name email uniqueId"
     );
-    res.json(updated);
+
+    res.json(populated);
   } catch (error) {
+    console.error("Error approving earning:", error);
     res.status(400).json({ error: error.message });
   }
 });
+
+
 
 // PATCH decline a single earning
 router.patch("/:id/decline", async (req, res) => {
@@ -213,7 +271,10 @@ router.patch("/bulk-decline", async (req, res) => {
 // (Optional) GET earning by ID
 router.get("/:id", async (req, res) => {
   try {
-    const earning = await Earning.findById(req.params.id);
+    const earning = await Earning.findById(req.params.id).populate(
+      "requestedBy",
+      "name email"
+    );
     if (!earning) return res.status(404).json({ error: "Not found" });
     res.json(earning);
   } catch (error) {
@@ -257,6 +318,7 @@ router.get("/", async (req, res) => {
     }
 
     const earnings = await Earning.find(query)
+      .populate("requestedBy", "name email")
       .sort({ date: -1 })
       .skip(skip)
       .limit(limitInt);

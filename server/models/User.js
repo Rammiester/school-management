@@ -9,8 +9,82 @@ const userSchema = new mongoose.Schema({
     isAvailable: { 
         type: Boolean, 
         default: true 
+    },
+    uniqueId: {
+      type: String,
+      unique: true,
+      sparse: true, // existing users can be backfilled later
+      index: true,
     }
+}, { timestamps: true });
+
+/**
+ * Counter schema & model
+ * Used to generate atomic, per-prefix incremental counters to avoid race conditions.
+ * Document example: { _id: 'ADM', seq: 12 }
+ */
+const counterSchema = new mongoose.Schema({
+  _id: { type: String, required: true }, // prefix, e.g., ADM, TCH
+  seq: { type: Number, default: 0 }
 });
+const Counter = mongoose.models.Counter || mongoose.model('Counter', counterSchema);
+
+// Role prefix map
+const rolePrefixes = {
+  chairman: "CHM",
+  admin: "ADM",
+  teacher: "TCH",
+  accountant: "ACC",
+  librarian: "LIB",
+  receptionist: "RCP",
+  transport: "TRN",
+  warden: "WRD",
+  staff: "STF",
+  user: "USR",
+};
+
+/**
+ * Pre-save hook to assign role-based uniqueId.
+ * - chairman -> fixed "CHM1"
+ * - others -> PREFIX + zero-padded sequence, e.g., ADM0001
+ *
+ * Uses an atomic counter (findOneAndUpdate with $inc & upsert) for concurrency safety.
+ */
+userSchema.pre("save", async function (next) {
+  try {
+    // if already has uniqueId, skip
+    if (this.uniqueId) return next();
+
+    const role = (this.role || 'user').toLowerCase();
+    const prefix = rolePrefixes[role] || 'USR';
+
+    // Chairman gets fixed identifier CHM1 (singleton)
+    if (role === 'chairman') {
+      this.uniqueId = 'CHM1';
+      return next();
+    }
+
+    // For other roles, atomically increment the counter document for that prefix
+    const counterId = prefix; // e.g., 'ADM', 'TCH'
+    const updatedCounter = await Counter.findOneAndUpdate(
+      { _id: counterId },
+      { $inc: { seq: 1 } },
+      { new: true, upsert: true, setDefaultsOnInsert: true }
+    );
+
+    const seqNumber = updatedCounter.seq || 1;
+    const padded = String(seqNumber).padStart(4, '0'); // e.g., 0001
+    this.uniqueId = `${prefix}${padded}`;
+
+    return next();
+  } catch (err) {
+    return next(err);
+  }
+});
+
+/**
+ * Existing statics preserved below (availability helpers, etc.)
+ */
 
 userSchema.statics.isBusyAtTime = async function(userId, date, timeSlot) {
     try {
@@ -132,4 +206,4 @@ userSchema.statics.updateAvailability = async function(userId, isAvailable) {
     }
 };
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.models.User || mongoose.model('User', userSchema);

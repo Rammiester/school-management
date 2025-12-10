@@ -78,7 +78,7 @@ const FinanceRequests = () => {
     dayjs(),
   ]);
   const [filterForm] = Form.useForm();
-
+  
   // Enhanced request types based on the API structure
   const expenseTypes = [
     "salary",
@@ -100,6 +100,7 @@ const FinanceRequests = () => {
   const paymentModes = ["cash", "card", "upi", "bank transfer", "cheque"];
   const [recipientType, setRecipientType] = useState("user");
   const [showAdvancedFilters, setShowAdvancedFilters] = useState(false);
+
 
   // ensure date & time are set to current India time every time the "Create Request" modal opens
   useEffect(() => {
@@ -254,75 +255,77 @@ const FinanceRequests = () => {
   };
 
   const handleSubmit = async (values) => {
-  setSubmitting(true);
-  try {
-    let recipientName = "";
+    setSubmitting(true);
+    try {
+      let recipientName = "";
 
-    if (recipientType === "student") {
-      const student = filteredStudents.find(
-        (s) => s.uniqueId === values.recipient
+      if (recipientType === "student") {
+        const student = filteredStudents.find(
+          (s) => s.uniqueId === values.recipient
+        );
+        recipientName = student?.name || "";
+      } else {
+        let user = filteredUsers.find((u) => u.email === values.recipient);
+        if (!user) {
+          user = allUsers.find((u) => u.email === values.recipient);
+        }
+        if (!user) {
+          user = filteredUsers.find((u) => u._id === values.recipient);
+        }
+        if (!user) {
+          user = allUsers.find((u) => u._id === values.recipient);
+        }
+        recipientName = user?.name || values.recipient || "";
+      }
+
+      // Create FormData for file upload
+      const formData = new FormData();
+
+      // Append regular fields - ENSURE THEY ARE NOT UNDEFINED
+      formData.append("type", values.type || "");
+      formData.append("requestType", values.requestType || "");
+      formData.append("name", recipientName || "Unknown");
+      formData.append("date", values.date.format("YYYY-MM-DD"));
+      formData.append("time", values.time.format("HH:mm"));
+      formData.append("month", values.date.format("MMMM"));
+      formData.append("modeOfPayment", values.modeOfPayment || "");
+      formData.append("description", values.description || "");
+      formData.append("requestedBy", user.id || "");
+      formData.append(
+        "earnings",
+        values.type === "revenue" ? parseFloat(values.amount) : 0
       );
-      recipientName = student?.name || "";
-    } else {
-      let user = filteredUsers.find((u) => u.email === values.recipient);
-      if (!user) {
-        user = allUsers.find((u) => u.email === values.recipient);
+      formData.append(
+        "expenses",
+        values.type === "expense" ? parseFloat(values.amount) : 0
+      );
+
+      if (values.feePeriod) {
+        formData.append("feePeriod", values.feePeriod);
       }
-      if (!user) {
-        user = filteredUsers.find((u) => u._id === values.recipient);
+
+      // Append files
+      if (fileList && fileList.length > 0) {
+        fileList.forEach((file) => {
+          formData.append("attachments", file.originFileObj);
+        });
       }
-      if (!user) {
-        user = allUsers.find((u) => u._id === values.recipient);
-      }
-      recipientName = user?.name || values.recipient || "";
-    }
 
-    // Create FormData for file upload
-    const formData = new FormData();
-    
-    // Append regular fields - ENSURE THEY ARE NOT UNDEFINED
-    formData.append('type', values.type || '');
-    formData.append('requestType', values.requestType || '');
-    formData.append('name', recipientName || "Unknown");
-    formData.append('date', values.date.format("YYYY-MM-DD"));
-    formData.append('time', values.time.format("HH:mm"));
-    formData.append('month', values.date.format("MMMM"));
-    formData.append('modeOfPayment', values.modeOfPayment || '');
-    formData.append('description', values.description || '');
-    formData.append('requestedBy', user.id || '');
-    formData.append('earnings', values.type === "revenue" ? parseFloat(values.amount) : 0);
-    formData.append('expenses', values.type === "expense" ? parseFloat(values.amount) : 0);
-    
-    if (values.feePeriod) {
-      formData.append('feePeriod', values.feePeriod);
-    }
+      
 
-    // Append files
-    if (fileList && fileList.length > 0) {
-      fileList.forEach((file) => {
-        formData.append('attachments', file.originFileObj);
-      });
+      const response = await createFinanceRequest(formData);
+      messageApi.success("Request created successfully");
+      setIsModalOpen(false);
+      form.resetFields();
+      setFileList([]);
+      fetchRequests();
+    } catch (error) {
+      console.error("Submission error:", error);
+      messageApi.error(error.message || "Failed to create request");
+    } finally {
+      setSubmitting(false);
     }
-
-    // DEBUG: Log what we're sending
-    console.log('FormData contents:');
-    for (let [key, value] of formData.entries()) {
-      console.log(key, value);
-    }
-
-    const response = await createFinanceRequest(formData);
-    messageApi.success("Request created successfully");
-    setIsModalOpen(false);
-    form.resetFields();
-    setFileList([]);
-    fetchRequests();
-  } catch (error) {
-    console.error('Submission error:', error);
-    messageApi.error(error.message || "Failed to create request");
-  } finally {
-    setSubmitting(false);
-  }
-};
+  };
 
   const handleDelete = async (id) => {
     try {
@@ -749,17 +752,15 @@ const FinanceRequests = () => {
                 </Select>
               </Form.Item>
             </Col> */}
-            <Col span={12}>
-             
-            </Col>
+            <Col span={12}></Col>
           </Row>
-             <Form.Item
-                name="amount"
-                label="Amount"
-                rules={[{ required: true, message: "Please enter amount" }]}
-              >
-                <Input type="number" placeholder="Enter amount" />
-              </Form.Item>
+          <Form.Item
+            name="amount"
+            label="Amount"
+            rules={[{ required: true, message: "Please enter amount" }]}
+          >
+            <Input type="number" placeholder="Enter amount" />
+          </Form.Item>
           <Row gutter={16}>
             <Col span={12}>
               <Form.Item
@@ -786,12 +787,10 @@ const FinanceRequests = () => {
                           {student.name} ({student.uniqueId})
                         </Option>
                       ))
-                    : allUsers.map(
-                        (
-                          user // Use allUsers instead of filteredUsers
-                        ) => (
+                    : (filteredUsers.length > 0 ? filteredUsers : allUsers).map(
+                        (user) => (
                           <Option key={user._id} value={user.email}>
-                            {user.name} ({user.email})
+                            {user.name} ({user.uniqueId})
                           </Option>
                         )
                       )}
@@ -853,7 +852,7 @@ const FinanceRequests = () => {
             name="attachments"
             label="Attachments (Optional)"
             valuePropName="fileList"
-            style={{color: "white"}}
+            style={{ color: "white" }}
             getValueFromEvent={(e) => {
               if (Array.isArray(e)) {
                 return e;
