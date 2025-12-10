@@ -65,8 +65,9 @@ const FinanceRequests = () => {
   const [filteredUsers, setFilteredUsers] = useState([]);
   const [filteredStudents, setFilteredStudents] = useState([]);
   const [allUsers, setAllUsers] = useState([]);
+  const [allStudents, setAllStudents] = useState([]);
   const [selectedRequest, setSelectedRequest] = useState(null);
-  const [fileList, setFileList] = useState([]); // NEW: For file uploads
+  const [fileList, setFileList] = useState([]);
   const [pagination, setPagination] = useState({
     current: 1,
     pageSize: 10,
@@ -78,7 +79,11 @@ const FinanceRequests = () => {
     dayjs(),
   ]);
   const [filterForm] = Form.useForm();
-  
+
+  // Explicit options state for dropdowns
+  const [userOptions, setUserOptions] = useState([]);
+  const [studentOptions, setStudentOptions] = useState([]);
+
   // Enhanced request types based on the API structure
   const expenseTypes = [
     "salary",
@@ -98,37 +103,75 @@ const FinanceRequests = () => {
     "grant",
   ];
   const paymentModes = ["cash", "card", "upi", "bank transfer", "cheque"];
-  const [recipientType, setRecipientType] = useState("user");
   const [showAdvancedFilters, setShowAdvancedFilters] = useState(false);
 
+  // Dynamic recipient type based on form type value
+  const typeValue = Form.useWatch("type", form);
+  const recipientType = typeValue === "revenue" ? "student" : "user";
 
   // ensure date & time are set to current India time every time the "Create Request" modal opens
   useEffect(() => {
     if (isModalOpen) {
       const nowIst = getIndiaTime();
-      // set both date and time fields (DatePicker expects a dayjs, TimePicker expects a dayjs)
       form.setFieldsValue({
         date: nowIst,
         time: nowIst,
       });
+
+      // Reset options when modal opens
+      setUserOptions(allUsers);
+      setStudentOptions(allStudents);
+
+      if (typeValue === "revenue") {
+        fetchInitialStudents();
+      }
     } else {
-      // optional: reset form when modal closed so stale data doesn't linger
       form.resetFields();
+      setAllStudents([]);
+      setFilteredUsers([]);
+      setFilteredStudents([]);
+      setUserOptions([]);
+      setStudentOptions([]);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isModalOpen]);
 
   useEffect(() => {
     fetchRequests();
-    fetchAllUsers(); // Fetch all users when component mounts
+    fetchAllUsers();
   }, []);
-  const typeValue = Form.useWatch("type", form);
+
+  // Update userOptions when allUsers changes
+  useEffect(() => {
+    if (allUsers.length > 0) {
+      setUserOptions(allUsers);
+    }
+  }, [allUsers]);
+
+  // Update studentOptions when allStudents changes
+  useEffect(() => {
+    if (allStudents.length > 0) {
+      setStudentOptions(allStudents);
+    }
+  }, [allStudents]);
+
   useEffect(() => {
     if (typeValue) {
       const typeLabel = typeValue === "expense" ? "Expense" : "Revenue";
       message.success(`Request Type selected: ${typeLabel}`);
+      form.setFieldValue("recipient", undefined);
+      setFilteredUsers([]);
+      setFilteredStudents([]);
+
+      // Reset options based on type
+      if (typeValue === "revenue") {
+        fetchInitialStudents();
+      } else {
+        setUserOptions(allUsers);
+      }
     }
   }, [typeValue, form]);
+
   const showDetails = (record) => {
     setSelectedRequest(record);
     setViewModal(true);
@@ -138,25 +181,20 @@ const FinanceRequests = () => {
     setSelectedRequest(record);
     setEditModal(true);
   };
+
   const handleReview = async (requestId, status, editedRequest = null) => {
     if (status === "edit" && editedRequest) {
-      // Handle edit functionality
       try {
-        // In a real implementation, you would update the request here
-        // For now, we'll just simulate the update
         message.success("Request updated successfully");
         setEditModal(false);
         setSelectedRequest(null);
-        fetchRequests(); // Refresh the list to show updated data
+        fetchRequests();
       } catch (error) {
         message.error("Failed to update request");
         console.error("Error updating request:", error);
       }
     } else {
-      // Handle approve/reject functionality (keep original logic)
-      // This would call the backend API to approve/reject
       try {
-        // This is a placeholder - in real implementation you'd call your API
         message.success(`Request ${status} successfully`);
         if (status === "approved" || status === "rejected") {
           setViewModal(false);
@@ -169,6 +207,7 @@ const FinanceRequests = () => {
       }
     }
   };
+
   const fetchRequests = async (
     page = 1,
     limit = 10,
@@ -181,9 +220,7 @@ const FinanceRequests = () => {
         limit,
         additionalFilters
       );
-      // Handle different response structures
       if (response.data && response.pagination) {
-        // New structure from backend
         setRequests(response.data);
         setPagination((prev) => ({
           ...prev,
@@ -192,7 +229,6 @@ const FinanceRequests = () => {
           total: response.pagination.total || 0,
         }));
       } else if (response && Array.isArray(response)) {
-        // Old structure (direct array)
         setRequests(response);
         setPagination((prev) => ({
           ...prev,
@@ -201,7 +237,6 @@ const FinanceRequests = () => {
           total: response.length || 0,
         }));
       } else {
-        // Fallback
         setRequests([]);
         setPagination((prev) => ({
           ...prev,
@@ -220,37 +255,84 @@ const FinanceRequests = () => {
 
   const fetchAllUsers = async () => {
     try {
-      const users = await getAllUsers(); // Call the new service function
-      setAllUsers(users);
+      const users = await getAllUsers();
+      setAllUsers(users || []);
+      setUserOptions(users || []);
     } catch (error) {
       messageApi.error("Failed to fetch users");
       console.error("Error fetching users:", error);
     }
   };
 
+  const fetchInitialStudents = async () => {
+    try {
+      const students = await searchStudents(" ");
+      if (students && students.length > 0) {
+        setAllStudents(students);
+        setStudentOptions(students);
+      } else {
+        const studentsWithA = await searchStudents("a");
+        setAllStudents(studentsWithA || []);
+        setStudentOptions(studentsWithA || []);
+      }
+    } catch (error) {
+      console.log("Could not fetch initial students");
+      setAllStudents([]);
+      setStudentOptions([]);
+    }
+  };
+
   const handleUserSearch = async (value) => {
-    if (value.length >= 3) {
+    console.log("User search triggered with value:", value);
+
+    if (!value || value.trim() === "") {
+      setFilteredUsers([]);
+      setUserOptions(allUsers);
+      return;
+    }
+
+    if (value.length >= 2) {
       try {
+        console.log("Searching users...");
         const users = await searchUsers(value);
-        setFilteredUsers(users);
+        console.log("User search results:", users);
+        setFilteredUsers(users || []);
+        setUserOptions(users || []);
       } catch (error) {
+        console.error("User search error:", error);
         messageApi.error("Failed to search users");
+        setFilteredUsers([]);
+        setUserOptions(allUsers);
       }
     } else {
-      setFilteredUsers([]);
+      setUserOptions(allUsers);
     }
   };
 
   const handleStudentSearch = async (value) => {
-    if (value.length >= 3) {
+    console.log("Student search triggered with value:", value);
+
+    if (!value || value.trim() === "") {
+      setFilteredStudents([]);
+      setStudentOptions(allStudents);
+      return;
+    }
+
+    if (value.length >= 2) {
       try {
+        console.log("Searching students...");
         const students = await searchStudents(value);
-        setFilteredStudents(students);
+        console.log("Student search results:", students);
+        setFilteredStudents(students || []);
+        setStudentOptions(students || []);
       } catch (error) {
+        console.error("Student search error:", error);
         messageApi.error("Failed to search students");
+        setFilteredStudents([]);
+        setStudentOptions(allStudents);
       }
     } else {
-      setFilteredStudents([]);
+      setStudentOptions(allStudents);
     }
   };
 
@@ -258,30 +340,42 @@ const FinanceRequests = () => {
     setSubmitting(true);
     try {
       let recipientName = "";
+      let recipientId = "";
 
       if (recipientType === "student") {
-        const student = filteredStudents.find(
+        let student = filteredStudents.find(
           (s) => s.uniqueId === values.recipient
         );
+        if (!student) {
+          student = allStudents.find((s) => s.uniqueId === values.recipient);
+        }
+        if (!student) {
+          student = studentOptions.find((s) => s.uniqueId === values.recipient);
+        }
         recipientName = student?.name || "";
+        recipientId = student?.uniqueId || values.recipient;
       } else {
-        let user = filteredUsers.find((u) => u.email === values.recipient);
-        if (!user) {
-          user = allUsers.find((u) => u.email === values.recipient);
+        let selectedUser = filteredUsers.find(
+          (u) => u.email === values.recipient
+        );
+        if (!selectedUser) {
+          selectedUser = allUsers.find((u) => u.email === values.recipient);
         }
-        if (!user) {
-          user = filteredUsers.find((u) => u._id === values.recipient);
+        if (!selectedUser) {
+          selectedUser = userOptions.find((u) => u.email === values.recipient);
         }
-        if (!user) {
-          user = allUsers.find((u) => u._id === values.recipient);
+        if (!selectedUser) {
+          selectedUser = filteredUsers.find((u) => u._id === values.recipient);
         }
-        recipientName = user?.name || values.recipient || "";
+        if (!selectedUser) {
+          selectedUser = allUsers.find((u) => u._id === values.recipient);
+        }
+        recipientName = selectedUser?.name || values.recipient || "";
+        recipientId = selectedUser?.uniqueId || "";
       }
 
-      // Create FormData for file upload
       const formData = new FormData();
 
-      // Append regular fields - ENSURE THEY ARE NOT UNDEFINED
       formData.append("type", values.type || "");
       formData.append("requestType", values.requestType || "");
       formData.append("name", recipientName || "Unknown");
@@ -300,24 +394,28 @@ const FinanceRequests = () => {
         values.type === "expense" ? parseFloat(values.amount) : 0
       );
 
-      if (values.feePeriod) {
-        formData.append("feePeriod", values.feePeriod);
+      // Format feePeriod from date range to string
+      if (values.feePeriod && values.feePeriod.length === 2) {
+        const startDate = values.feePeriod[0].format("DD MMM YYYY");
+        const endDate = values.feePeriod[1].format("DD MMM YYYY");
+        formData.append("feePeriod", `${startDate} - ${endDate}`);
       }
 
-      // Append files
       if (fileList && fileList.length > 0) {
         fileList.forEach((file) => {
           formData.append("attachments", file.originFileObj);
         });
       }
 
-      
-
       const response = await createFinanceRequest(formData);
       messageApi.success("Request created successfully");
       setIsModalOpen(false);
       form.resetFields();
       setFileList([]);
+      setFilteredUsers([]);
+      setFilteredStudents([]);
+      setUserOptions(allUsers);
+      setStudentOptions([]);
       fetchRequests();
     } catch (error) {
       console.error("Submission error:", error);
@@ -336,15 +434,12 @@ const FinanceRequests = () => {
       messageApi.error("Failed to delete request");
     }
   };
+
   const handleDropdownVisibleChange = (visible) => {
-    // This function can be used to validate when dropdown opens
-    // But we'll rely on the form validation instead
     if (visible) {
-      // Check if type is selected before showing options
       const type = form.getFieldValue("type");
       if (!type) {
         messageApi.error("Please select Request Type first");
-        // Prevent dropdown from opening if no type selected
         return false;
       }
     }
@@ -666,7 +761,7 @@ const FinanceRequests = () => {
         open={isModalOpen}
         onCancel={() => {
           setIsModalOpen(false);
-          setFileList([]); // NEW: Clear file list on cancel
+          setFileList([]);
         }}
         footer={null}
         width={700}
@@ -710,7 +805,6 @@ const FinanceRequests = () => {
                       .indexOf(input.toLowerCase()) >= 0
                   }
                   onOpenChange={handleDropdownVisibleChange}
-                  // disabled={!typeValue}
                 >
                   {typeValue === "revenue" &&
                     revenueTypes.map((type) => (
@@ -733,27 +827,6 @@ const FinanceRequests = () => {
             </Col>
           </Row>
 
-          <Row gutter={16}>
-            {/* <Col span={12}>
-              <Form.Item
-                name="recipientType"
-                label="Recipient Type"
-                rules={[
-                  { required: true, message: "Please select recipient type" },
-                ]}
-                initialValue="user"
-              >
-                <Select
-                  placeholder="Select recipient type"
-                  onChange={(value) => setRecipientType(value)}
-                >
-                  <Option value="user">User</Option>
-                  <Option value="student">Student</Option>
-                </Select>
-              </Form.Item>
-            </Col> */}
-            <Col span={12}></Col>
-          </Row>
           <Form.Item
             name="amount"
             label="Amount"
@@ -761,17 +834,32 @@ const FinanceRequests = () => {
           >
             <Input type="number" placeholder="Enter amount" />
           </Form.Item>
+
           <Row gutter={16}>
             <Col span={12}>
               <Form.Item
                 name="recipient"
                 label={recipientType === "student" ? "Student" : "User"}
                 rules={[
-                  { required: true, message: "Please select a recipient" },
+                  {
+                    required: true,
+                    message: `Please select a ${
+                      recipientType === "student" ? "student" : "user"
+                    }`,
+                  },
                 ]}
+                extra={
+                  recipientType === "student"
+                    ? "Search by name or unique ID (min 2 characters)"
+                    : "Search by name or unique ID (min 2 characters)"
+                }
               >
                 <Select
-                  placeholder={`Select a ${recipientType}`}
+                  placeholder={
+                    recipientType === "student"
+                      ? "Search student by name or unique ID"
+                      : "Search user by name or unique ID"
+                  }
                   showSearch
                   onSearch={
                     recipientType === "student"
@@ -780,20 +868,61 @@ const FinanceRequests = () => {
                   }
                   filterOption={false}
                   allowClear
+                  notFoundContent={
+                    typeValue
+                      ? recipientType === "student"
+                        ? studentOptions.length === 0
+                          ? "Type 2+ characters to search students..."
+                          : "No students found"
+                        : userOptions.length === 0
+                        ? "Type 2+ characters to search users..."
+                        : "No users found"
+                      : "Please select type first"
+                  }
+                  disabled={!typeValue}
+                  onDropdownVisibleChange={(open) => {
+                    if (
+                      open &&
+                      recipientType === "student" &&
+                      studentOptions.length === 0
+                    ) {
+                      fetchInitialStudents();
+                    }
+                    if (
+                      open &&
+                      recipientType === "user" &&
+                      userOptions.length === 0
+                    ) {
+                      setUserOptions(allUsers);
+                    }
+                  }}
+                  onClear={() => {
+                    if (recipientType === "student") {
+                      setStudentOptions(allStudents);
+                      setFilteredStudents([]);
+                    } else {
+                      setUserOptions(allUsers);
+                      setFilteredUsers([]);
+                    }
+                  }}
                 >
                   {recipientType === "student"
-                    ? filteredStudents.map((student) => (
-                        <Option key={student.uniqueId} value={student.uniqueId}>
+                    ? studentOptions.map((student) => (
+                        <Option
+                          key={`student-${student.uniqueId || student._id}`}
+                          value={student.uniqueId}
+                        >
                           {student.name} ({student.uniqueId})
                         </Option>
                       ))
-                    : (filteredUsers.length > 0 ? filteredUsers : allUsers).map(
-                        (user) => (
-                          <Option key={user._id} value={user.email}>
-                            {user.name} ({user.uniqueId})
-                          </Option>
-                        )
-                      )}
+                    : userOptions.map((user) => (
+                        <Option
+                          key={`user-${user._id || user.email}`}
+                          value={user.email}
+                        >
+                          {user.name} ({user.uniqueId || user.email})
+                        </Option>
+                      ))}
                 </Select>
               </Form.Item>
             </Col>
@@ -847,7 +976,6 @@ const FinanceRequests = () => {
             <TextArea rows={3} placeholder="Enter description" />
           </Form.Item>
 
-          {/* NEW: Attachment Upload Field */}
           <Form.Item
             name="attachments"
             label="Attachments (Optional)"
@@ -877,7 +1005,7 @@ const FinanceRequests = () => {
                   messageApi.error("Image must be smaller than 5MB!");
                   return Upload.LIST_IGNORE;
                 }
-                return false; // Prevent auto upload
+                return false;
               }}
               fileList={fileList}
               onChange={({ fileList: newFileList }) => setFileList(newFileList)}
@@ -891,13 +1019,18 @@ const FinanceRequests = () => {
             </Upload>
           </Form.Item>
 
-          <Form.Item
-            name="feePeriod"
-            label="Fee Period (for revenue)"
-            hidden={form.getFieldValue("type") !== "revenue"}
-          >
-            <Input placeholder="e.g., Jan 2024 - Mar 2024" />
-          </Form.Item>
+          {typeValue === "revenue" && (
+            <Form.Item
+              name="feePeriod"
+              label="Fee Period"
+            >
+              <DatePicker.RangePicker
+                style={{ width: "100%" }}
+                format="DD MMM YYYY"
+                placeholder={["Start Date", "End Date"]}
+              />
+            </Form.Item>
+          )}
 
           <Divider style={{ margin: "20px 0" }} />
 
@@ -918,6 +1051,7 @@ const FinanceRequests = () => {
           </Form.Item>
         </Form>
       </Modal>
+
       <ReviewModal
         visible={viewModal}
         onClose={() => setViewModal(false)}
@@ -926,6 +1060,7 @@ const FinanceRequests = () => {
         mode="view"
         showActionButtons={false}
       />
+
       <ReviewModal
         visible={editModal}
         onClose={() => setEditModal(false)}

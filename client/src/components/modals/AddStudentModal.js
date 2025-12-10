@@ -25,7 +25,10 @@ import {
   Refresh as RefreshIcon,
 } from "@mui/icons-material";
 import { appDefaults } from "../../api/index.js";
-import { getSuggestedStudentId, saveStudent } from "../../services/dashboardService";
+import {
+  getSuggestedStudentId,
+  saveStudent,
+} from "../../services/dashboardService";
 import Loading from "../LoadingComponent/Loading";
 
 const { Option } = Select;
@@ -230,7 +233,7 @@ const AddStudentModal = ({ visible, onClose, onStudentAdded }) => {
       {contextHolder}
       <Modal
         title={
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
             <span style={{ color: COLORS.SECONDARY }}>🧑‍🎓</span>
             <span>Add New Student</span>
           </div>
@@ -256,10 +259,10 @@ const AddStudentModal = ({ visible, onClose, onStudentAdded }) => {
             borderRadius: "4px",
           },
         }}
-        bodyStyle={{ 
-          background: COLORS.BACKGROUND, 
+        bodyStyle={{
+          background: COLORS.BACKGROUND,
           color: COLORS.TEXT_LIGHT,
-          padding: '24px',
+          padding: "24px",
         }}
         width={900}
         footer={[
@@ -296,7 +299,11 @@ const AddStudentModal = ({ visible, onClose, onStudentAdded }) => {
           layout="vertical"
           onFinish={handleSubmit}
           autoComplete="off"
-          style={{ background: COLORS.CARD_BG, padding: '20px', borderRadius: '8px' }}
+          style={{
+            background: COLORS.CARD_BG,
+            padding: "20px",
+            borderRadius: "8px",
+          }}
         >
           <Row gutter={24}>
             <Col xs={24} md={12}>
@@ -307,9 +314,9 @@ const AddStudentModal = ({ visible, onClose, onStudentAdded }) => {
                   { required: true, message: "Please enter student name" },
                 ]}
               >
-                <Input 
-                  placeholder="Enter full name" 
-                  style={{ 
+                <Input
+                  placeholder="Enter full name"
+                  style={{
                     background: COLORS.INPUT_BG,
                     color: COLORS.TEXT_LIGHT,
                     borderColor: "var(--border-color)",
@@ -323,21 +330,45 @@ const AddStudentModal = ({ visible, onClose, onStudentAdded }) => {
                 name="gender"
                 rules={[{ required: true, message: "Please select gender" }]}
               >
-                <Select 
+                <Select
                   placeholder="Select gender"
-                  style={{ 
+                  style={{
                     background: COLORS.INPUT_BG,
                     color: COLORS.TEXT_LIGHT,
                     borderColor: "var(--border-color)",
                   }}
-                  dropdownStyle={{ 
+                  dropdownStyle={{
                     background: COLORS.INPUT_BG,
                     color: COLORS.TEXT_LIGHT,
                   }}
                 >
-                  <Option value="Male" style={{ background: COLORS.INPUT_BG, color: COLORS.TEXT_LIGHT }}>Male</Option>
-                  <Option value="Female" style={{ background: COLORS.INPUT_BG, color: COLORS.TEXT_LIGHT }}>Female</Option>
-                  <Option value="Other" style={{ background: COLORS.INPUT_BG, color: COLORS.TEXT_LIGHT }}>Other</Option>
+                  <Option
+                    value="Male"
+                    style={{
+                      background: COLORS.INPUT_BG,
+                      color: COLORS.TEXT_LIGHT,
+                    }}
+                  >
+                    Male
+                  </Option>
+                  <Option
+                    value="Female"
+                    style={{
+                      background: COLORS.INPUT_BG,
+                      color: COLORS.TEXT_LIGHT,
+                    }}
+                  >
+                    Female
+                  </Option>
+                  <Option
+                    value="Other"
+                    style={{
+                      background: COLORS.INPUT_BG,
+                      color: COLORS.TEXT_LIGHT,
+                    }}
+                  >
+                    Other
+                  </Option>
                 </Select>
               </Form.Item>
             </Col>
@@ -348,7 +379,11 @@ const AddStudentModal = ({ visible, onClose, onStudentAdded }) => {
                 rules={[{ required: true, message: "Please select DOB" }]}
               >
                 <DatePicker
-                  style={{ width: "100%", background: COLORS.INPUT_BG, color: COLORS.TEXT_LIGHT }}
+                  style={{
+                    width: "100%",
+                    background: COLORS.INPUT_BG,
+                    color: COLORS.TEXT_LIGHT,
+                  }}
                   onChange={handleDobChange}
                   format="YYYY-MM-DD"
                   popupStyle={{ background: COLORS.INPUT_BG }}
@@ -357,26 +392,26 @@ const AddStudentModal = ({ visible, onClose, onStudentAdded }) => {
             </Col>
             <Col xs={24} md={12}>
               <Form.Item
-                label={labelWithIcon(BadgeIcon, "Unique ID")}
+                label={labelWithIcon(BadgeIcon, "Student ID")}
                 name="uniqueId"
                 initialValue={suggestedId}
               >
-                <div style={{ display: 'flex', alignItems: 'center' }}>
+                <div style={{ display: "flex", alignItems: "center" }}>
                   <Input
                     value={suggestedId}
                     readOnly
-                    placeholder="Auto-generated"
+                    placeholder="Auto-generated (SRS_PAT_2025_0001)"
                     suffix={loadingId ? <Loading size="small" /> : null}
-                    style={{ 
+                    style={{
                       background: COLORS.INPUT_BG,
                       color: COLORS.TEXT_LIGHT,
                       borderColor: "var(--border-color)",
                       borderTopRightRadius: "0",
                       borderBottomRightRadius: "0",
-                      width: '100%'
+                      width: "100%",
                     }}
                   />
-                  {/* <Button
+                  <Button
                     onClick={handleRefreshId}
                     disabled={loadingId}
                     style={{
@@ -385,11 +420,14 @@ const AddStudentModal = ({ visible, onClose, onStudentAdded }) => {
                       color: COLORS.TEXT_LIGHT,
                       borderTopLeftRadius: "0",
                       borderBottomLeftRadius: "0",
-                      width: '40px',
+                      width: "40px",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
                     }}
                   >
                     <RefreshIcon style={{ fontSize: 16 }} />
-                  </Button> */}
+                  </Button>
                 </div>
               </Form.Item>
             </Col>
@@ -401,9 +439,9 @@ const AddStudentModal = ({ visible, onClose, onStudentAdded }) => {
                   { required: true, message: "Please enter admission ID" },
                 ]}
               >
-                <Input 
-                  placeholder="Enter admission ID" 
-                  style={{ 
+                <Input
+                  placeholder="Enter admission ID"
+                  style={{
                     background: COLORS.INPUT_BG,
                     color: COLORS.TEXT_LIGHT,
                     borderColor: "var(--border-color)",
@@ -419,17 +457,27 @@ const AddStudentModal = ({ visible, onClose, onStudentAdded }) => {
                   { required: true, message: "Please select blood group" },
                 ]}
               >
-                <Select 
+                <Select
                   placeholder="Select blood group"
-                  style={{ background: COLORS.INPUT_BG, color: COLORS.TEXT_LIGHT }}
-                  dropdownStyle={{ 
+                  style={{
+                    background: COLORS.INPUT_BG,
+                    color: COLORS.TEXT_LIGHT,
+                  }}
+                  dropdownStyle={{
                     background: COLORS.INPUT_BG,
                     color: COLORS.TEXT_LIGHT,
                   }}
                 >
                   {["A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"].map(
                     (group) => (
-                      <Option key={group} value={group} style={{ background: COLORS.INPUT_BG, color: COLORS.TEXT_LIGHT }}>
+                      <Option
+                        key={group}
+                        value={group}
+                        style={{
+                          background: COLORS.INPUT_BG,
+                          color: COLORS.TEXT_LIGHT,
+                        }}
+                      >
                         {group}
                       </Option>
                     )
@@ -446,9 +494,9 @@ const AddStudentModal = ({ visible, onClose, onStudentAdded }) => {
                   { type: "email", message: "Invalid email format" },
                 ]}
               >
-                <Input 
-                  placeholder="Enter email address" 
-                  style={{ 
+                <Input
+                  placeholder="Enter email address"
+                  style={{
                     background: COLORS.INPUT_BG,
                     color: COLORS.TEXT_LIGHT,
                     borderColor: "var(--border-color)",
@@ -468,10 +516,10 @@ const AddStudentModal = ({ visible, onClose, onStudentAdded }) => {
                   },
                 ]}
               >
-                <Input 
-                  placeholder="Enter contact number" 
+                <Input
+                  placeholder="Enter contact number"
                   maxLength={10}
-                  style={{ 
+                  style={{
                     background: COLORS.INPUT_BG,
                     color: COLORS.TEXT_LIGHT,
                     borderColor: "var(--border-color)",
@@ -487,9 +535,9 @@ const AddStudentModal = ({ visible, onClose, onStudentAdded }) => {
                   { required: true, message: "Please enter father's name" },
                 ]}
               >
-                <Input 
-                  placeholder="Enter father's name" 
-                  style={{ 
+                <Input
+                  placeholder="Enter father's name"
+                  style={{
                     background: COLORS.INPUT_BG,
                     color: COLORS.TEXT_LIGHT,
                     borderColor: "var(--border-color)",
@@ -509,10 +557,10 @@ const AddStudentModal = ({ visible, onClose, onStudentAdded }) => {
                   },
                 ]}
               >
-                <Input 
-                  placeholder="Parent contact number" 
+                <Input
+                  placeholder="Parent contact number"
                   maxLength={10}
-                  style={{ 
+                  style={{
                     background: COLORS.INPUT_BG,
                     color: COLORS.TEXT_LIGHT,
                     borderColor: "var(--border-color)",
@@ -526,27 +574,29 @@ const AddStudentModal = ({ visible, onClose, onStudentAdded }) => {
                 name="grade"
                 rules={[{ required: true, message: "Please select grade" }]}
               >
-                <Select 
+                <Select
                   placeholder="Select grade"
-                  style={{ 
+                  style={{
                     background: COLORS.INPUT_BG,
                     color: COLORS.TEXT_LIGHT,
                     borderColor: "var(--border-color)",
                   }}
-                  dropdownStyle={{ 
+                  dropdownStyle={{
                     background: COLORS.INPUT_BG,
                     color: COLORS.TEXT_LIGHT,
                   }}
                 >
                   {Array.from({ length: 12 }, (_, i) => {
-                    const grade = `${i + 1}${i === 0 ? 'st' : i === 1 ? 'nd' : i === 2 ? 'rd' : 'th'}`;
+                    const grade = `${i + 1}${
+                      i === 0 ? "st" : i === 1 ? "nd" : i === 2 ? "rd" : "th"
+                    }`;
                     return (
-                      <Option 
-                        key={grade} 
-                        value={grade} 
-                        style={{ 
-                          background: COLORS.INPUT_BG, 
-                          color: COLORS.TEXT_LIGHT 
+                      <Option
+                        key={grade}
+                        value={grade}
+                        style={{
+                          background: COLORS.INPUT_BG,
+                          color: COLORS.TEXT_LIGHT,
                         }}
                       >
                         {grade}
@@ -562,9 +612,9 @@ const AddStudentModal = ({ visible, onClose, onStudentAdded }) => {
                 name="section"
                 rules={[{ required: true, message: "Please enter section" }]}
               >
-                <Input 
-                  placeholder="e.g. A, B, C" 
-                  style={{ 
+                <Input
+                  placeholder="e.g. A, B, C"
+                  style={{
                     background: COLORS.INPUT_BG,
                     color: COLORS.TEXT_LIGHT,
                     borderColor: "var(--border-color)",
@@ -578,9 +628,9 @@ const AddStudentModal = ({ visible, onClose, onStudentAdded }) => {
                 name="address"
                 rules={[{ required: true, message: "Please enter address" }]}
               >
-                <Input 
-                  placeholder="Enter address" 
-                  style={{ 
+                <Input
+                  placeholder="Enter address"
+                  style={{
                     background: COLORS.INPUT_BG,
                     color: COLORS.TEXT_LIGHT,
                     borderColor: "var(--border-color)",
@@ -593,10 +643,10 @@ const AddStudentModal = ({ visible, onClose, onStudentAdded }) => {
                 label={labelWithIcon(NotesIcon, "Remarks")}
                 name="remarks"
               >
-                <TextArea 
-                  rows={2} 
-                  placeholder="Any remarks or notes..." 
-                  style={{ 
+                <TextArea
+                  rows={2}
+                  placeholder="Any remarks or notes..."
+                  style={{
                     background: COLORS.INPUT_BG,
                     color: COLORS.TEXT_LIGHT,
                     borderColor: "var(--border-color)",
@@ -610,7 +660,7 @@ const AddStudentModal = ({ visible, onClose, onStudentAdded }) => {
                   type="number"
                   readOnly
                   placeholder="Calculated from DOB"
-                  style={{ 
+                  style={{
                     background: COLORS.INPUT_BG,
                     color: COLORS.TEXT_LIGHT,
                     borderColor: "var(--border-color)",
@@ -623,10 +673,10 @@ const AddStudentModal = ({ visible, onClose, onStudentAdded }) => {
                 label={labelWithIcon(PersonIcon, "Performance Score")}
                 name="performanceScore"
               >
-                <Input 
-                  type="number" 
-                  placeholder="Score out of 100" 
-                  style={{ 
+                <Input
+                  type="number"
+                  placeholder="Score out of 100"
+                  style={{
                     background: COLORS.INPUT_BG,
                     color: COLORS.TEXT_LIGHT,
                     borderColor: "var(--border-color)",
@@ -642,9 +692,9 @@ const AddStudentModal = ({ visible, onClose, onStudentAdded }) => {
                   { pattern: /^\d{1,3}%$/, message: "Use format like 90%" },
                 ]}
               >
-                <Input 
-                  placeholder="e.g. 85%" 
-                  style={{ 
+                <Input
+                  placeholder="e.g. 85%"
+                  style={{
                     background: COLORS.INPUT_BG,
                     color: COLORS.TEXT_LIGHT,
                     borderColor: "var(--border-color)",

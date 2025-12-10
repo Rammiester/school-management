@@ -169,14 +169,15 @@ router.get('/available', authMiddleware, async (req, res) => {
 router.get('/search', authMiddleware, async (req, res) => {
   try {
     const { q } = req.query;
-    if (!q || q.length < 3) {
+    if (!q || q.length < 2) {  // Changed from 3 to 2
       return res.json([]);
     }
 
     const query = {
       $or: [
         { name: { $regex: q, $options: 'i' } },
-        { email: { $regex: q, $options: 'i' } }
+        { email: { $regex: q, $options: 'i' } },
+        { uniqueId: { $regex: q, $options: 'i' } }  // Added uniqueId search
       ]
     };
 

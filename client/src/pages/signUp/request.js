@@ -159,12 +159,11 @@ const Request = () => {
             <div style={{ marginBottom: 16 }}>
               <label>Assign Role:</label>
               <Select
-                defaultValue="student"
+                defaultValue="teacher"
                 onChange={(value) => setSelectedRequest({...selectedRequest, role: value})}
                 style={{ width: '100%' }}
                 placeholder="Select a role"
               >
-                <Select.Option value="student">Student</Select.Option>
                 <Select.Option value="teacher">Teacher</Select.Option>
                 <Select.Option value="staff">Staff</Select.Option>
                 <Select.Option value="admin">Admin</Select.Option>
